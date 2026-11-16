@@ -1,0 +1,32 @@
+# Build output
+**/bin/
+**/obj/
+
+# Visual Studio and IDE state
+**/.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Test and coverage output
+TestResults/
+**/TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Local Python environments and generated Python files
+**/.venv/
+**/.venv*/
+**/__pycache__/
+*.py[cod]
+
+# Local tooling and user-specific files
+.env
+.env.*
+*.local.json
+
+# OS files
+.DS_Store
+Thumbs.db

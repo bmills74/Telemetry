@@ -6,12 +6,20 @@ public interface ITelemetrySource : IAsyncDisposable
 
     bool IsRunning { get; }
 
+    bool IsPaused { get; }
+
+    void Pause();
+
+    void Resume();
+
     Task StartAsync(CancellationToken cancellationToken = default);
 
     Task StopAsync();
 }
 
-public sealed class TelemetrySampleEventArgs(TelemetrySample sample) : EventArgs
+public sealed class TelemetrySampleEventArgs(TelemetrySample sample, int sampleIndex) : EventArgs
 {
     public TelemetrySample Sample { get; } = sample;
+
+    public int SampleIndex { get; } = sampleIndex;
 }

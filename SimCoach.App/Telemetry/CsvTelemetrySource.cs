@@ -10,6 +10,10 @@ public sealed class CsvTelemetrySource : ITelemetrySource
     private readonly double _playbackSpeed;
     private CancellationTokenSource? _runCancellation;
     private Task? _runTask;
+    private volatile bool _isPaused;
+    private int _requestedIndex = -1;
+
+    public bool LoopPlayback { get; set; }
 
     public CsvTelemetrySource(IReadOnlyList<TelemetrySample> samples, double playbackSpeed = 1)
     {
@@ -25,6 +29,17 @@ public sealed class CsvTelemetrySource : ITelemetrySource
     public event EventHandler<TelemetrySampleEventArgs>? SampleReceived;
 
     public bool IsRunning => _runTask is { IsCompleted: false };
+
+    public bool IsPaused => _isPaused;
+
+    public void Pause() => _isPaused = true;
+
+    public void Resume() => _isPaused = false;
+
+    public void Seek(int sampleIndex)
+    {
+        Interlocked.Exchange(ref _requestedIndex, Math.Clamp(sampleIndex, 0, _samples.Count - 1));
+    }
 
     public static IReadOnlyList<TelemetrySample> Load(string path)
     {
@@ -43,6 +58,10 @@ public sealed class CsvTelemetrySource : ITelemetrySource
 
         var samples = new List<TelemetrySample>();
         var lineNumber = 1;
+        double? previousLatitude = null;
+        double? previousLongitude = null;
+        var previousLapNumber = 1;
+        var lapDistanceKm = 0d;
         while (!reader.EndOfStream)
         {
             lineNumber++;
@@ -58,7 +77,20 @@ public sealed class CsvTelemetrySource : ITelemetrySource
                 continue;
             }
 
-            samples.Add(CreateSample(index, values, samples.Count, lineNumber));
+            var sample = CreateSample(
+                index,
+                values,
+                samples.Count,
+                lineNumber,
+                previousLatitude,
+                previousLongitude,
+                previousLapNumber,
+                lapDistanceKm);
+            samples.Add(sample.Telemetry);
+            previousLatitude = sample.Latitude;
+            previousLongitude = sample.Longitude;
+            previousLapNumber = sample.Telemetry.LapNumber;
+            lapDistanceKm = sample.Telemetry.LapDistanceKm;
         }
 
         if (samples.Count == 0)
@@ -77,6 +109,7 @@ public sealed class CsvTelemetrySource : ITelemetrySource
         }
 
         _runCancellation = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        _isPaused = false;
         _runTask = ReplayAsync(_runCancellation.Token);
         return Task.CompletedTask;
     }
@@ -101,6 +134,7 @@ public sealed class CsvTelemetrySource : ITelemetrySource
             _runCancellation.Dispose();
             _runCancellation = null;
             _runTask = null;
+            _isPaused = false;
         }
     }
 
@@ -111,51 +145,98 @@ public sealed class CsvTelemetrySource : ITelemetrySource
 
     private async Task ReplayAsync(CancellationToken cancellationToken)
     {
-        for (var current = 0; current < _samples.Count; current++)
+        do
         {
-            cancellationToken.ThrowIfCancellationRequested();
-            SampleReceived?.Invoke(this, new TelemetrySampleEventArgs(_samples[current]));
-
-            if (current >= _samples.Count - 1)
+            var requestedStart = Interlocked.Exchange(ref _requestedIndex, -1);
+            var current = requestedStart >= 0 ? requestedStart : 0;
+            while (current < _samples.Count)
             {
-                break;
-            }
+                cancellationToken.ThrowIfCancellationRequested();
+                while (_isPaused)
+                {
+                    await Task.Delay(50, cancellationToken).ConfigureAwait(false);
+                }
 
-            var interval = _samples[current + 1].SessionTime - _samples[current].SessionTime;
-            if (interval <= TimeSpan.Zero || interval > TimeSpan.FromSeconds(2))
-            {
-                interval = TimeSpan.FromMilliseconds(16.667);
-            }
+                SampleReceived?.Invoke(this, new TelemetrySampleEventArgs(_samples[current], current));
 
-            var delay = TimeSpan.FromTicks(Math.Max(1, (long)(interval.Ticks / _playbackSpeed)));
-            await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
+                if (current >= _samples.Count - 1)
+                {
+                    break;
+                }
+
+                var interval = _samples[current + 1].SessionTime - _samples[current].SessionTime;
+                if (interval <= TimeSpan.Zero || interval > TimeSpan.FromSeconds(2))
+                {
+                    interval = TimeSpan.FromMilliseconds(16.667);
+                }
+
+                var delay = TimeSpan.FromTicks(Math.Max(1, (long)(interval.Ticks / _playbackSpeed)));
+                await Task.Delay(delay, cancellationToken).ConfigureAwait(false);
+
+                var requestedIndex = Interlocked.Exchange(ref _requestedIndex, -1);
+                current = requestedIndex >= 0 ? requestedIndex : current + 1;
+            }
         }
+        while (LoopPlayback);
     }
 
-    private static TelemetrySample CreateSample(
+    private static ParsedSample CreateSample(
         IReadOnlyDictionary<string, int> index,
         IReadOnlyList<string> values,
         int sampleNumber,
-        int lineNumber)
+        int lineNumber,
+        double? previousLatitude,
+        double? previousLongitude,
+        int previousLapNumber,
+        double previousLapDistanceKm)
     {
         var sessionSeconds = ReadDouble(index, values, "sessiontime", "time", "timestamp")
             ?? sampleNumber / 60d;
         var lapNumber = (int)Math.Round(ReadDouble(index, values, "lap", "lapnumber") ?? 1);
-        var lapDistance = ReadDouble(index, values, "lapdistpct", "lapdistance", "lapdist") ?? sampleNumber;
-        if (Normalize(index.Keys.FirstOrDefault(key => key.Contains("lapdistpct", StringComparison.Ordinal)) ?? string.Empty) == "lapdistpct" && lapDistance > 1)
+        var latitude = ReadDouble(index, values, "lat", "latitude");
+        var longitude = ReadDouble(index, values, "lon", "longitude", "long");
+        var lapDistanceKm = previousLapNumber == lapNumber ? previousLapDistanceKm : 0;
+        if (latitude.HasValue && longitude.HasValue && previousLatitude.HasValue && previousLongitude.HasValue && previousLapNumber == lapNumber)
         {
-            lapDistance /= 100;
+            lapDistanceKm += HaversineDistanceKm(previousLatitude.Value, previousLongitude.Value, latitude.Value, longitude.Value);
         }
 
-        return new TelemetrySample(
-            TimeSpan.FromSeconds(Math.Max(0, sessionSeconds)),
-            lapNumber,
-            lapDistance,
-            ReadDouble(index, values, "speed", "speedkph", "speedkmh", "speedmph") ?? 0,
-            NormalizeInput(ReadDouble(index, values, "throttle", "throttlepercent", "throttleraw")),
-            NormalizeInput(ReadDouble(index, values, "brake", "brakepercent", "brakeraw")),
-            ReadDouble(index, values, "steering", "steeringwheel", "steeringangle") ?? 0,
-            (int)Math.Round(ReadDouble(index, values, "gear") ?? 0));
+        return new ParsedSample(
+            new TelemetrySample(
+                TimeSpan.FromSeconds(Math.Max(0, sessionSeconds)),
+                lapNumber,
+                lapDistanceKm,
+                ToKph(ReadDouble(index, values, "speed", "speedmps", "speedkph", "speedkmh", "speedmph")),
+                NormalizeInput(ReadDouble(index, values, "throttle", "throttlepercent", "throttleraw")),
+                NormalizeInput(ReadDouble(index, values, "brake", "brakepercent", "brakeraw")),
+                ReadDouble(index, values, "steering", "steeringwheel", "steeringwheelangle", "steeringangle") ?? 0,
+                (int)Math.Round(ReadDouble(index, values, "gear") ?? 0),
+                latitude,
+                longitude),
+            latitude,
+            longitude);
+    }
+
+    private sealed record ParsedSample(TelemetrySample Telemetry, double? Latitude, double? Longitude);
+
+    private static double HaversineDistanceKm(double latitude1, double longitude1, double latitude2, double longitude2)
+    {
+        const double earthRadiusKm = 6371.0088;
+        var latitudeDelta = DegreesToRadians(latitude2 - latitude1);
+        var longitudeDelta = DegreesToRadians(longitude2 - longitude1);
+        var latitude1Radians = DegreesToRadians(latitude1);
+        var latitude2Radians = DegreesToRadians(latitude2);
+        var a = Math.Pow(Math.Sin(latitudeDelta / 2), 2) +
+                Math.Cos(latitude1Radians) * Math.Cos(latitude2Radians) * Math.Pow(Math.Sin(longitudeDelta / 2), 2);
+        return earthRadiusKm * 2 * Math.Asin(Math.Sqrt(a));
+    }
+
+    private static double DegreesToRadians(double degrees) => degrees * Math.PI / 180;
+
+    private static double ToKph(double? value)
+    {
+        // Garage 61's Speed column is metres per second. The normalized model uses km/h.
+        return (value ?? 0) * 3.6;
     }
 
     private static double NormalizeInput(double? value)
