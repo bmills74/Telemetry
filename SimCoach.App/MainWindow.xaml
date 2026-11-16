@@ -1,0 +1,68 @@
+<Window x:Class="SimCoach.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sim Coach"
+        Width="720"
+        Height="440"
+        MinWidth="600"
+        MinHeight="360"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <TextBlock FontSize="26" FontWeight="SemiBold" Text="Sim Coach" />
+            <TextBlock Margin="0,6,0,0" Foreground="Gray" Text="Mock telemetry replay" />
+        </StackPanel>
+
+        <DockPanel Grid.Row="1" Margin="0,22,0,18">
+            <Button Click="LoadCsvClick" Content="Load Garage 61 CSV" />
+            <Button Click="StartClick" Content="Start" />
+            <Button Click="StopClick" Content="Stop" />
+            <TextBlock Margin="12,0,0,0" Text="Playback speed:" />
+            <ComboBox x:Name="PlaybackSpeedComboBox" Width="90" Margin="8,0,0,0" SelectedIndex="0">
+                <ComboBoxItem Content="0.5×" Tag="0.5" />
+                <ComboBoxItem Content="1×" Tag="1" />
+                <ComboBoxItem Content="2×" Tag="2" />
+                <ComboBoxItem Content="5×" Tag="5" />
+                <ComboBoxItem Content="20×" Tag="20" />
+            </ComboBox>
+        </DockPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="FileTextBlock" Foreground="Gray" Text="No CSV loaded" TextWrapping="Wrap" />
+            <TextBlock x:Name="StatusTextBlock" Grid.Row="1" Margin="0,10,0,0" FontSize="16" Text="Ready" />
+
+            <UniformGrid Grid.Row="2" Margin="0,24,0,0" Columns="4">
+                <StackPanel Margin="0,0,12,0">
+                    <TextBlock Foreground="Gray" Text="Lap" />
+                    <TextBlock x:Name="LapTextBlock" FontSize="24" Text="—" />
+                </StackPanel>
+                <StackPanel Margin="0,0,12,0">
+                    <TextBlock Foreground="Gray" Text="Distance" />
+                    <TextBlock x:Name="DistanceTextBlock" FontSize="24" Text="—" />
+                </StackPanel>
+                <StackPanel Margin="0,0,12,0">
+                    <TextBlock Foreground="Gray" Text="Speed" />
+                    <TextBlock x:Name="SpeedTextBlock" FontSize="24" Text="—" />
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Foreground="Gray" Text="Gear" />
+                    <TextBlock x:Name="GearTextBlock" FontSize="24" Text="—" />
+                </StackPanel>
+            </UniformGrid>
+        </Grid>
+
+        <TextBlock x:Name="FooterTextBlock" Grid.Row="3" Foreground="Gray" Text="Load a CSV to begin." />
+    </Grid>
+</Window>
