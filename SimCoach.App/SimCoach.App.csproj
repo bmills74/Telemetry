@@ -9,10 +9,15 @@
     <RootNamespace>SimCoach</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="..\Tools\KokoroTts\runtime\KokoroWorker\**\*" Link="Kokoro\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <InternalsVisibleTo Include="SimCoach.Tests" />
     <PackageReference Include="NAudio" Version="2.3.0" />
     <PackageReference Include="SVappsLAB.iRacingTelemetrySDK" Version="2.3.0" />
     <PackageReference Include="System.Speech" Version="10.0.0" />
     <PackageReference Include="Whisper.net" Version="1.9.1" />
     <PackageReference Include="Whisper.net.Runtime" Version="1.9.1" />
   </ItemGroup>
+  <Target Name="RequireBundledKokoro" BeforeTargets="PrepareForPublish">
+    <Error Condition="!Exists('..\Tools\KokoroTts\runtime\KokoroWorker\KokoroWorker.exe') Or !Exists('..\Tools\KokoroTts\runtime\KokoroWorker\kokoro-v1.0.onnx') Or !Exists('..\Tools\KokoroTts\runtime\KokoroWorker\voices-v1.0.bin')" Text="Build the bundled voice runtime with Tools/KokoroTts/Setup-Kokoro.ps1 before publishing." />
+  </Target>
 </Project>

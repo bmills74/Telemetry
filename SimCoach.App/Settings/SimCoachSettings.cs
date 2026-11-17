@@ -5,6 +5,8 @@ namespace SimCoach.Settings;
 
 public sealed class SimCoachSettings
 {
+    public int? PushToTalkDevice { get; set; }
+    public int? PushToTalkButton { get; set; }
     public string? LastCsvPath { get; set; }
 
     public string? LastReferenceCsvPath { get; set; }

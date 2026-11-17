@@ -1,6 +1,24 @@
 using SimCoach.Telemetry;
 using SimCoach.Coaching;
 
+if (args.Length >= 3 && args[0] == "--voice-drive")
+    return await VoiceDriveChecks.RunAsync(args[1], args[2], args.Skip(3).ToArray());
+
+IbtLapChecks.Run();
+LiveCoachChecks.Run();
+await LiveTelemetryChecks.RunAsync();
+if (args.Length == 0) return 0;
+if (args[0] == "--kokoro-smoke")
+{
+    await KokoroChecks.RunAsync();
+    return 0;
+}
+if (args[0] == "--live-smoke")
+{
+    await LiveTelemetryChecks.CheckLiveAsync();
+    return 0;
+}
+
 var csvPath = args.FirstOrDefault();
 if (string.IsNullOrWhiteSpace(csvPath) || !File.Exists(csvPath))
 {
@@ -79,16 +97,8 @@ if (args.Length > 2 && File.Exists(args[2]))
     Assert(variables.Any(variable => variable.Name == "Speed" && variable.Unit == "m/s"), "Expected IBT variable metadata to include Speed units.");
     Console.WriteLine($"IBT checks passed: {ibt.Samples.Count:N0} samples, {ibt.Metadata.Channels.Channels.Count:N0} channels, {ibt.Metadata.LapNumbers.Count:N0} laps.");
 
-    var sdkSamples = 0;
-    await using (var sdkSource = new IracingLiveTelemetrySource(args[2], 1000))
-    {
-        sdkSource.SampleReceived += (_, _) => Interlocked.Increment(ref sdkSamples);
-        await sdkSource.StartAsync();
-        await Task.Delay(500);
-        await sdkSource.StopAsync();
-        Assert(sdkSamples > 0, $"Expected the SDK adapter to emit IBT samples, got {sdkSamples}.");
-    }
-    Console.WriteLine($"SDK adapter checks passed: {sdkSamples:N0} samples emitted from IBT playback.");
+    await LiveTelemetryChecks.CheckIbtAsync(args[2]);
+    Console.WriteLine("SDK adapter checks passed for supplied IBT file.");
 }
 
 Console.WriteLine($"Parser checks passed: {samples.Count:N0} samples, {samples[^1].LapDistanceKm:0.000} km lap distance.");

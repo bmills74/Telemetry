@@ -23,6 +23,11 @@ coverage/
 *.py[cod]
 
 # Local tooling and user-specific files
+.dotnet/
+Tools/KokoroTts/runtime/
+Tools/KokoroTts/build/
+Tools/KokoroTts/bundle-build.log
+artifacts/
 .env
 .env.*
 *.local.json

@@ -19,21 +19,22 @@
 
         <StackPanel>
             <TextBlock FontSize="26" FontWeight="SemiBold" Text="Sim Coach" />
-            <TextBlock Margin="0,6,0,0" Foreground="Gray" Text="Mock telemetry replay" />
+            <TextBlock Margin="0,6,0,0" Foreground="Gray" Text="Live iRacing telemetry and recorded lap replay" />
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" Margin="0,18,0,12" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
             <WrapPanel>
+            <Button x:Name="ConnectLiveButton" Click="ConnectLiveClick" Content="Connect to iRacing" />
             <Button Click="LoadCsvClick" Content="Load Garage 61 CSV" />
             <Button Click="LoadIbtClick" Content="Load iRacing IBT" />
             <Button Click="LoadReferenceCsvClick" Content="Load Reference Lap" />
             <TextBlock Margin="8,0,4,0" VerticalAlignment="Center" Foreground="Gray" Text="Replay lap" />
-            <ComboBox x:Name="IbtLapComboBox" Width="90" Margin="8,0,8,0" IsEnabled="False" SelectionChanged="IbtLapSelectionChanged" ToolTip="Select the replay lap from the IBT file" />
+            <ComboBox x:Name="IbtLapComboBox" DisplayMemberPath="DisplayName" Width="195" Margin="8,0,8,0" IsEnabled="False" SelectionChanged="IbtLapSelectionChanged" ToolTip="Select the replay lap from the IBT file" />
             <TextBlock Margin="0,0,4,0" VerticalAlignment="Center" Foreground="Gray" Text="Reference lap" />
-            <ComboBox x:Name="ReferenceIbtLapComboBox" Width="90" Margin="0,0,8,0" IsEnabled="False" SelectionChanged="ReferenceIbtLapSelectionChanged" ToolTip="Select the reference lap from the IBT file" />
+            <ComboBox x:Name="ReferenceIbtLapComboBox" DisplayMemberPath="DisplayName" Width="195" Margin="0,0,8,0" IsEnabled="False" SelectionChanged="ReferenceIbtLapSelectionChanged" ToolTip="Select the reference lap from the IBT file" />
             <Button Click="StartClick" Content="Start" />
-            <Button Click="PauseClick" Content="Pause" />
-            <Button Click="RestartClick" Content="Restart" />
+            <Button x:Name="PauseButton" Click="PauseClick" Content="Pause" />
+            <Button x:Name="RestartButton" Click="RestartClick" Content="Restart" />
             <Button Click="StopClick" Content="Stop" />
             <CheckBox x:Name="LoopCheckBox" Margin="4,0,12,0" VerticalAlignment="Center" Content="Loop" />
             <CheckBox x:Name="AutoCoachCheckBox" Margin="4,0,12,0" VerticalAlignment="Center" Content="Auto coach" />
@@ -205,6 +206,7 @@
                         </Grid.RowDefinitions>
                         <DockPanel>
                             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                <Button x:Name="WheelBindingButton" Content="Map wheel PTT" Click="MapWheelClick" />
                                 <Button x:Name="ListenButton" Content="🎙 Record" Click="ListenButtonClick" />
                                 <Button Click="SpeakCoachClick" Content="Speak" />
                                 <Button Click="AskCoachClick" Content="Ask" />

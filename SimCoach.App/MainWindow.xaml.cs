@@ -22,7 +22,18 @@ public partial class MainWindow : System.Windows.Window
     private TelemetryComparisonTrack? _comparisonTrack;
     private IReadOnlyList<CornerFinding> _cornerFindings = [];
     private double _replayDistanceKm;
-    private CsvTelemetrySource? _source;
+    private ITelemetrySource? _source;
+    private bool _liveMode;
+    private readonly List<TelemetrySample> _liveSamples = [];
+    private readonly System.Threading.Channels.Channel<TelemetrySampleEventArgs> _liveQueue =
+        System.Threading.Channels.Channel.CreateBounded<TelemetrySampleEventArgs>(
+            new System.Threading.Channels.BoundedChannelOptions(512)
+            {
+                FullMode = System.Threading.Channels.BoundedChannelFullMode.DropOldest
+            });
+    private LiveCoach? _liveCoach;
+    private readonly System.Windows.Threading.DispatcherTimer _liveTimer = new() { Interval = TimeSpan.FromMilliseconds(100) };
+    private bool _wasLiveConnected;
     private readonly SimCoachSettingsStore _settingsStore = new();
     private readonly CoachResponseService _coachResponseService = new();
     private readonly CoachingSynthesisService _coachingSynthesisService = new();
@@ -42,6 +53,10 @@ public partial class MainWindow : System.Windows.Window
     public MainWindow()
     {
         InitializeComponent();
+        InitializeWheelBinding();
+        _voiceCoachService.SpeechFailed += (_, message) => Dispatcher.BeginInvoke(new Action(() =>
+            StatusTextBlock.Text = $"Speech unavailable — {message}"));
+        _liveTimer.Tick += LiveTimerTick;
         VoiceComboBox.ItemsSource = _voiceCoachService.VoiceNames;
         VoiceComboBox.SelectedItem = _voiceCoachService.SelectedVoiceName;
         SpeechRateSlider.Value = _voiceCoachService.Rate;
@@ -92,19 +107,15 @@ public partial class MainWindow : System.Windows.Window
             StatusTextBlock.Text = "Reading iRacing telemetry...";
             var loaded = await Task.Run(() => IbtTelemetrySource.LoadWithMetadata(dialog.FileName));
             _pendingIbtLoad = loaded;
-            var laps = loaded.Metadata.LapNumbers
-                .Where(lap => lap > 0)
-                .OrderBy(lap => lap)
-                .ToList();
+            var laps = IbtLap.Summarize(loaded.Samples);
             IbtLapComboBox.ItemsSource = laps;
             IbtLapComboBox.IsEnabled = true;
             var settings = _settingsStore.Load();
             settings.LastReplayIbtPath = dialog.FileName;
             settings.LastReplaySource = "ibt";
             _settingsStore.Save(settings);
-            IbtLapComboBox.SelectedItem = laps.Contains(settings.LastReplayIbtLap ?? 0)
-                ? settings.LastReplayIbtLap
-                : laps.FirstOrDefault();
+            IbtLapComboBox.SelectedItem = IbtLap.Fastest(laps) ?? laps.FirstOrDefault();
+            SelectFastestReference(loaded);
             StatusTextBlock.Text = $"Loaded IBT: {loaded.Samples.Count:N0} samples, {loaded.Metadata.Channels.Channels.Count:N0} channels";
         }
         catch (Exception exception)
@@ -118,13 +129,15 @@ public partial class MainWindow : System.Windows.Window
 
     private void IbtLapSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
-        if (_pendingIbtLoad is null || IbtLapComboBox.SelectedItem is not int lapNumber)
+        if (_pendingIbtLoad is null || IbtLapComboBox.SelectedItem is not IbtLap selectedLap)
         {
             return;
         }
 
+        var lapNumber = selectedLap.Number;
         var lapSamples = _pendingIbtLoad.Samples
             .Where(sample => sample.LapNumber == lapNumber)
+            .Select(sample => sample with { SessionTime = sample.SessionTime - selectedLap.Start })
             .ToList();
         if (lapSamples.Count < 2)
         {
@@ -132,6 +145,7 @@ public partial class MainWindow : System.Windows.Window
             return;
         }
 
+        SetLiveMode(false);
         _loadedSamples = lapSamples;
         _replayMetadata = _pendingIbtLoad.Metadata with
         {
@@ -139,7 +153,7 @@ public partial class MainWindow : System.Windows.Window
             LapNumbers = new HashSet<int> { lapNumber }
         };
         _replayDistanceKm = Math.Max(lapSamples.Max(sample => sample.LapDistanceKm), 0.001);
-        FileTextBlock.Text = $"iRacing IBT: {System.IO.Path.GetFileName(_pendingIbtLoad.Metadata.SourcePath)} (Lap {lapNumber})";
+        FileTextBlock.Text = $"iRacing IBT: {System.IO.Path.GetFileName(_pendingIbtLoad.Metadata.SourcePath)} ({selectedLap.DisplayName})";
         FooterTextBlock.Text = $"Loaded IBT Lap {lapNumber} with {lapSamples.Count:N0} samples from {_replayMetadata.Channels.Channels.Count:N0} channels.";
         UpdateChannelAvailability();
         UpdateComparisonTrack();
@@ -182,12 +196,10 @@ public partial class MainWindow : System.Windows.Window
         {
             var loaded = IbtTelemetrySource.LoadWithMetadata(path);
             _pendingIbtLoad = loaded;
-            var laps = loaded.Metadata.LapNumbers.Where(lap => lap > 0).OrderBy(lap => lap).ToList();
+            var laps = IbtLap.Summarize(loaded.Samples);
             IbtLapComboBox.ItemsSource = laps;
             IbtLapComboBox.IsEnabled = true;
-            IbtLapComboBox.SelectedItem = preferredLap.HasValue && laps.Contains(preferredLap.Value)
-                ? preferredLap.Value
-                : laps.FirstOrDefault();
+            IbtLapComboBox.SelectedItem = laps.FirstOrDefault(lap => lap.Number == preferredLap) ?? IbtLap.Fastest(laps) ?? laps.FirstOrDefault();
             StatusTextBlock.Text = "Previous IBT restored; ready to replay";
         }
         catch (Exception exception)
@@ -246,12 +258,11 @@ public partial class MainWindow : System.Windows.Window
         {
             var loaded = IbtTelemetrySource.LoadWithMetadata(path);
             _pendingReferenceIbtLoad = loaded;
-            var laps = loaded.Metadata.LapNumbers.Where(lap => lap > 0).OrderBy(lap => lap).ToList();
+            var laps = IbtLap.Summarize(loaded.Samples);
             ReferenceIbtLapComboBox.ItemsSource = laps;
             ReferenceIbtLapComboBox.IsEnabled = true;
-            ReferenceIbtLapComboBox.SelectedItem = preferredLap.HasValue && laps.Contains(preferredLap.Value)
-                ? preferredLap.Value
-                : laps.FirstOrDefault();
+            ReferenceIbtLapComboBox.SelectedItem = laps.FirstOrDefault(lap => lap.Number == preferredLap && lap.Duration.HasValue) ?? IbtLap.Fastest(laps);
+            if (ReferenceIbtLapComboBox.SelectedItem is null) ClearIncompleteReference();
             StatusTextBlock.Text = "Previous reference IBT restored";
         }
         catch (Exception exception)
@@ -286,6 +297,7 @@ public partial class MainWindow : System.Windows.Window
 
     private void LoadCsv(string path)
     {
+        SetLiveMode(false);
         _pendingIbtLoad = null;
         IbtLapComboBox.ItemsSource = null;
         IbtLapComboBox.IsEnabled = false;
@@ -364,19 +376,15 @@ public partial class MainWindow : System.Windows.Window
                 StatusTextBlock.Text = "Reading reference iRacing telemetry...";
                 var loaded = await Task.Run(() => IbtTelemetrySource.LoadWithMetadata(dialog.FileName));
                 _pendingReferenceIbtLoad = loaded;
-                var laps = loaded.Metadata.LapNumbers
-                    .Where(lap => lap > 0)
-                    .OrderBy(lap => lap)
-                    .ToList();
+                var laps = IbtLap.Summarize(loaded.Samples);
                 ReferenceIbtLapComboBox.ItemsSource = laps;
                 ReferenceIbtLapComboBox.IsEnabled = true;
                 var settings = _settingsStore.Load();
                 settings.LastReferenceIbtPath = dialog.FileName;
                 settings.LastReferenceSource = "ibt";
                 _settingsStore.Save(settings);
-                ReferenceIbtLapComboBox.SelectedItem = laps.Contains(settings.LastReferenceIbtLap ?? 0)
-                    ? settings.LastReferenceIbtLap
-                    : laps.FirstOrDefault();
+                ReferenceIbtLapComboBox.SelectedItem = IbtLap.Fastest(laps);
+                if (ReferenceIbtLapComboBox.SelectedItem is null) ClearIncompleteReference();
             }
             else
             {
@@ -390,15 +398,49 @@ public partial class MainWindow : System.Windows.Window
         }
     }
 
+    private void SelectFastestReference(TelemetryLoadResult loaded)
+    {
+        _pendingReferenceIbtLoad = loaded;
+        var laps = IbtLap.Summarize(loaded.Samples);
+        ReferenceIbtLapComboBox.ItemsSource = laps;
+        ReferenceIbtLapComboBox.IsEnabled = true;
+        var settings = _settingsStore.Load();
+        settings.LastReferenceIbtPath = loaded.Metadata.SourcePath;
+        settings.LastReferenceSource = "ibt";
+        _settingsStore.Save(settings);
+        ReferenceIbtLapComboBox.SelectedItem = IbtLap.Fastest(laps);
+        if (ReferenceIbtLapComboBox.SelectedItem is null) ClearIncompleteReference();
+    }
+
+    private void ClearIncompleteReference()
+    {
+        _referenceSamples = null;
+        _referenceMetadata = null;
+        _currentComparison = null;
+        _currentCorner = null;
+        ReferenceFileTextBlock.Text = "No complete reference lap found in this IBT. Record a full lap including the finish-line crossing.";
+        UpdateComparisonTrack();
+        UpdateCornerAnalysis();
+        UpdateChannelAvailability();
+        TimeDifferencePanelValue.Text = "No complete reference lap";
+    }
+
     private void ReferenceIbtLapSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
-        if (_pendingReferenceIbtLoad is null || ReferenceIbtLapComboBox.SelectedItem is not int lapNumber)
+        if (_pendingReferenceIbtLoad is null || ReferenceIbtLapComboBox.SelectedItem is not IbtLap selectedLap)
         {
             return;
         }
 
+        if (!selectedLap.Duration.HasValue)
+        {
+            ClearIncompleteReference();
+            return;
+        }
+        var lapNumber = selectedLap.Number;
         var lapSamples = _pendingReferenceIbtLoad.Samples
             .Where(sample => sample.LapNumber == lapNumber)
+            .Select(sample => sample with { SessionTime = sample.SessionTime - selectedLap.Start })
             .ToList();
         if (lapSamples.Count < 2)
         {
@@ -412,22 +454,137 @@ public partial class MainWindow : System.Windows.Window
             SampleCount = lapSamples.Count,
             LapNumbers = new HashSet<int> { lapNumber }
         };
-        ReferenceFileTextBlock.Text = $"Reference iRacing IBT: {System.IO.Path.GetFileName(_pendingReferenceIbtLoad.Metadata.SourcePath)} (Lap {lapNumber}, {lapSamples.Count:N0} samples)";
+        ReferenceFileTextBlock.Text = $"Reference iRacing IBT: {System.IO.Path.GetFileName(_pendingReferenceIbtLoad.Metadata.SourcePath)} ({selectedLap.DisplayName}, {lapSamples.Count:N0} samples)";
         UpdateChannelAvailability();
         UpdateComparisonTrack();
         UpdateCornerAnalysis();
         TimeDifferencePanelValue.Text = _comparisonTrack is null
             ? "Reference loaded; comparison pending"
             : "Reference loaded; ready for comparison";
-        StatusTextBlock.Text = $"Reference IBT Lap {lapNumber} loaded";
+        StatusTextBlock.Text = $"Reference {selectedLap.DisplayName}";
         var settings = _settingsStore.Load();
         settings.LastReferenceIbtLap = lapNumber;
         settings.LastReferenceSource = "ibt";
         _settingsStore.Save(settings);
     }
 
+    private async void ConnectLiveClick(object sender, System.Windows.RoutedEventArgs e) => await ConnectLiveAsync();
+
+    private async Task ConnectLiveAsync()
+    {
+        if (_source is IracingLiveTelemetrySource { IsRunning: true }) return;
+        await StopSourceAsync();
+        SetLiveMode(true);
+        _pendingIbtLoad = null;
+        IbtLapComboBox.ItemsSource = null;
+        _liveSamples.Clear();
+        _loadedSamples = _liveSamples;
+        _wasLiveConnected = false;
+        ResetAutomaticCoaching();
+        _voiceCoachService.StopSpeaking();
+        _lastCoachResponse = null;
+        _currentComparison = null;
+        _currentCorner = null;
+        _conversationCornerNumber = null;
+        CoachResponseTextBlock.Text = "Live telemetry mode. Record and load a lap for corner coaching.";
+        UpdateComparisonTrack();
+        UpdateCornerAnalysis();
+        ClearTelemetry();
+        var live = new IracingLiveTelemetrySource();
+        _source = live;
+        _replayMetadata = live.Metadata;
+        UpdateChannelAvailability();
+        live.SampleReceived += SourceSampleReceived;
+        FileTextBlock.Text = "Live iRacing shared memory";
+        FooterTextBlock.Text = "Waiting for iRacing. Join a session and enter the car.";
+        StatusTextBlock.Text = "Waiting for iRacing...";
+        ConnectLiveButton.IsEnabled = false;
+        await live.StartAsync();
+        _liveTimer.Start();
+    }
+
+    private void SetLiveMode(bool live)
+    {
+        _liveMode = live;
+        TimelineSlider.IsEnabled = !live && _loadedSamples is { Count: > 0 };
+        PauseButton.IsEnabled = !live;
+        RestartButton.IsEnabled = !live;
+        LoopCheckBox.IsEnabled = !live;
+        PlaybackSpeedComboBox.IsEnabled = !live;
+        AutoCoachCheckBox.IsEnabled = !live || _liveCoach is not null;
+        IbtLapComboBox.IsEnabled = !live && _pendingIbtLoad is not null;
+    }
+
+    private void LiveTimerTick(object? sender, EventArgs e)
+    {
+        if (_source is not IracingLiveTelemetrySource live) return;
+        var connected = live.IsConnected;
+        StatusTextBlock.Text = live.LastError is { } error
+            ? $"iRacing error: {error}"
+            : !live.IsRunning ? "iRacing monitoring stopped. Click Connect to retry."
+            : connected ? "Connected to iRacing — live telemetry"
+            : "Waiting for iRacing / disconnected — reconnecting automatically...";
+        ConnectLiveButton.IsEnabled = !live.IsRunning;
+        if (!connected)
+        {
+            while (_liveQueue.Reader.TryRead(out _)) { }
+            _liveCoach?.Reset();
+            if (_wasLiveConnected)
+            {
+                _liveSamples.Clear();
+                ClearTelemetry();
+            }
+            _wasLiveConnected = false;
+            return;
+        }
+        TelemetrySampleEventArgs? latest = null;
+        while (_liveQueue.Reader.TryRead(out var next))
+        {
+            latest = next;
+            var report = _liveCoach?.Observe(next.Sample);
+            if (report is not null && AutoCoachCheckBox.IsChecked == true)
+            {
+                _lastCoachResponse = report;
+                CoachResponseTextBlock.Text = report;
+                _voiceCoachService.StopSpeaking();
+                _voiceCoachService.Speak(report);
+            }
+        }
+        if (latest is null) return;
+        var sample = latest.Sample;
+        if (!_wasLiveConnected || (_liveSamples.Count > 0 &&
+            (sample.LapNumber != _liveSamples[^1].LapNumber || sample.SessionTime < _liveSamples[^1].SessionTime)))
+        {
+            _liveSamples.Clear();
+        }
+        _wasLiveConnected = true;
+        _liveSamples.Add(sample);
+        if (_liveSamples.Count > ChartWindowSize) _liveSamples.RemoveAt(0);
+        _currentSampleIndex = _liveSamples.Count - 1;
+        if (_replayMetadata?.Channels != live.Metadata.Channels)
+        {
+            _replayMetadata = live.Metadata;
+            UpdateChannelAvailability();
+        }
+        UpdateTelemetryReadout(sample);
+        SpeedPanelValue.Text = $"Live {sample.SpeedKph:0} km/h";
+        ThrottlePanelValue.Text = $"Live {sample.Throttle:P0}";
+        BrakePanelValue.Text = $"Live {sample.Brake:P0}";
+        SteeringPanelValue.Text = $"Live {sample.Steering:0.00} rad";
+        LinePanelValue.Text = "Racing line comparison is available in replay";
+        TimeDifferencePanelValue.Text = "Live feedback compares completed corners";
+        CurrentCornerTextBlock.Text = "Live telemetry";
+        TimelineValueTextBlock.Text = "LIVE";
+        RedrawChart();
+    }
+
     private async void StartClick(object sender, System.Windows.RoutedEventArgs e)
     {
+        if (_liveMode)
+        {
+            await ConnectLiveAsync();
+            return;
+        }
         if (_loadedSamples is null)
         {
             StatusTextBlock.Text = "Load a CSV before starting playback.";
@@ -437,9 +594,9 @@ public partial class MainWindow : System.Windows.Window
         await StopSourceAsync();
         ResetAutomaticCoaching();
         var speed = GetPlaybackSpeed();
-        _source = new CsvTelemetrySource(_loadedSamples, speed);
-        _source.LoopPlayback = LoopCheckBox.IsChecked == true;
-        _source.Seek(_currentSampleIndex);
+        var replay = new CsvTelemetrySource(_loadedSamples, speed) { LoopPlayback = LoopCheckBox.IsChecked == true };
+        replay.Seek(_currentSampleIndex);
+        _source = replay;
         _source.SampleReceived += SourceSampleReceived;
         StatusTextBlock.Text = $"Playing at {speed.ToString("0.##", CultureInfo.InvariantCulture)}×";
         await _source.StartAsync();
@@ -487,8 +644,14 @@ public partial class MainWindow : System.Windows.Window
 
     private void SourceSampleReceived(object? sender, TelemetrySampleEventArgs e)
     {
-        Dispatcher.Invoke(() =>
+        if (sender is IracingLiveTelemetrySource)
         {
+            _liveQueue.Writer.TryWrite(e);
+            return;
+        }
+        Dispatcher.BeginInvoke(new Action(() =>
+        {
+            if (!ReferenceEquals(sender, _source)) return;
             _currentSampleIndex = e.SampleIndex;
             _updatingTimeline = true;
             TimelineSlider.Value = e.SampleIndex;
@@ -496,11 +659,12 @@ public partial class MainWindow : System.Windows.Window
             _updatingTimeline = false;
             UpdateTelemetryReadout(e.Sample, e.SampleIndex, automaticCoaching: true);
             RedrawChart();
-        });
+        }));
     }
 
     protected override async void OnClosed(EventArgs e)
     {
+        _wheelTimer.Stop();
         await StopSourceAsync();
         _voiceCoachService.Dispose();
         base.OnClosed(e);
@@ -508,14 +672,19 @@ public partial class MainWindow : System.Windows.Window
 
     private async Task StopSourceAsync()
     {
-        if (_source is null)
+        _liveTimer.Stop();
+        var source = _source;
+        _source = null;
+        if (source is null)
         {
             return;
         }
 
-        _source.SampleReceived -= SourceSampleReceived;
-        await _source.DisposeAsync();
-        _source = null;
+        source.SampleReceived -= SourceSampleReceived;
+        await source.DisposeAsync();
+        while (_liveQueue.Reader.TryRead(out _)) { }
+        _liveCoach?.Reset();
+        ConnectLiveButton.IsEnabled = true;
     }
 
     private async Task StartSourceAsync()
@@ -526,11 +695,12 @@ public partial class MainWindow : System.Windows.Window
         }
 
         var speed = GetPlaybackSpeed();
-        _source = new CsvTelemetrySource(_loadedSamples, speed)
+        var replay = new CsvTelemetrySource(_loadedSamples, speed)
         {
             LoopPlayback = LoopCheckBox.IsChecked == true
         };
-        _source.Seek(_currentSampleIndex);
+        replay.Seek(_currentSampleIndex);
+        _source = replay;
         _source.SampleReceived += SourceSampleReceived;
         StatusTextBlock.Text = $"Playing at {speed.ToString("0.##", CultureInfo.InvariantCulture)}×";
         await _source.StartAsync();
@@ -581,8 +751,17 @@ public partial class MainWindow : System.Windows.Window
         ReferenceThrottleChartLine.Points = BuildPoints(referenceSamples, sample => sample.Throttle, width, ThrottleChartCanvas.ActualHeight);
         ReferenceBrakeChartLine.Points = BuildPoints(referenceSamples, sample => sample.Brake, width, BrakeChartCanvas.ActualHeight);
         ReferenceSteeringChartLine.Points = BuildPoints(referenceSamples, sample => (sample.Steering + 2) / 4, width, SteeringChartCanvas.ActualHeight);
-        LineChartLine.Points = BuildValuePoints(chartSamples.Select(sample => _comparisonTrack.Compare(sample, _replayDistanceKm).LineOffsetMeters).ToList(), width, LineChartCanvas.ActualHeight, -5, 5);
-        ReferenceLineChartLine.Points = BuildValuePoints(Enumerable.Repeat(0d, chartSamples.Count).ToList(), width, LineChartCanvas.ActualHeight, -5, 5);
+        var lineOffsets = chartSamples.Select(sample => _comparisonTrack.Compare(sample, _replayDistanceKm).LineOffsetMeters).ToArray();
+        if (lineOffsets.All(double.IsFinite))
+        {
+            LineChartLine.Points = BuildValuePoints(lineOffsets, width, LineChartCanvas.ActualHeight, -5, 5);
+            ReferenceLineChartLine.Points = BuildValuePoints(new double[lineOffsets.Length], width, LineChartCanvas.ActualHeight, -5, 5);
+        }
+        else
+        {
+            LineChartLine.Points.Clear();
+            ReferenceLineChartLine.Points.Clear();
+        }
         DrawEventMarkers(chartSamples, windowStart);
     }
 
@@ -732,13 +911,13 @@ public partial class MainWindow : System.Windows.Window
     private void TimelineSliderValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
     {
         var loadedSamples = _loadedSamples;
-        if (_updatingTimeline || loadedSamples is null)
+        if (_updatingTimeline || _liveMode || loadedSamples is null || loadedSamples.Count == 0)
         {
             return;
         }
 
         _currentSampleIndex = (int)Math.Round(e.NewValue);
-        _source?.Seek(_currentSampleIndex);
+        (_source as CsvTelemetrySource)?.Seek(_currentSampleIndex);
         TimelineValueTextBlock.Text = $"{_currentSampleIndex:N0} / {Math.Max(0, loadedSamples.Count - 1):N0}";
         UpdateTelemetryReadout(loadedSamples[_currentSampleIndex]);
         RedrawChart();
@@ -762,9 +941,11 @@ public partial class MainWindow : System.Windows.Window
         ThrottlePanelValue.Text = "—";
         BrakePanelValue.Text = "—";
         SteeringPanelValue.Text = "—";
+        LinePanelValue.Text = "—";
         TimeDifferencePanelValue.Text = "—";
         CurrentCornerTextBlock.Text = "—";
         CurrentCornerDetailTextBlock.Text = string.Empty;
+        CurrentCornerDiagnosisTextBlock.Text = string.Empty;
         CurrentTimeDifferenceTextBlock.Text = string.Empty;
         _currentSampleIndex = 0;
         _updatingTimeline = true;
@@ -791,19 +972,27 @@ public partial class MainWindow : System.Windows.Window
 
     private void UpdateComparisonTrack()
     {
-        _comparisonTrack = _referenceSamples is { Count: >= 2 }
+        _liveCoach = _liveMode && _referenceSamples is { Count: >= 10 } reference
+            ? new LiveCoach(reference)
+            : null;
+        AutoCoachCheckBox.IsEnabled = !_liveMode || _liveCoach is not null;
+        if (_liveMode)
+            CoachResponseTextBlock.Text = _liveCoach is null
+                ? "Load a reference lap for this car and track to enable live coaching."
+                : "Enable Auto coach for live feedback. Say or type help for commands.";
+        _comparisonTrack = !_liveMode && _referenceSamples is { Count: >= 2 }
             ? new TelemetryComparisonTrack(_referenceSamples)
             : null;
     }
 
     private void UpdateCornerAnalysis()
     {
-        if (_loadedSamples is null || _referenceSamples is null)
+        if (_liveMode || _loadedSamples is null || _referenceSamples is null)
         {
             _cornerFindings = [];
             CornerAnalysisItemsControl.ItemsSource = new[]
             {
-                new CornerAnalysisRow(0, "Corner analysis", string.Empty, "Not ready", "Load replay and reference laps to analyse corners.", string.Empty)
+                new CornerAnalysisRow(0, "Corner analysis", string.Empty, "Not ready", _liveMode ? "Live coaching reports appear in the Coach panel." : "Load replay and reference laps to analyse corners.", string.Empty)
             };
             CornerAnalysisExpander.IsExpanded = false;
             return;
@@ -882,6 +1071,7 @@ public partial class MainWindow : System.Windows.Window
             : $"Replay {sample.Steering:0.00}   Ref {comparison.Reference.Steering:0.00}";
         LinePanelValue.Text = comparison is null
             ? "No reference line"
+            : !double.IsFinite(comparison.LineOffsetMeters) ? "Line unavailable at this position"
             : $"Replay {comparison.LineOffsetMeters:+0.00;-0.00;0.00} m   Ref 0.00 m";
         TimeDifferencePanelValue.Text = comparison is null
             ? "No reference comparison"
@@ -987,24 +1177,31 @@ public partial class MainWindow : System.Windows.Window
 
     private async void ListenButtonClick(object sender, System.Windows.RoutedEventArgs e)
     {
+        if (_startingVoice || _wheelRecording || _voiceStopTask is { IsCompleted: false }) return;
+        if (_voiceCoachService.IsRecording) await StopVoiceRecordingAsync();
+        else await StartVoiceRecordingAsync(fromWheel: false);
+    }
+
+    private async Task StartVoiceRecordingAsync(bool fromWheel)
+    {
+        _startingVoice = true;
         try
         {
-            if (_voiceCoachService.IsRecording)
-            {
-                await StopVoiceRecordingAsync();
-                return;
-            }
-
+            _voiceCoachService.StopSpeaking();
             ListenButton.Content = "Preparing microphone...";
             StatusTextBlock.Text = "Preparing local speech model...";
             await _voiceCoachService.StartRecordingAsync();
-            ListenButton.Content = "🎙 Recording... click to stop";
-            StatusTextBlock.Text = "Recording voice command... click the microphone to stop";
+            ListenButton.Content = fromWheel ? "Recording… release wheel button" : "Recording… click to stop";
+            StatusTextBlock.Text = "Recording voice command...";
         }
         catch (Exception exception)
         {
             ListenButton.Content = "🎙 Record";
             StatusTextBlock.Text = $"Voice input unavailable: {exception.Message}";
+        }
+        finally
+        {
+            _startingVoice = false;
         }
     }
 
@@ -1066,23 +1263,21 @@ public partial class MainWindow : System.Windows.Window
             return;
         }
 
+        var previousStatus = StatusTextBlock.Text;
         try
         {
             ListenButton.Content = "Transcribing...";
             StatusTextBlock.Text = "Transcribing locally...";
             var transcript = await _voiceCoachService.StopRecordingAsync();
+            if (string.IsNullOrWhiteSpace(transcript) ||
+                string.Equals(transcript.Trim().TrimEnd('.'), "[BLANK_AUDIO]", StringComparison.OrdinalIgnoreCase))
+            {
+                StatusTextBlock.Text = previousStatus;
+                return;
+            }
+
             CoachInputTextBox.Text = transcript;
-            if (string.IsNullOrWhiteSpace(transcript))
-            {
-                CoachResponseTextBlock.Text = _voiceCoachService.LastRecordedBytes <= 44
-                    ? "No microphone audio was captured. Check the Windows input device and try again."
-                    : "Audio was captured, but Whisper found no speech. Try speaking closer to the microphone.";
-                StatusTextBlock.Text = "No voice command recognised";
-            }
-            else
-            {
-                AskCoach(speak: true);
-            }
+            AskCoach(speak: true);
         }
         catch (Exception exception)
         {
@@ -1094,9 +1289,50 @@ public partial class MainWindow : System.Windows.Window
         }
     }
 
+    private void LogVoiceReview(string transcript, string reason)
+    {
+        var directory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SimCoach");
+        try
+        {
+            Directory.CreateDirectory(directory);
+            var entry = System.Text.Json.JsonSerializer.Serialize(new
+            {
+                timestamp = DateTimeOffset.Now,
+                mode = _liveMode ? "live" : "replay",
+                reason,
+                transcript = transcript.Trim()
+            });
+            File.AppendAllText(System.IO.Path.Combine(directory, "voice-command-review.jsonl"), entry + Environment.NewLine);
+        }
+        catch (IOException exception)
+        {
+            System.Diagnostics.Trace.TraceWarning("Could not write voice review log: {0}", exception.Message);
+        }
+        catch (UnauthorizedAccessException exception)
+        {
+            System.Diagnostics.Trace.TraceWarning("Could not write voice review log: {0}", exception.Message);
+        }
+    }
+
     private void AskCoach(bool speak)
     {
         var command = _coachResponseService.Parse(CoachInputTextBox.Text);
+        if (_liveMode)
+        {
+            var understood = true;
+            var liveResponse = command.Type == CoachCommandType.Repeat
+                ? _lastCoachResponse ?? "No coaching message yet."
+                : _liveCoach?.Respond(CoachInputTextBox.Text, out understood) ?? "Load a reference lap to enable live coaching.";
+            if (speak && !understood) LogVoiceReview(CoachInputTextBox.Text, "unknown_command");
+            if (command.Type == CoachCommandType.Quiet) _voiceCoachService.StopSpeaking();
+            else if (speak) _voiceCoachService.Speak(liveResponse);
+            _lastCoachResponse = liveResponse;
+            CoachResponseTextBlock.Text = liveResponse;
+            CoachInputTextBox.SelectAll();
+            return;
+        }
+        if (speak && command.Type == CoachCommandType.Unknown)
+            LogVoiceReview(CoachInputTextBox.Text, "unknown_command");
         if (command.CornerNumber.HasValue)
         {
             _conversationCornerNumber = command.CornerNumber;

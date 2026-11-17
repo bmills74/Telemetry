@@ -152,7 +152,9 @@ public sealed class CoachingDiagnosisService
     }
 
     private static string BuildEvidence(CornerFinding finding) =>
-        $"Entry {Math.Abs(finding.EntryLineOffsetMeters):0.0} m off, apex {Math.Abs(finding.ApexLineOffsetMeters):0.0} m off, exit {Math.Abs(finding.ExitLineOffsetMeters):0.0} m off; brake point {DescribeBrake(finding.BrakeDeltaMeters)}; minimum speed {finding.MinimumSpeedDeltaKph:+0;-0;0} km/h versus reference.{DescribeSteering(finding.Steering)}";
+        (double.IsFinite(finding.EntryLineOffsetMeters) && double.IsFinite(finding.ApexLineOffsetMeters) && double.IsFinite(finding.ExitLineOffsetMeters)
+            ? $"Entry {Math.Abs(finding.EntryLineOffsetMeters):0.0} m off, apex {Math.Abs(finding.ApexLineOffsetMeters):0.0} m off, exit {Math.Abs(finding.ExitLineOffsetMeters):0.0} m off; " : "Racing line unavailable; ") +
+        $"brake point {DescribeBrake(finding.BrakeDeltaMeters)}; minimum speed {finding.MinimumSpeedDeltaKph:+0;-0;0} km/h versus reference.{DescribeSteering(finding.Steering)}";
 
     private static string DescribeSteering(SteeringComparison? steering) => steering is null
         ? string.Empty

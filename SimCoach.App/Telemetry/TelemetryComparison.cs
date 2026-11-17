@@ -86,28 +86,28 @@ public sealed class TelemetryComparisonTrack
     {
         if (!replay.Latitude.HasValue || !replay.Longitude.HasValue)
         {
-            return 0;
+            return double.NaN;
         }
 
         var reference = Interpolate(progress);
         if (!reference.Latitude.HasValue || !reference.Longitude.HasValue)
         {
-            return 0;
+            return double.NaN;
         }
 
         var before = Interpolate(Math.Max(0, progress - 0.0025));
         var after = Interpolate(Math.Min(1, progress + 0.0025));
         if (!before.Latitude.HasValue || !before.Longitude.HasValue || !after.Latitude.HasValue || !after.Longitude.HasValue)
         {
-            return 0;
+            return double.NaN;
         }
 
-        var tangent = ToLocalMeters(reference.Latitude.Value, reference.Longitude.Value, after.Latitude.Value, after.Longitude.Value);
+        var tangent = ToLocalMeters(before.Latitude.Value, before.Longitude.Value, after.Latitude.Value, after.Longitude.Value);
         var replayOffset = ToLocalMeters(reference.Latitude.Value, reference.Longitude.Value, replay.Latitude.Value, replay.Longitude.Value);
         var tangentLength = Math.Sqrt(tangent.X * tangent.X + tangent.Y * tangent.Y);
         if (tangentLength < 0.001)
         {
-            return 0;
+            return double.NaN;
         }
 
         // Positive means left of the reference direction; negative means right.

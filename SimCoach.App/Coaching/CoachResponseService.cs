@@ -29,9 +29,12 @@ public sealed class CoachResponseService
 {
     private readonly CoachingSynthesisService _synthesisService = new();
 
+    internal static string NormalizeBrakingTerms(string text) =>
+        Regex.Replace(text, @"\b(?:break|brake|breaking|braking)[ -]?points?\b", "braking points");
+
     public CoachCommand Parse(string input)
     {
-        var text = input.Trim().ToLowerInvariant();
+        var text = NormalizeBrakingTerms(input.Trim().ToLowerInvariant());
         if (string.IsNullOrWhiteSpace(text))
         {
             return new CoachCommand(CoachCommandType.Unknown);
@@ -151,7 +154,10 @@ public sealed class CoachResponseService
             return "I don’t have a line comparison yet.";
         }
 
-        var currentSuffix = cornerNumber is null && context.CurrentCorner?.Number == finding.Number && context.CurrentComparison is not null
+        if (!double.IsFinite(finding.EntryLineOffsetMeters) || !double.IsFinite(finding.ApexLineOffsetMeters) || !double.IsFinite(finding.ExitLineOffsetMeters))
+            return "I need position data from both laps to compare your racing line.";
+
+        var currentSuffix = cornerNumber is null && context.CurrentCorner?.Number == finding.Number && context.CurrentComparison is not null && double.IsFinite(context.CurrentComparison.LineOffsetMeters)
             ? $" You are currently {Math.Abs(context.CurrentComparison.LineOffsetMeters):0.0} metres off the reference."
             : string.Empty;
         var direction = finding.TurnDirection switch

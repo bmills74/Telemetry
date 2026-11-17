@@ -57,6 +57,9 @@ public sealed class VoiceCoachService : IDisposable
     private StreamReader? _kokoroOutput;
     private WaveOutEvent? _kokoroPlayback;
     private readonly SemaphoreSlim _speechLock = new(1, 1);
+    private int _speechVersion;
+    private bool _disposed;
+    public event EventHandler<string>? SpeechFailed;
 
     public VoiceCoachService()
     {
@@ -147,14 +150,20 @@ public sealed class VoiceCoachService : IDisposable
             return string.Empty;
         }
 
-        var transcript = new List<string>();
+        _audioStream = null;
         await using var transcriptionStream = new MemoryStream(audioBytes, writable: false);
+        return await TranscribeAsync(transcriptionStream, cancellationToken).ConfigureAwait(false);
+    }
+
+    internal async Task<string> TranscribeAsync(Stream transcriptionStream, CancellationToken cancellationToken = default)
+    {
+        await EnsureWhisperReadyAsync(cancellationToken).ConfigureAwait(false);
+        var transcript = new List<string>();
         await foreach (var result in _whisperProcessor!.ProcessAsync(transcriptionStream, cancellationToken).ConfigureAwait(false))
         {
             transcript.Add(result.Text);
         }
 
-        _audioStream = null;
         return string.Join(" ", transcript).Trim();
     }
 
@@ -165,6 +174,7 @@ public sealed class VoiceCoachService : IDisposable
 
     public void StopSpeaking()
     {
+        Interlocked.Increment(ref _speechVersion);
         _synthesizer.SpeakAsyncCancelAll();
         _kokoroPlayback?.Stop();
     }
@@ -185,6 +195,7 @@ public sealed class VoiceCoachService : IDisposable
 
     public void Dispose()
     {
+        _disposed = true;
         if (IsRecording && _waveIn is not null)
         {
             _waveIn.StopRecording();
@@ -205,26 +216,28 @@ public sealed class VoiceCoachService : IDisposable
         }
         _kokoroProcess?.Dispose();
         _kokoroPlayback?.Dispose();
-        _speechLock.Dispose();
+        // Active speech may still be releasing this managed semaphore after cancellation.
         _synthesizer.Dispose();
     }
 
     private async Task SpeakAsync(string text)
     {
-        if (string.IsNullOrWhiteSpace(text))
+        if (_disposed || string.IsNullOrWhiteSpace(text))
         {
             return;
         }
 
+        var version = Volatile.Read(ref _speechVersion);
         await _speechLock.WaitAsync().ConfigureAwait(false);
         try
         {
+            if (_disposed || version != Volatile.Read(ref _speechVersion)) return;
             try
             {
                 if (SelectedVoiceName is not null && KokoroVoices.ContainsKey(SelectedVoiceName))
                 {
                     Log($"Speaking with Kokoro voice '{SelectedVoiceName}': {text}");
-                    await SpeakWithKokoroAsync(text).ConfigureAwait(false);
+                    await SpeakWithKokoroAsync(text, version).ConfigureAwait(false);
                 }
                 else
                 {
@@ -234,11 +247,9 @@ public sealed class VoiceCoachService : IDisposable
             }
             catch (Exception exception)
             {
-                // Keep the coach usable if the optional local neural voice is
-                // not installed or fails while loading its model.
-                Log($"Kokoro failed; falling back to Windows voice '{SelectedVoiceName}'. {exception}");
+                Log($"Speech failed for '{SelectedVoiceName}'. {exception}");
                 ResetKokoroProcess();
-                SpeakWithWindows(text);
+                if (!_disposed) SpeechFailed?.Invoke(this, $"{SelectedVoiceName}: {exception.Message}");
             }
         }
         finally
@@ -255,7 +266,7 @@ public sealed class VoiceCoachService : IDisposable
         _synthesizer.SpeakAsync(text);
     }
 
-    private async Task SpeakWithKokoroAsync(string text)
+    internal async Task<byte[]> GenerateKokoroAudioAsync(string text)
     {
         await EnsureKokoroProcessAsync().ConfigureAwait(false);
         await _kokoroInput!.WriteLineAsync(JsonSerializer.Serialize(new
@@ -268,7 +279,7 @@ public sealed class VoiceCoachService : IDisposable
         })).ConfigureAwait(false);
         await _kokoroInput.FlushAsync().ConfigureAwait(false);
 
-        var responseLine = await _kokoroOutput!.ReadLineAsync().ConfigureAwait(false);
+        var responseLine = await _kokoroOutput!.ReadLineAsync().WaitAsync(TimeSpan.FromSeconds(120)).ConfigureAwait(false);
         Log($"Kokoro audio response received: {(responseLine is null ? "<null>" : $"{responseLine.Length} characters")}");
         if (string.IsNullOrWhiteSpace(responseLine))
         {
@@ -289,7 +300,13 @@ public sealed class VoiceCoachService : IDisposable
             throw new InvalidOperationException("Kokoro returned no audio.");
         }
 
-        var audioBytes = Convert.FromBase64String(response.AudioBase64);
+        return Convert.FromBase64String(response.AudioBase64);
+    }
+
+    private async Task SpeakWithKokoroAsync(string text, int version)
+    {
+        var audioBytes = await GenerateKokoroAudioAsync(text).ConfigureAwait(false);
+        if (_disposed || version != Volatile.Read(ref _speechVersion)) return;
         using var audioStream = new MemoryStream(audioBytes, writable: false);
         using var reader = new WaveFileReader(audioStream);
         _kokoroPlayback?.Stop();
@@ -311,42 +328,35 @@ public sealed class VoiceCoachService : IDisposable
             return;
         }
 
-        const string pythonPath = @"C:\tools\kokoro\.venv312\Scripts\python.exe";
-        var scriptPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Tools", "KokoroTts", "kokoro_tts.py"));
-        const string kokoroPath = @"C:\tools\kokoro\kokoro-main";
-        if (!File.Exists(pythonPath) || !File.Exists(scriptPath) || !Directory.Exists(kokoroPath))
-        {
-            Log($"Kokoro paths missing. Python='{pythonPath}' exists={File.Exists(pythonPath)}; script='{scriptPath}' exists={File.Exists(scriptPath)}; model root='{kokoroPath}' exists={Directory.Exists(kokoroPath)}.");
-            throw new FileNotFoundException("Local Kokoro installation was not found.");
-        }
-
-        Log($"Starting Kokoro. Python='{pythonPath}', script='{scriptPath}', PYTHONPATH='{kokoroPath}'.");
-
+        var workerPath = Path.Combine(AppContext.BaseDirectory, "Kokoro", "KokoroWorker.exe");
+        if (!File.Exists(workerPath))
+            throw new FileNotFoundException("The bundled Kokoro worker is missing. Rebuild with Tools/KokoroTts/Setup-Kokoro.ps1 first.", workerPath);
+        Log($"Starting bundled Kokoro: {workerPath}");
         var startInfo = new ProcessStartInfo
         {
-            FileName = pythonPath,
-            Arguments = $"\"{scriptPath}\"",
-            WorkingDirectory = kokoroPath,
+            FileName = workerPath,
+            WorkingDirectory = Path.GetDirectoryName(workerPath)!,
             UseShellExecute = false,
             RedirectStandardInput = true,
             RedirectStandardOutput = true,
             RedirectStandardError = true,
-            CreateNoWindow = true
+            CreateNoWindow = true,
+            StandardInputEncoding = new System.Text.UTF8Encoding(false),
+            StandardOutputEncoding = System.Text.Encoding.UTF8
         };
-        startInfo.Environment["PYTHONPATH"] = kokoroPath;
-        startInfo.Environment["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1";
+        startInfo.Environment["PYTHONUTF8"] = "1";
         _kokoroProcess = Process.Start(startInfo)
             ?? throw new InvalidOperationException("Could not start Kokoro.");
         _kokoroInput = _kokoroProcess.StandardInput;
         _kokoroOutput = _kokoroProcess.StandardOutput;
         _ = ReadKokoroErrorsAsync(_kokoroProcess.StandardError);
 
-        var readyLine = await _kokoroOutput.ReadLineAsync().ConfigureAwait(false);
+        var readyLine = await _kokoroOutput.ReadLineAsync().WaitAsync(TimeSpan.FromSeconds(60)).ConfigureAwait(false);
         Log($"Kokoro ready response: {readyLine ?? "<null>"}");
         if (string.IsNullOrWhiteSpace(readyLine) || !readyLine.Contains("\"ready\":true", StringComparison.OrdinalIgnoreCase))
         {
             ResetKokoroProcess();
-            throw new InvalidOperationException("Kokoro did not become ready.");
+            throw new InvalidOperationException($"Kokoro did not become ready: {readyLine ?? "worker exited"}");
         }
     }
 

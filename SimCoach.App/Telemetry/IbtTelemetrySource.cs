@@ -68,6 +68,9 @@ public static class IbtTelemetrySource
             }
 
             var sessionSeconds = ReadRequiredDouble(bytes, recordOffset, header.BufferLength, byName, "SessionTime");
+            var position = TelemetryPosition.Validate(
+                ReadCoordinate(byName, bytes, recordOffset, "Lat"),
+                ReadCoordinate(byName, bytes, recordOffset, "Lon"));
             samples.Add(new TelemetrySample(
                 TimeSpan.FromSeconds(Math.Max(0, sessionSeconds - firstSessionSeconds)),
                 lapNumber,
@@ -77,6 +80,8 @@ public static class IbtTelemetrySource
                 NormalizeInput(ReadFloat(byName, bytes, recordOffset, "Brake") ?? 0),
                 ReadFloat(byName, bytes, recordOffset, "SteeringWheelAngle") ?? 0,
                 ReadInt(byName, bytes, recordOffset, "Gear") ?? 0,
+                Latitude: position.Latitude,
+                Longitude: position.Longitude,
                 LapProgress: progress,
                 Rpm: ReadFloat(byName, bytes, recordOffset, "RPM"),
                 Clutch: NormalizeOptional(ReadFloat(byName, bytes, recordOffset, "Clutch")),
@@ -164,6 +169,11 @@ public static class IbtTelemetrySource
             _ => throw new InvalidDataException($"The IBT {name} channel has an unsupported type.")
         };
     }
+
+    private static double? ReadCoordinate(IReadOnlyDictionary<string, IbtVariable> variables, byte[] bytes, int offset, string name) =>
+        variables.TryGetValue(name, out var variable) && string.Equals(variable.Unit, "deg", StringComparison.OrdinalIgnoreCase)
+            ? Convert.ToDouble(ReadValue(bytes, offset, 0, variable))
+            : null;
 
     private static float? ReadFloat(IReadOnlyDictionary<string, IbtVariable> variables, byte[] bytes, int recordOffset, string name) =>
         variables.TryGetValue(name, out var variable) ? Convert.ToSingle(ReadValue(bytes, recordOffset, 0, variable)) : null;

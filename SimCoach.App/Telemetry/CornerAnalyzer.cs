@@ -120,7 +120,8 @@ public static class CornerAnalyzer
             var exitComparison = comparisonTrack.Compare(NearestSample(replaySamples, segment.End), replayDistanceKm);
             var maximumLineOffset = replaySegment
                 .Select(sample => Math.Abs(comparisonTrack.Compare(sample, replayDistanceKm).LineOffsetMeters))
-                .DefaultIfEmpty(0)
+                .Where(double.IsFinite)
+                .DefaultIfEmpty(double.NaN)
                 .Max();
             var summary = BuildSummary(brakeDeltaMeters, minimumSpeedDelta, exitComparison.LineOffsetMeters, segmentTimeDelta);
 
