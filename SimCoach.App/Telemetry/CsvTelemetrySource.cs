@@ -42,6 +42,9 @@ public sealed class CsvTelemetrySource : ITelemetrySource
     }
 
     public static IReadOnlyList<TelemetrySample> Load(string path)
+        => LoadWithMetadata(path).Samples;
+
+    public static TelemetryLoadResult LoadWithMetadata(string path)
     {
         using var reader = new StreamReader(path);
         var headerLine = reader.ReadLine();
@@ -55,6 +58,7 @@ public sealed class CsvTelemetrySource : ITelemetrySource
             .Select((header, position) => (Key: Normalize(header), Position: position))
             .GroupBy(item => item.Key)
             .ToDictionary(group => group.Key, group => group.First().Position);
+        var availableChannels = TelemetryChannelAvailability.FromHeaders(headers);
 
         var samples = new List<TelemetrySample>();
         var lineNumber = 1;
@@ -62,6 +66,7 @@ public sealed class CsvTelemetrySource : ITelemetrySource
         double? previousLongitude = null;
         var previousLapNumber = 1;
         var lapDistanceKm = 0d;
+        double? previousLapProgress = null;
         while (!reader.EndOfStream)
         {
             lineNumber++;
@@ -85,12 +90,14 @@ public sealed class CsvTelemetrySource : ITelemetrySource
                 previousLatitude,
                 previousLongitude,
                 previousLapNumber,
-                lapDistanceKm);
+                lapDistanceKm,
+                previousLapProgress);
             samples.Add(sample.Telemetry);
             previousLatitude = sample.Latitude;
             previousLongitude = sample.Longitude;
             previousLapNumber = sample.Telemetry.LapNumber;
             lapDistanceKm = sample.Telemetry.LapDistanceKm;
+            previousLapProgress = sample.Telemetry.LapProgress;
         }
 
         if (samples.Count == 0)
@@ -98,7 +105,13 @@ public sealed class CsvTelemetrySource : ITelemetrySource
             throw new InvalidDataException("The CSV does not contain telemetry rows.");
         }
 
-        return samples;
+        var metadata = new TelemetrySessionMetadata(
+            TelemetrySourceKind.Garage61Csv,
+            path,
+            availableChannels,
+            samples.Count,
+            samples.Select(sample => sample.LapNumber).ToHashSet());
+        return new TelemetryLoadResult(samples, metadata);
     }
 
     public Task StartAsync(CancellationToken cancellationToken = default)
@@ -188,11 +201,20 @@ public sealed class CsvTelemetrySource : ITelemetrySource
         double? previousLatitude,
         double? previousLongitude,
         int previousLapNumber,
-        double previousLapDistanceKm)
+        double previousLapDistanceKm,
+        double? previousLapProgress)
     {
         var sessionSeconds = ReadDouble(index, values, "sessiontime", "time", "timestamp")
             ?? sampleNumber / 60d;
         var lapNumber = (int)Math.Round(ReadDouble(index, values, "lap", "lapnumber") ?? 1);
+        var lapProgress = NormalizeProgress(ReadDouble(index, values, "lapdistpct", "lapdistancepct", "lapprogress"));
+        if (lapProgress.HasValue && previousLapProgress.HasValue && lapProgress.Value + 0.25 < previousLapProgress.Value)
+        {
+            // Garage 61 exports commonly include the first sample after the
+            // finish line. Keep that terminal sample at the end of the lap so
+            // alignment remains monotonic for the single-lap replay.
+            lapProgress = 1;
+        }
         var latitude = ReadDouble(index, values, "lat", "latitude");
         var longitude = ReadDouble(index, values, "lon", "longitude", "long");
         var lapDistanceKm = previousLapNumber == lapNumber ? previousLapDistanceKm : 0;
@@ -203,16 +225,28 @@ public sealed class CsvTelemetrySource : ITelemetrySource
 
         return new ParsedSample(
             new TelemetrySample(
-                TimeSpan.FromSeconds(Math.Max(0, sessionSeconds)),
-                lapNumber,
-                lapDistanceKm,
-                ToKph(ReadDouble(index, values, "speed", "speedmps", "speedkph", "speedkmh", "speedmph")),
-                NormalizeInput(ReadDouble(index, values, "throttle", "throttlepercent", "throttleraw")),
-                NormalizeInput(ReadDouble(index, values, "brake", "brakepercent", "brakeraw")),
-                ReadDouble(index, values, "steering", "steeringwheel", "steeringwheelangle", "steeringangle") ?? 0,
-                (int)Math.Round(ReadDouble(index, values, "gear") ?? 0),
-                latitude,
-                longitude),
+                SessionTime: TimeSpan.FromSeconds(Math.Max(0, sessionSeconds)),
+                LapNumber: lapNumber,
+                LapDistanceKm: lapDistanceKm,
+                SpeedKph: ToKph(ReadDouble(index, values, "speed", "speedmps", "speedkph", "speedkmh", "speedmph")),
+                Throttle: NormalizeInput(ReadDouble(index, values, "throttle", "throttlepercent", "throttleraw")),
+                Brake: NormalizeInput(ReadDouble(index, values, "brake", "brakepercent", "brakeraw")),
+                Steering: ReadDouble(index, values, "steering", "steeringwheel", "steeringwheelangle", "steeringangle") ?? 0,
+                Gear: (int)Math.Round(ReadDouble(index, values, "gear") ?? 0),
+                Latitude: latitude,
+                Longitude: longitude,
+                LapProgress: lapProgress,
+                Rpm: ReadDouble(index, values, "rpm", "engine0rpm"),
+                Clutch: NormalizeInput(ReadDouble(index, values, "clutch")),
+                AbsActive: ReadBool(index, values, "absactive", "brakeabsactive"),
+                DrsActive: ReadBool(index, values, "drsactive"),
+                P2PActive: ReadBool(index, values, "p2pactive", "pushtopass"),
+                LateralAcceleration: ReadDouble(index, values, "lataccel", "lateralacceleration"),
+                LongitudinalAcceleration: ReadDouble(index, values, "longaccel", "longitudinalacceleration"),
+                VerticalAcceleration: ReadDouble(index, values, "vertaccel", "verticalacceleration"),
+                Yaw: ReadDouble(index, values, "yaw"),
+                YawRate: ReadDouble(index, values, "yawrate"),
+                PositionType: ReadInt(index, values, "positiontype")),
             latitude,
             longitude);
     }
@@ -247,6 +281,52 @@ public sealed class CsvTelemetrySource : ITelemetrySource
         }
 
         return value.Value > 1 ? value.Value / 100 : value.Value;
+    }
+
+    private static double? NormalizeProgress(double? value)
+    {
+        if (!value.HasValue)
+        {
+            return null;
+        }
+
+        return Math.Clamp(value.Value > 1 ? value.Value / 100 : value.Value, 0, 1);
+    }
+
+    private static int? ReadInt(
+        IReadOnlyDictionary<string, int> index,
+        IReadOnlyList<string> values,
+        params string[] names)
+    {
+        var value = ReadDouble(index, values, names);
+        return value.HasValue ? (int)Math.Round(value.Value) : null;
+    }
+
+    private static bool? ReadBool(
+        IReadOnlyDictionary<string, int> index,
+        IReadOnlyList<string> values,
+        params string[] names)
+    {
+        foreach (var name in names)
+        {
+            if (!index.TryGetValue(name, out var position) || position >= values.Count)
+            {
+                continue;
+            }
+
+            var raw = values[position].Trim();
+            if (bool.TryParse(raw, out var boolean))
+            {
+                return boolean;
+            }
+
+            if (double.TryParse(raw, NumberStyles.Float, CultureInfo.InvariantCulture, out var number))
+            {
+                return Math.Abs(number) > double.Epsilon;
+            }
+        }
+
+        return null;
     }
 
     private static double? ReadDouble(

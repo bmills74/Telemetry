@@ -15,6 +15,10 @@ public partial class MainWindow : System.Windows.Window
 {
     private IReadOnlyList<TelemetrySample>? _loadedSamples;
     private IReadOnlyList<TelemetrySample>? _referenceSamples;
+    private TelemetrySessionMetadata? _replayMetadata;
+    private TelemetrySessionMetadata? _referenceMetadata;
+    private TelemetryLoadResult? _pendingIbtLoad;
+    private TelemetryLoadResult? _pendingReferenceIbtLoad;
     private TelemetryComparisonTrack? _comparisonTrack;
     private IReadOnlyList<CornerFinding> _cornerFindings = [];
     private double _replayDistanceKm;
@@ -26,6 +30,7 @@ public partial class MainWindow : System.Windows.Window
     private string? _lastCoachResponse;
     private TelemetryComparison? _currentComparison;
     private CornerFinding? _currentCorner;
+    private int? _conversationCornerNumber;
     private Task? _voiceStopTask;
     private int _lastSourceSampleIndex = -1;
     private CornerFinding? _previousAutomaticCorner;
@@ -40,8 +45,8 @@ public partial class MainWindow : System.Windows.Window
         VoiceComboBox.ItemsSource = _voiceCoachService.VoiceNames;
         VoiceComboBox.SelectedItem = _voiceCoachService.SelectedVoiceName;
         SpeechRateSlider.Value = _voiceCoachService.Rate;
-        RestoreLastCsv();
-        RestoreLastReferenceCsv();
+        RestoreLastReplaySource();
+        RestoreLastReferenceSource();
     }
 
     private async void LoadCsvClick(object sender, System.Windows.RoutedEventArgs e)
@@ -65,6 +70,129 @@ public partial class MainWindow : System.Windows.Window
         catch (Exception exception)
         {
             StatusTextBlock.Text = $"Could not load CSV: {exception.Message}";
+        }
+    }
+
+    private async void LoadIbtClick(object sender, System.Windows.RoutedEventArgs e)
+    {
+        var dialog = new OpenFileDialog
+        {
+            Filter = "iRacing telemetry (*.ibt)|*.ibt|All files (*.*)|*.*",
+            Title = "Load an iRacing telemetry file"
+        };
+
+        if (dialog.ShowDialog() != true)
+        {
+            return;
+        }
+
+        try
+        {
+            await StopSourceAsync();
+            StatusTextBlock.Text = "Reading iRacing telemetry...";
+            var loaded = await Task.Run(() => IbtTelemetrySource.LoadWithMetadata(dialog.FileName));
+            _pendingIbtLoad = loaded;
+            var laps = loaded.Metadata.LapNumbers
+                .Where(lap => lap > 0)
+                .OrderBy(lap => lap)
+                .ToList();
+            IbtLapComboBox.ItemsSource = laps;
+            IbtLapComboBox.IsEnabled = true;
+            var settings = _settingsStore.Load();
+            settings.LastReplayIbtPath = dialog.FileName;
+            settings.LastReplaySource = "ibt";
+            _settingsStore.Save(settings);
+            IbtLapComboBox.SelectedItem = laps.Contains(settings.LastReplayIbtLap ?? 0)
+                ? settings.LastReplayIbtLap
+                : laps.FirstOrDefault();
+            StatusTextBlock.Text = $"Loaded IBT: {loaded.Samples.Count:N0} samples, {loaded.Metadata.Channels.Channels.Count:N0} channels";
+        }
+        catch (Exception exception)
+        {
+            _pendingIbtLoad = null;
+            IbtLapComboBox.ItemsSource = null;
+            IbtLapComboBox.IsEnabled = false;
+            StatusTextBlock.Text = $"Could not load IBT: {exception.Message}";
+        }
+    }
+
+    private void IbtLapSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        if (_pendingIbtLoad is null || IbtLapComboBox.SelectedItem is not int lapNumber)
+        {
+            return;
+        }
+
+        var lapSamples = _pendingIbtLoad.Samples
+            .Where(sample => sample.LapNumber == lapNumber)
+            .ToList();
+        if (lapSamples.Count < 2)
+        {
+            StatusTextBlock.Text = $"IBT Lap {lapNumber} does not contain enough samples.";
+            return;
+        }
+
+        _loadedSamples = lapSamples;
+        _replayMetadata = _pendingIbtLoad.Metadata with
+        {
+            SampleCount = lapSamples.Count,
+            LapNumbers = new HashSet<int> { lapNumber }
+        };
+        _replayDistanceKm = Math.Max(lapSamples.Max(sample => sample.LapDistanceKm), 0.001);
+        FileTextBlock.Text = $"iRacing IBT: {System.IO.Path.GetFileName(_pendingIbtLoad.Metadata.SourcePath)} (Lap {lapNumber})";
+        FooterTextBlock.Text = $"Loaded IBT Lap {lapNumber} with {lapSamples.Count:N0} samples from {_replayMetadata.Channels.Channels.Count:N0} channels.";
+        UpdateChannelAvailability();
+        UpdateComparisonTrack();
+        UpdateCornerAnalysis();
+        ClearTelemetry();
+        _updatingTimeline = true;
+        TimelineSlider.Maximum = Math.Max(1, lapSamples.Count - 1);
+        TimelineSlider.IsEnabled = true;
+        TimelineSlider.Value = 0;
+        TimelineValueTextBlock.Text = $"0 / {lapSamples.Count - 1:N0}";
+        _updatingTimeline = false;
+        StatusTextBlock.Text = $"IBT Lap {lapNumber} ready to replay";
+        var settings = _settingsStore.Load();
+        settings.LastReplayIbtLap = lapNumber;
+        settings.LastReplaySource = "ibt";
+        _settingsStore.Save(settings);
+    }
+
+    private void RestoreLastReplaySource()
+    {
+        var settings = _settingsStore.Load();
+        if (string.Equals(settings.LastReplaySource, "ibt", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrWhiteSpace(settings.LastReplayIbtPath))
+        {
+            RestoreLastIbt(settings.LastReplayIbtPath, settings.LastReplayIbtLap);
+            return;
+        }
+
+        RestoreLastCsv();
+    }
+
+    private void RestoreLastIbt(string path, int? preferredLap)
+    {
+        if (!File.Exists(path))
+        {
+            StatusTextBlock.Text = "Previous IBT not found; choose a file to load.";
+            return;
+        }
+
+        try
+        {
+            var loaded = IbtTelemetrySource.LoadWithMetadata(path);
+            _pendingIbtLoad = loaded;
+            var laps = loaded.Metadata.LapNumbers.Where(lap => lap > 0).OrderBy(lap => lap).ToList();
+            IbtLapComboBox.ItemsSource = laps;
+            IbtLapComboBox.IsEnabled = true;
+            IbtLapComboBox.SelectedItem = preferredLap.HasValue && laps.Contains(preferredLap.Value)
+                ? preferredLap.Value
+                : laps.FirstOrDefault();
+            StatusTextBlock.Text = "Previous IBT restored; ready to replay";
+        }
+        catch (Exception exception)
+        {
+            StatusTextBlock.Text = $"Could not restore previous IBT: {exception.Message}";
         }
     }
 
@@ -94,6 +222,44 @@ public partial class MainWindow : System.Windows.Window
         }
     }
 
+    private void RestoreLastReferenceSource()
+    {
+        var settings = _settingsStore.Load();
+        if (string.Equals(settings.LastReferenceSource, "ibt", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrWhiteSpace(settings.LastReferenceIbtPath))
+        {
+            RestoreLastReferenceIbt(settings.LastReferenceIbtPath, settings.LastReferenceIbtLap);
+            return;
+        }
+
+        RestoreLastReferenceCsv();
+    }
+
+    private void RestoreLastReferenceIbt(string path, int? preferredLap)
+    {
+        if (!File.Exists(path))
+        {
+            ReferenceFileTextBlock.Text = "Previous reference IBT not found; choose a file to load.";
+            return;
+        }
+
+        try
+        {
+            var loaded = IbtTelemetrySource.LoadWithMetadata(path);
+            _pendingReferenceIbtLoad = loaded;
+            var laps = loaded.Metadata.LapNumbers.Where(lap => lap > 0).OrderBy(lap => lap).ToList();
+            ReferenceIbtLapComboBox.ItemsSource = laps;
+            ReferenceIbtLapComboBox.IsEnabled = true;
+            ReferenceIbtLapComboBox.SelectedItem = preferredLap.HasValue && laps.Contains(preferredLap.Value)
+                ? preferredLap.Value
+                : laps.FirstOrDefault();
+            StatusTextBlock.Text = "Previous reference IBT restored";
+        }
+        catch (Exception exception)
+        {
+            StatusTextBlock.Text = $"Could not restore previous reference IBT: {exception.Message}";
+        }
+    }
+
     private void RestoreLastReferenceCsv()
     {
         var lastReferencePath = _settingsStore.Load().LastReferenceCsvPath;
@@ -120,13 +286,20 @@ public partial class MainWindow : System.Windows.Window
 
     private void LoadCsv(string path)
     {
-        _loadedSamples = CsvTelemetrySource.Load(path);
+        _pendingIbtLoad = null;
+        IbtLapComboBox.ItemsSource = null;
+        IbtLapComboBox.IsEnabled = false;
+        var loaded = CsvTelemetrySource.LoadWithMetadata(path);
+        _loadedSamples = loaded.Samples;
+        _replayMetadata = loaded.Metadata;
         _replayDistanceKm = Math.Max(_loadedSamples[^1].LapDistanceKm, 0.001);
         FileTextBlock.Text = System.IO.Path.GetFileName(path);
-        FooterTextBlock.Text = $"Loaded {_loadedSamples.Count:N0} telemetry samples.";
+        UpdateChannelAvailability();
+        FooterTextBlock.Text = $"Loaded {_loadedSamples.Count:N0} telemetry samples from {_replayMetadata.Channels.Channels.Count:N0} channels.";
         StatusTextBlock.Text = "Ready to replay";
         var settings = _settingsStore.Load();
         settings.LastCsvPath = path;
+        settings.LastReplaySource = "csv";
         _settingsStore.Save(settings);
         UpdateComparisonTrack();
         UpdateCornerAnalysis();
@@ -141,10 +314,17 @@ public partial class MainWindow : System.Windows.Window
 
     private void LoadReferenceCsv(string path)
     {
-        _referenceSamples = CsvTelemetrySource.Load(path);
-        ReferenceFileTextBlock.Text = $"Reference lap: {System.IO.Path.GetFileName(path)} ({_referenceSamples.Count:N0} samples)";
+        _pendingReferenceIbtLoad = null;
+        ReferenceIbtLapComboBox.ItemsSource = null;
+        ReferenceIbtLapComboBox.IsEnabled = false;
+        var loaded = CsvTelemetrySource.LoadWithMetadata(path);
+        _referenceSamples = loaded.Samples;
+        _referenceMetadata = loaded.Metadata;
+        ReferenceFileTextBlock.Text = $"Reference lap: {System.IO.Path.GetFileName(path)} ({_referenceSamples.Count:N0} samples, {_referenceMetadata.Channels.Channels.Count:N0} channels)";
+        UpdateChannelAvailability();
         var settings = _settingsStore.Load();
         settings.LastReferenceCsvPath = path;
+        settings.LastReferenceSource = "csv";
         _settingsStore.Save(settings);
         UpdateComparisonTrack();
         UpdateCornerAnalysis();
@@ -153,12 +333,23 @@ public partial class MainWindow : System.Windows.Window
             : "Reference loaded; ready for comparison";
     }
 
-    private void LoadReferenceCsvClick(object sender, System.Windows.RoutedEventArgs e)
+    private void UpdateChannelAvailability()
+    {
+        var replayChannels = _replayMetadata is null
+            ? "none"
+            : string.Join(", ", _replayMetadata.Channels.Channels.OrderBy(channel => channel, StringComparer.OrdinalIgnoreCase));
+        var referenceChannels = _referenceMetadata is null
+            ? "none"
+            : string.Join(", ", _referenceMetadata.Channels.Channels.OrderBy(channel => channel, StringComparer.OrdinalIgnoreCase));
+        ChannelAvailabilityTextBlock.Text = $"Replay channels: {replayChannels}\nReference channels: {referenceChannels}";
+    }
+
+    private async void LoadReferenceCsvClick(object sender, System.Windows.RoutedEventArgs e)
     {
         var dialog = new OpenFileDialog
         {
-            Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*",
-            Title = "Load a reference lap CSV"
+            Filter = "Telemetry files (*.csv;*.ibt)|*.csv;*.ibt|CSV files (*.csv)|*.csv|iRacing telemetry (*.ibt)|*.ibt|All files (*.*)|*.*",
+            Title = "Load a reference lap"
         };
 
         if (dialog.ShowDialog() != true)
@@ -168,13 +359,71 @@ public partial class MainWindow : System.Windows.Window
 
         try
         {
-            LoadReferenceCsv(dialog.FileName);
-            StatusTextBlock.Text = "Reference lap loaded";
+            if (string.Equals(System.IO.Path.GetExtension(dialog.FileName), ".ibt", StringComparison.OrdinalIgnoreCase))
+            {
+                StatusTextBlock.Text = "Reading reference iRacing telemetry...";
+                var loaded = await Task.Run(() => IbtTelemetrySource.LoadWithMetadata(dialog.FileName));
+                _pendingReferenceIbtLoad = loaded;
+                var laps = loaded.Metadata.LapNumbers
+                    .Where(lap => lap > 0)
+                    .OrderBy(lap => lap)
+                    .ToList();
+                ReferenceIbtLapComboBox.ItemsSource = laps;
+                ReferenceIbtLapComboBox.IsEnabled = true;
+                var settings = _settingsStore.Load();
+                settings.LastReferenceIbtPath = dialog.FileName;
+                settings.LastReferenceSource = "ibt";
+                _settingsStore.Save(settings);
+                ReferenceIbtLapComboBox.SelectedItem = laps.Contains(settings.LastReferenceIbtLap ?? 0)
+                    ? settings.LastReferenceIbtLap
+                    : laps.FirstOrDefault();
+            }
+            else
+            {
+                LoadReferenceCsv(dialog.FileName);
+                StatusTextBlock.Text = "Reference lap loaded";
+            }
         }
         catch (Exception exception)
         {
             StatusTextBlock.Text = $"Could not load reference lap: {exception.Message}";
         }
+    }
+
+    private void ReferenceIbtLapSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        if (_pendingReferenceIbtLoad is null || ReferenceIbtLapComboBox.SelectedItem is not int lapNumber)
+        {
+            return;
+        }
+
+        var lapSamples = _pendingReferenceIbtLoad.Samples
+            .Where(sample => sample.LapNumber == lapNumber)
+            .ToList();
+        if (lapSamples.Count < 2)
+        {
+            StatusTextBlock.Text = $"Reference IBT Lap {lapNumber} does not contain enough samples.";
+            return;
+        }
+
+        _referenceSamples = lapSamples;
+        _referenceMetadata = _pendingReferenceIbtLoad.Metadata with
+        {
+            SampleCount = lapSamples.Count,
+            LapNumbers = new HashSet<int> { lapNumber }
+        };
+        ReferenceFileTextBlock.Text = $"Reference iRacing IBT: {System.IO.Path.GetFileName(_pendingReferenceIbtLoad.Metadata.SourcePath)} (Lap {lapNumber}, {lapSamples.Count:N0} samples)";
+        UpdateChannelAvailability();
+        UpdateComparisonTrack();
+        UpdateCornerAnalysis();
+        TimeDifferencePanelValue.Text = _comparisonTrack is null
+            ? "Reference loaded; comparison pending"
+            : "Reference loaded; ready for comparison";
+        StatusTextBlock.Text = $"Reference IBT Lap {lapNumber} loaded";
+        var settings = _settingsStore.Load();
+        settings.LastReferenceIbtLap = lapNumber;
+        settings.LastReferenceSource = "ibt";
+        _settingsStore.Save(settings);
     }
 
     private async void StartClick(object sender, System.Windows.RoutedEventArgs e)
@@ -312,6 +561,7 @@ public partial class MainWindow : System.Windows.Window
         SetCursor(BrakeCursorLine, cursorRatio * BrakeChartCanvas.ActualWidth, BrakeChartCanvas.ActualHeight);
         SetCursor(SteeringCursorLine, cursorRatio * SteeringChartCanvas.ActualWidth, SteeringChartCanvas.ActualHeight);
         SetCursor(LineCursorLine, cursorRatio * LineChartCanvas.ActualWidth, LineChartCanvas.ActualHeight);
+        ClearEventMarkers();
 
         if (_comparisonTrack is null)
         {
@@ -333,6 +583,7 @@ public partial class MainWindow : System.Windows.Window
         ReferenceSteeringChartLine.Points = BuildPoints(referenceSamples, sample => (sample.Steering + 2) / 4, width, SteeringChartCanvas.ActualHeight);
         LineChartLine.Points = BuildValuePoints(chartSamples.Select(sample => _comparisonTrack.Compare(sample, _replayDistanceKm).LineOffsetMeters).ToList(), width, LineChartCanvas.ActualHeight, -5, 5);
         ReferenceLineChartLine.Points = BuildValuePoints(Enumerable.Repeat(0d, chartSamples.Count).ToList(), width, LineChartCanvas.ActualHeight, -5, 5);
+        DrawEventMarkers(chartSamples, windowStart);
     }
 
     private PointCollection BuildPoints(IReadOnlyList<TelemetrySample> samples, Func<TelemetrySample, double> selector, double width, double height)
@@ -378,6 +629,104 @@ public partial class MainWindow : System.Windows.Window
         cursor.X2 = x;
         cursor.Y1 = 0;
         cursor.Y2 = height;
+    }
+
+    private void DrawEventMarkers(IReadOnlyList<TelemetrySample> chartSamples, int windowStart)
+    {
+        if (_loadedSamples is null || chartSamples.Count < 2)
+        {
+            return;
+        }
+
+        foreach (var finding in _cornerFindings)
+        {
+            if (finding.Events is not { } events)
+            {
+                continue;
+            }
+
+            AddEventMarker(events.ReplayBrakeProgress, windowStart, chartSamples.Count, "#E53E3E", dashed: false);
+            AddEventMarker(events.ReferenceBrakeProgress, windowStart, chartSamples.Count, "#E53E3E", dashed: true);
+            AddEventMarker(events.ReplayTurnInProgress, windowStart, chartSamples.Count, "#DD6B20", dashed: false);
+            AddEventMarker(events.ReferenceTurnInProgress, windowStart, chartSamples.Count, "#DD6B20", dashed: true);
+            AddEventMarker(events.ReplayApexProgress, windowStart, chartSamples.Count, "#805AD5", dashed: false);
+            AddEventMarker(events.ReferenceApexProgress, windowStart, chartSamples.Count, "#805AD5", dashed: true);
+            AddEventMarker(events.ReplayThrottleProgress, windowStart, chartSamples.Count, "#2F855A", dashed: false);
+            AddEventMarker(events.ReferenceThrottleProgress, windowStart, chartSamples.Count, "#2F855A", dashed: true);
+        }
+    }
+
+    private void AddEventMarker(double progress, int windowStart, int chartSampleCount, string color, bool dashed)
+    {
+        if (_loadedSamples is null || chartSampleCount < 2)
+        {
+            return;
+        }
+
+        var sampleIndex = FindSampleIndexAtProgress(progress);
+        var x = (sampleIndex - windowStart) / (double)(chartSampleCount - 1) * SpeedChartCanvas.ActualWidth;
+        if (x < 0 || x > SpeedChartCanvas.ActualWidth)
+        {
+            return;
+        }
+
+        AddMarkerLine(SpeedEventMarkersCanvas, x, SpeedChartCanvas.ActualHeight, color, dashed);
+        AddMarkerLine(ThrottleEventMarkersCanvas, x, ThrottleChartCanvas.ActualHeight, color, dashed);
+        AddMarkerLine(BrakeEventMarkersCanvas, x, BrakeChartCanvas.ActualHeight, color, dashed);
+        AddMarkerLine(SteeringEventMarkersCanvas, x, SteeringChartCanvas.ActualHeight, color, dashed);
+        AddMarkerLine(LineEventMarkersCanvas, x, LineChartCanvas.ActualHeight, color, dashed);
+    }
+
+    private static void AddMarkerLine(Canvas canvas, double x, double height, string color, bool dashed)
+    {
+        var marker = new Line
+        {
+            X1 = x,
+            X2 = x,
+            Y1 = 0,
+            Y2 = height,
+            Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color)),
+            StrokeThickness = 1,
+            Opacity = 0.7,
+            IsHitTestVisible = false
+        };
+        if (dashed)
+        {
+            marker.StrokeDashArray = new DoubleCollection { 3, 3 };
+        }
+        canvas.Children.Add(marker);
+    }
+
+    private void ClearEventMarkers()
+    {
+        SpeedEventMarkersCanvas.Children.Clear();
+        ThrottleEventMarkersCanvas.Children.Clear();
+        BrakeEventMarkersCanvas.Children.Clear();
+        SteeringEventMarkersCanvas.Children.Clear();
+        LineEventMarkersCanvas.Children.Clear();
+    }
+
+    private int FindSampleIndexAtProgress(double progress)
+    {
+        if (_loadedSamples is null || _loadedSamples.Count == 0)
+        {
+            return 0;
+        }
+
+        var bestIndex = 0;
+        var bestDifference = double.MaxValue;
+        for (var index = 0; index < _loadedSamples.Count; index++)
+        {
+            var sampleProgress = _loadedSamples[index].LapProgress ?? _loadedSamples[index].LapDistanceKm / Math.Max(_replayDistanceKm, 0.001);
+            var difference = Math.Abs(sampleProgress - progress);
+            if (difference < bestDifference)
+            {
+                bestDifference = difference;
+                bestIndex = index;
+            }
+        }
+
+        return bestIndex;
     }
 
     private void TimelineSliderValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<double> e)
@@ -432,6 +781,7 @@ public partial class MainWindow : System.Windows.Window
         ReferenceSteeringChartLine.Points.Clear();
         LineChartLine.Points.Clear();
         ReferenceLineChartLine.Points.Clear();
+        ClearEventMarkers();
         SetCursor(SpeedCursorLine, 0, SpeedChartCanvas.ActualHeight);
         SetCursor(ThrottleCursorLine, 0, ThrottleChartCanvas.ActualHeight);
         SetCursor(BrakeCursorLine, 0, BrakeChartCanvas.ActualHeight);
@@ -451,18 +801,66 @@ public partial class MainWindow : System.Windows.Window
         if (_loadedSamples is null || _referenceSamples is null)
         {
             _cornerFindings = [];
-            CornerAnalysisTextBlock.Text = "Load replay and reference laps to analyse corners.";
+            CornerAnalysisItemsControl.ItemsSource = new[]
+            {
+                new CornerAnalysisRow(0, "Corner analysis", string.Empty, "Not ready", "Load replay and reference laps to analyse corners.", string.Empty)
+            };
             CornerAnalysisExpander.IsExpanded = false;
             return;
         }
 
         var findings = CornerAnalyzer.Analyze(_loadedSamples, _referenceSamples);
         _cornerFindings = findings;
-        CornerAnalysisTextBlock.Text = findings.Count == 0
-            ? "No braking zones were detected in the reference lap."
-            : string.Join(Environment.NewLine, findings.Take(5).Select(finding =>
-                $"{(finding.IsPriority ? "★ FOCUS" : "       ")}  Corner {finding.Number}: {_coachingSynthesisService.Summarize(finding)}"));
+        CornerAnalysisItemsControl.ItemsSource = findings.Count == 0
+            ? new[] { new CornerAnalysisRow(0, "Corner analysis", string.Empty, "No corners detected", "No braking zones were detected in the reference lap.", string.Empty) }
+            : findings.Take(5).Select(finding =>
+            {
+                var diagnosis = _coachingSynthesisService.Diagnose(finding);
+                var focus = finding.IsPriority ? "★ Focus: " : string.Empty;
+                return new CornerAnalysisRow(
+                    finding.Number,
+                    $"{focus}Corner {finding.Number}",
+                    $"{finding.SegmentTimeDeltaSeconds:+0.000;-0.000;0.000} s",
+                    $"{FormatIssue(diagnosis.Issue)} ({diagnosis.Confidence.ToString().ToLowerInvariant()} confidence)",
+                    diagnosis.Instruction,
+                    $"Steering: {_coachingSynthesisService.DescribeSteering(finding)}");
+            }).ToList();
         CornerAnalysisExpander.IsExpanded = findings.Count > 0;
+    }
+
+    private sealed record CornerAnalysisRow(
+        int CornerNumber,
+        string CornerLabel,
+        string TimeLoss,
+        string Issue,
+        string Recommendation,
+        string Steering);
+
+    private void CornerAnalysisRowClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (sender is not System.Windows.Controls.Border { DataContext: CornerAnalysisRow row } || row.CornerNumber <= 0 || _loadedSamples is null)
+        {
+            return;
+        }
+
+        var finding = _cornerFindings.FirstOrDefault(item => item.Number == row.CornerNumber);
+        if (finding is null)
+        {
+            return;
+        }
+
+        _conversationCornerNumber = finding.Number;
+        var targetProgress = finding.Events?.ReplayBrakeProgress ?? finding.StartProgress;
+        _currentSampleIndex = FindSampleIndexAtProgress(targetProgress);
+        _updatingTimeline = true;
+        TimelineSlider.Value = _currentSampleIndex;
+        TimelineValueTextBlock.Text = $"{_currentSampleIndex:N0} / {Math.Max(0, _loadedSamples.Count - 1):N0}";
+        _updatingTimeline = false;
+        AnalysisTabs.SelectedIndex = 0;
+        UpdateTelemetryReadout(_loadedSamples[_currentSampleIndex]);
+        RedrawChart();
+        StatusTextBlock.Text = $"Focused on Corner {finding.Number}";
+        e.Handled = true;
     }
 
     private void UpdateTelemetryReadout(TelemetrySample sample, int sampleIndex = -1, bool automaticCoaching = false)
@@ -502,21 +900,37 @@ public partial class MainWindow : System.Windows.Window
         {
             CurrentCornerTextBlock.Text = "No reference loaded";
             CurrentCornerDetailTextBlock.Text = string.Empty;
+            CurrentCornerDiagnosisTextBlock.Text = string.Empty;
             CurrentTimeDifferenceTextBlock.Text = string.Empty;
         }
         else if (activeCorner is null)
         {
             CurrentCornerTextBlock.Text = "Straight";
             CurrentCornerDetailTextBlock.Text = string.Empty;
+            CurrentCornerDiagnosisTextBlock.Text = string.Empty;
             CurrentTimeDifferenceTextBlock.Text = $"{comparison.TimeDeltaSeconds:+0.000;-0.000;0.000} s";
         }
         else
         {
             CurrentCornerTextBlock.Text = $"Corner {activeCorner.Number}";
+            var diagnosis = _coachingSynthesisService.Diagnose(activeCorner);
             CurrentCornerDetailTextBlock.Text = _coachingSynthesisService.Summarize(activeCorner);
+            CurrentCornerDiagnosisTextBlock.Text = $"Primary issue: {FormatIssue(diagnosis.Issue)} ({diagnosis.Severity.ToString().ToLowerInvariant()}); confidence: {diagnosis.Confidence.ToString().ToLowerInvariant()}. {diagnosis.Evidence}";
             CurrentTimeDifferenceTextBlock.Text = $"{comparison.TimeDeltaSeconds:+0.000;-0.000;0.000} s";
         }
     }
+
+    private static string FormatIssue(CoachingIssueType issue) => issue switch
+    {
+        CoachingIssueType.BrakingPoint => "braking point",
+        CoachingIssueType.EntryLine => "entry line",
+        CoachingIssueType.ApexTiming => "apex timing",
+        CoachingIssueType.ApexLine => "apex line",
+        CoachingIssueType.ExitLine => "exit line",
+        CoachingIssueType.MinimumSpeed => "minimum speed",
+        CoachingIssueType.SteeringInput => "steering input",
+        _ => "no clear issue"
+    };
 
     private void ProcessAutomaticCoaching(
         TelemetrySample sample,
@@ -683,7 +1097,16 @@ public partial class MainWindow : System.Windows.Window
     private void AskCoach(bool speak)
     {
         var command = _coachResponseService.Parse(CoachInputTextBox.Text);
-        var context = new CoachContext(_cornerFindings, _currentCorner, _currentComparison);
+        if (command.CornerNumber.HasValue)
+        {
+            _conversationCornerNumber = command.CornerNumber;
+        }
+        else if (command.Type == CoachCommandType.Focus)
+        {
+            _conversationCornerNumber = _cornerFindings.FirstOrDefault(finding => finding.IsPriority)?.Number;
+        }
+
+        var context = new CoachContext(_cornerFindings, _currentCorner, _currentComparison, _conversationCornerNumber);
         var response = _coachResponseService.Respond(command, context, _lastCoachResponse);
         _lastCoachResponse = response;
         CoachResponseTextBlock.Text = response;

@@ -16,13 +16,13 @@ public sealed class TelemetryComparisonTrack
         _referenceSamples = referenceSamples;
         _referenceDistanceKm = Math.Max(referenceSamples[^1].LapDistanceKm, 0.001);
         _referenceProgress = referenceSamples
-            .Select(sample => Math.Clamp(sample.LapDistanceKm / _referenceDistanceKm, 0, 1))
+            .Select(sample => GetProgress(sample, _referenceDistanceKm))
             .ToArray();
     }
 
     public TelemetryComparison Compare(TelemetrySample replaySample, double replayDistanceKm)
     {
-        var replayProgress = Math.Clamp(replaySample.LapDistanceKm / Math.Max(replayDistanceKm, 0.001), 0, 1);
+        var replayProgress = GetProgress(replaySample, Math.Max(replayDistanceKm, 0.001));
         var reference = Interpolate(replayProgress);
         var timeDelta = replaySample.SessionTime.TotalSeconds - reference.SessionTime.TotalSeconds;
         var lineOffset = CalculateLateralOffsetMeters(replaySample, replayProgress);
@@ -67,7 +67,19 @@ public sealed class TelemetryComparisonTrack
             Interpolate(lower.Steering, upper.Steering, fraction),
             fraction < 0.5 ? lower.Gear : upper.Gear,
             InterpolateNullable(lower.Latitude, upper.Latitude, fraction),
-            InterpolateNullable(lower.Longitude, upper.Longitude, fraction));
+            InterpolateNullable(lower.Longitude, upper.Longitude, fraction),
+            InterpolateNullable(lower.LapProgress, upper.LapProgress, fraction),
+            InterpolateNullable(lower.Rpm, upper.Rpm, fraction),
+            InterpolateNullable(lower.Clutch, upper.Clutch, fraction),
+            fraction < 0.5 ? lower.AbsActive : upper.AbsActive,
+            fraction < 0.5 ? lower.DrsActive : upper.DrsActive,
+            fraction < 0.5 ? lower.P2PActive : upper.P2PActive,
+            InterpolateNullable(lower.LateralAcceleration, upper.LateralAcceleration, fraction),
+            InterpolateNullable(lower.LongitudinalAcceleration, upper.LongitudinalAcceleration, fraction),
+            InterpolateNullable(lower.VerticalAcceleration, upper.VerticalAcceleration, fraction),
+            InterpolateNullable(lower.Yaw, upper.Yaw, fraction),
+            InterpolateNullable(lower.YawRate, upper.YawRate, fraction),
+            fraction < 0.5 ? lower.PositionType : upper.PositionType);
     }
 
     private double CalculateLateralOffsetMeters(TelemetrySample replay, double progress)
@@ -125,6 +137,11 @@ public sealed class TelemetryComparisonTrack
         }
 
         return lower.Value + (upper.Value - lower.Value) * fraction;
+    }
+
+    private static double GetProgress(TelemetrySample sample, double distanceKm)
+    {
+        return Math.Clamp(sample.LapProgress ?? sample.LapDistanceKm / Math.Max(distanceKm, 0.001), 0, 1);
     }
 }
 

@@ -8,6 +8,18 @@ public sealed class SimCoachSettings
     public string? LastCsvPath { get; set; }
 
     public string? LastReferenceCsvPath { get; set; }
+
+    public string? LastReplayIbtPath { get; set; }
+
+    public int? LastReplayIbtLap { get; set; }
+
+    public string? LastReferenceIbtPath { get; set; }
+
+    public int? LastReferenceIbtLap { get; set; }
+
+    public string? LastReplaySource { get; set; }
+
+    public string? LastReferenceSource { get; set; }
 }
 
 public sealed class SimCoachSettingsStore

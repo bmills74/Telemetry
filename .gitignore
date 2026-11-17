@@ -27,6 +27,9 @@ coverage/
 .env.*
 *.local.json
 
+# Downloaded iRacing telemetry fixtures
+TestData/iRacing/*.ibt
+
 # OS files
 .DS_Store
 Thumbs.db

@@ -4,7 +4,9 @@ public sealed record CornerFinding(
     int Number,
     double StartProgress,
     double ApexProgress,
+    double ReplayApexProgress,
     double EndProgress,
+    CornerTurnDirection TurnDirection,
     double BrakeDeltaMeters,
     double MinimumSpeedDeltaKph,
     double LineOffsetMeters,
@@ -16,6 +18,33 @@ public sealed record CornerFinding(
     string Summary)
 {
     public bool IsPriority { get; init; }
+    public SteeringComparison? Steering { get; init; }
+    public CornerEventMarkers? Events { get; init; }
+}
+
+public sealed record SteeringComparison(
+    double ReferenceTurnInSpeedKph,
+    double ReplayTurnInSpeedKph,
+    double ReferenceSteeringAtReferenceSpeed,
+    double ReplaySteeringAtReferenceSpeed,
+    double ReferenceSteeringRate,
+    double ReplaySteeringRate);
+
+public sealed record CornerEventMarkers(
+    double ReferenceBrakeProgress,
+    double ReplayBrakeProgress,
+    double ReferenceTurnInProgress,
+    double ReplayTurnInProgress,
+    double ReferenceApexProgress,
+    double ReplayApexProgress,
+    double ReferenceThrottleProgress,
+    double ReplayThrottleProgress);
+
+public enum CornerTurnDirection
+{
+    Unknown,
+    Left,
+    Right
 }
 
 public static class CornerAnalyzer
@@ -58,6 +87,23 @@ public static class CornerAnalyzer
             var referenceMinimumSpeed = referenceSegment.Min(sample => sample.SpeedKph);
             var replayMinimumSpeed = replaySegment.Min(sample => sample.SpeedKph);
             var minimumSpeedDelta = replayMinimumSpeed - referenceMinimumSpeed;
+            var replayApexProgress = replaySegment
+                .OrderBy(sample => sample.SpeedKph)
+                .Select(sample => Progress(sample, replaySamples))
+                .FirstOrDefault(segment.Apex);
+            var turnDirection = DetermineTurnDirection(referenceSegment);
+            var steering = CompareSteering(referenceSegment, replaySegment);
+            var referenceTurnInIndex = FindTurnInIndex(referenceSegment);
+            var replayTurnInIndex = FindTurnInIndex(replaySegment);
+            var events = new CornerEventMarkers(
+                referenceBrakeProgress,
+                replayBrakeProgress,
+                referenceTurnInIndex >= 0 ? Progress(referenceSegment[referenceTurnInIndex], referenceSamples) : segment.Start,
+                replayTurnInIndex >= 0 ? Progress(replaySegment[replayTurnInIndex], replaySamples) : segment.Start,
+                segment.Apex,
+                replayApexProgress,
+                FindThrottleProgress(referenceSegment, segment.Apex, referenceSamples),
+                FindThrottleProgress(replaySegment, replayApexProgress, replaySamples));
 
             // Start at the first driver's brake point and finish halfway to the next corner.
             var segmentStart = Math.Min(referenceBrakeProgress, replayBrakeProgress);
@@ -82,7 +128,9 @@ public static class CornerAnalyzer
                 index + 1,
                 segment.Start,
                 segment.Apex,
+                replayApexProgress,
                 segment.End,
+                turnDirection,
                 brakeDeltaMeters,
                 minimumSpeedDelta,
                 exitComparison.LineOffsetMeters,
@@ -91,7 +139,11 @@ public static class CornerAnalyzer
                 exitComparison.LineOffsetMeters,
                 maximumLineOffset,
                 segmentTimeDelta,
-                summary));
+                summary)
+            {
+                Steering = steering,
+                Events = events
+            });
         }
 
         var priorityNumbers = findings
@@ -166,7 +218,54 @@ public static class CornerAnalyzer
         samples.MinBy(sample => Math.Abs(Progress(sample, samples) - progress)) ?? samples[0];
 
     private static double Progress(TelemetrySample sample, IReadOnlyList<TelemetrySample> samples) =>
-        Math.Clamp(sample.LapDistanceKm / Math.Max(samples[^1].LapDistanceKm, 0.001), 0, 1);
+        Math.Clamp(sample.LapProgress ?? sample.LapDistanceKm / Math.Max(samples[^1].LapDistanceKm, 0.001), 0, 1);
+
+    private static CornerTurnDirection DetermineTurnDirection(IReadOnlyList<TelemetrySample> samples)
+    {
+        var positioned = samples
+            .Where(sample => sample.Latitude.HasValue && sample.Longitude.HasValue)
+            .ToList();
+        if (positioned.Count < 3)
+        {
+            return CornerTurnDirection.Unknown;
+        }
+
+        var turn = 0d;
+        for (var index = 1; index < positioned.Count - 1; index++)
+        {
+            var before = ToLocalMeters(
+                positioned[index - 1].Latitude!.Value,
+                positioned[index - 1].Longitude!.Value,
+                positioned[index].Latitude!.Value,
+                positioned[index].Longitude!.Value);
+            var after = ToLocalMeters(
+                positioned[index].Latitude!.Value,
+                positioned[index].Longitude!.Value,
+                positioned[index + 1].Latitude!.Value,
+                positioned[index + 1].Longitude!.Value);
+            turn += before.X * after.Y - before.Y * after.X;
+        }
+
+        if (Math.Abs(turn) < 0.000001)
+        {
+            return CornerTurnDirection.Unknown;
+        }
+
+        return turn > 0 ? CornerTurnDirection.Left : CornerTurnDirection.Right;
+    }
+
+    private static (double X, double Y) ToLocalMeters(
+        double originLatitude,
+        double originLongitude,
+        double latitude,
+        double longitude)
+    {
+        const double earthRadiusMeters = 6371008.8;
+        var latitudeRadians = originLatitude * Math.PI / 180;
+        var x = (longitude - originLongitude) * Math.PI / 180 * earthRadiusMeters * Math.Cos(latitudeRadians);
+        var y = (latitude - originLatitude) * Math.PI / 180 * earthRadiusMeters;
+        return (x, y);
+    }
 
     private static string BuildSummary(double brakeDeltaMeters, double speedDeltaKph, double lineOffsetMeters, double segmentTimeDeltaSeconds)
     {
@@ -201,6 +300,87 @@ public static class CornerAnalyzer
 
         details.Add($"segment delta {segmentTimeDeltaSeconds:+0.000;-0.000;0.000} s");
         return string.Join("; ", details);
+    }
+
+    private static SteeringComparison? CompareSteering(
+        IReadOnlyList<TelemetrySample> referenceSegment,
+        IReadOnlyList<TelemetrySample> replaySegment)
+    {
+        var referenceTurnInIndex = FindTurnInIndex(referenceSegment);
+        var replayTurnInIndex = FindTurnInIndex(replaySegment);
+        var referenceTurnIn = referenceTurnInIndex >= 0 ? referenceSegment[referenceTurnInIndex] : null;
+        var replayTurnIn = replayTurnInIndex >= 0 ? replaySegment[replayTurnInIndex] : null;
+        if (referenceTurnIn is null || replayTurnIn is null)
+        {
+            return null;
+        }
+
+        var replayAtReferenceSpeed = replaySegment
+            .MinBy(sample => Math.Abs(sample.SpeedKph - referenceTurnIn.SpeedKph)) ?? replayTurnIn;
+        var referenceAtReplaySpeed = referenceSegment
+            .MinBy(sample => Math.Abs(sample.SpeedKph - replayAtReferenceSpeed.SpeedKph)) ?? referenceTurnIn;
+
+        return new SteeringComparison(
+            referenceTurnIn.SpeedKph,
+            replayTurnIn.SpeedKph,
+            Math.Abs(referenceAtReplaySpeed.Steering),
+            Math.Abs(replayAtReferenceSpeed.Steering),
+            SteeringBuildRate(referenceSegment, referenceTurnInIndex),
+            SteeringBuildRate(replaySegment, replayTurnInIndex));
+    }
+
+    private static int FindTurnInIndex(IReadOnlyList<TelemetrySample> samples)
+    {
+        const double steeringThreshold = 0.05;
+        for (var index = 0; index < samples.Count; index++)
+        {
+            if (Math.Abs(samples[index].Steering) < steeringThreshold)
+            {
+                continue;
+            }
+
+            var lookAhead = Math.Min(samples.Count - 1, index + 12);
+            if (Math.Abs(samples[lookAhead].Steering) >= Math.Abs(samples[index].Steering) + 0.02 || index == 0)
+            {
+                return index;
+            }
+        }
+
+        return -1;
+    }
+
+    private static double SteeringBuildRate(IReadOnlyList<TelemetrySample> samples, int turnInIndex)
+    {
+        if (turnInIndex < 0 || turnInIndex >= samples.Count - 1)
+        {
+            return 0;
+        }
+
+        var maximumRate = 0d;
+        var endIndex = Math.Min(samples.Count - 1, turnInIndex + Math.Max(10, (samples.Count - turnInIndex) / 2));
+        for (var index = turnInIndex + 1; index <= endIndex; index++)
+        {
+            var seconds = (samples[index].SessionTime - samples[index - 1].SessionTime).TotalSeconds;
+            if (seconds <= 0)
+            {
+                continue;
+            }
+
+            var rate = (Math.Abs(samples[index].Steering) - Math.Abs(samples[index - 1].Steering)) / seconds;
+            maximumRate = Math.Max(maximumRate, rate);
+        }
+
+        return maximumRate;
+    }
+
+    private static double FindThrottleProgress(
+        IReadOnlyList<TelemetrySample> samples,
+        double afterProgress,
+        IReadOnlyList<TelemetrySample> fullLap)
+    {
+        var sample = samples.FirstOrDefault(item =>
+            Progress(item, fullLap) >= afterProgress && item.Throttle >= 0.5);
+        return sample is null ? afterProgress : Progress(sample, fullLap);
     }
 
     private sealed record CornerSegment(double Start, double Apex, double End);

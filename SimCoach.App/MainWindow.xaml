@@ -2,10 +2,10 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Sim Coach"
-        Width="760"
-        Height="760"
-        MinWidth="620"
-        MinHeight="420"
+        Width="1100"
+        Height="820"
+        MinWidth="820"
+        MinHeight="560"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="24">
         <Grid.RowDefinitions>
@@ -22,9 +22,15 @@
             <TextBlock Margin="0,6,0,0" Foreground="Gray" Text="Mock telemetry replay" />
         </StackPanel>
 
-        <DockPanel Grid.Row="1" Margin="0,22,0,14">
+        <ScrollViewer Grid.Row="1" Margin="0,18,0,12" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
+            <WrapPanel>
             <Button Click="LoadCsvClick" Content="Load Garage 61 CSV" />
+            <Button Click="LoadIbtClick" Content="Load iRacing IBT" />
             <Button Click="LoadReferenceCsvClick" Content="Load Reference Lap" />
+            <TextBlock Margin="8,0,4,0" VerticalAlignment="Center" Foreground="Gray" Text="Replay lap" />
+            <ComboBox x:Name="IbtLapComboBox" Width="90" Margin="8,0,8,0" IsEnabled="False" SelectionChanged="IbtLapSelectionChanged" ToolTip="Select the replay lap from the IBT file" />
+            <TextBlock Margin="0,0,4,0" VerticalAlignment="Center" Foreground="Gray" Text="Reference lap" />
+            <ComboBox x:Name="ReferenceIbtLapComboBox" Width="90" Margin="0,0,8,0" IsEnabled="False" SelectionChanged="ReferenceIbtLapSelectionChanged" ToolTip="Select the reference lap from the IBT file" />
             <Button Click="StartClick" Content="Start" />
             <Button Click="PauseClick" Content="Pause" />
             <Button Click="RestartClick" Content="Restart" />
@@ -39,28 +45,40 @@
                 <ComboBoxItem Content="5×" Tag="5" />
                 <ComboBoxItem Content="20×" Tag="20" />
             </ComboBox>
-        </DockPanel>
+            </WrapPanel>
+        </ScrollViewer>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="300" />
             </Grid.ColumnDefinitions>
-            <StackPanel>
-                <TextBlock x:Name="FileTextBlock" Foreground="Gray" Text="Replay CSV: none" TextWrapping="Wrap" />
-                <TextBlock x:Name="ReferenceFileTextBlock" Margin="0,4,0,0" Foreground="Gray" Text="Reference lap: none" TextWrapping="Wrap" />
-                <TextBlock Margin="0,4,0,0">
-                    <Run Text="Key: " />
-                    <Run Foreground="#3182CE" Text="solid = mine" />
-                    <Run Text=" | " />
-                    <Run Foreground="#718096" Text="dashed = reference" />
-                </TextBlock>
-            </StackPanel>
-            <Border Grid.Column="1" Margin="16,0,0,0" Padding="12,8" BorderBrush="#909090" BorderThickness="1" Background="#F7F7F7">
+            <Expander Grid.Column="0" Header="Session details" IsExpanded="False" VerticalAlignment="Top">
+                <StackPanel Margin="8,6,8,8">
+                    <TextBlock x:Name="FileTextBlock" Foreground="Gray" Text="Replay CSV: none" TextWrapping="Wrap" />
+                    <TextBlock x:Name="ReferenceFileTextBlock" Margin="0,4,0,0" Foreground="Gray" Text="Reference lap: none" TextWrapping="Wrap" />
+                    <TextBlock Margin="0,4,0,0">
+                        <Run Text="Key: " />
+                        <Run Foreground="#3182CE" Text="solid = mine" />
+                        <Run Text=" | " />
+                        <Run Foreground="#718096" Text="dashed = reference" />
+                    </TextBlock>
+                    <TextBlock Margin="0,4,0,0" Foreground="Gray" Text="Markers: brake · turn-in · apex · throttle; solid = mine, dashed = reference" />
+                    <ScrollViewer Height="54" Margin="0,4,0,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <TextBlock x:Name="ChannelAvailabilityTextBlock" Foreground="Gray" Text="Channels: none" TextWrapping="Wrap" />
+                    </ScrollViewer>
+                </StackPanel>
+            </Expander>
+            <Border Grid.Column="1" Height="150" VerticalAlignment="Top" Margin="16,0,0,0" Padding="12,8" BorderBrush="#909090" BorderThickness="1" Background="#F7F7F7">
                 <StackPanel>
                     <TextBlock Foreground="Gray" Text="Current position" />
                     <TextBlock x:Name="CurrentCornerTextBlock" Margin="0,4,0,0" FontSize="18" FontWeight="SemiBold" Text="—" />
-                    <TextBlock x:Name="CurrentCornerDetailTextBlock" Margin="0,4,0,0" Foreground="Gray" TextWrapping="Wrap" />
+                    <ScrollViewer Height="58" Margin="0,4,0,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel>
+                            <TextBlock x:Name="CurrentCornerDetailTextBlock" Foreground="Gray" TextWrapping="Wrap" />
+                            <TextBlock x:Name="CurrentCornerDiagnosisTextBlock" Margin="0,4,0,0" TextWrapping="Wrap" />
+                        </StackPanel>
+                    </ScrollViewer>
                     <TextBlock Margin="0,8,0,0" Foreground="Gray" Text="Time difference" />
                     <TextBlock x:Name="CurrentTimeDifferenceTextBlock" FontSize="18" FontWeight="SemiBold" Text="" />
                 </StackPanel>
@@ -68,8 +86,10 @@
         </Grid>
         <TextBlock x:Name="StatusTextBlock" Grid.Row="3" Margin="0,10,0,8" FontSize="16" Text="Ready" />
 
-        <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Auto">
-            <StackPanel>
+        <TabControl x:Name="AnalysisTabs" Grid.Row="4">
+            <TabItem Header="Telemetry">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
                 <Expander Header="Speed" IsExpanded="True" Margin="0,0,0,8">
                     <Border Height="150" Margin="8,8,8,8" BorderBrush="#909090" BorderThickness="1" Background="#F7F7F7">
                         <Grid>
@@ -77,6 +97,7 @@
                                 <Polyline x:Name="ReferenceSpeedChartLine" Stroke="#718096" StrokeDashArray="4,3" StrokeThickness="2" />
                                 <Polyline x:Name="SpeedChartLine" Stroke="#3182CE" StrokeThickness="2" />
                                 <Line x:Name="SpeedCursorLine" Stroke="#202020" StrokeDashArray="2,2" StrokeThickness="1" />
+                                <Canvas x:Name="SpeedEventMarkersCanvas" IsHitTestVisible="False" />
                             </Canvas>
                             <TextBlock x:Name="SpeedPanelValue" Margin="8,8,0,0" FontSize="18" FontWeight="SemiBold" Text="—" />
                         </Grid>
@@ -90,6 +111,7 @@
                                 <Polyline x:Name="ReferenceThrottleChartLine" Stroke="#718096" StrokeDashArray="4,3" StrokeThickness="2" />
                                 <Polyline x:Name="ThrottleChartLine" Stroke="#2F855A" StrokeThickness="2" />
                                 <Line x:Name="ThrottleCursorLine" Stroke="#202020" StrokeDashArray="2,2" StrokeThickness="1" />
+                                <Canvas x:Name="ThrottleEventMarkersCanvas" IsHitTestVisible="False" />
                             </Canvas>
                             <TextBlock x:Name="ThrottlePanelValue" Margin="8,8,0,0" FontSize="18" FontWeight="SemiBold" Text="—" />
                         </Grid>
@@ -103,6 +125,7 @@
                                 <Polyline x:Name="ReferenceBrakeChartLine" Stroke="#718096" StrokeDashArray="4,3" StrokeThickness="2" />
                                 <Polyline x:Name="BrakeChartLine" Stroke="#E53E3E" StrokeThickness="2" />
                                 <Line x:Name="BrakeCursorLine" Stroke="#202020" StrokeDashArray="2,2" StrokeThickness="1" />
+                                <Canvas x:Name="BrakeEventMarkersCanvas" IsHitTestVisible="False" />
                             </Canvas>
                             <TextBlock x:Name="BrakePanelValue" Margin="8,8,0,0" FontSize="18" FontWeight="SemiBold" Text="—" />
                         </Grid>
@@ -116,6 +139,7 @@
                                 <Polyline x:Name="ReferenceSteeringChartLine" Stroke="#718096" StrokeDashArray="4,3" StrokeThickness="2" />
                                 <Polyline x:Name="SteeringChartLine" Stroke="#805AD5" StrokeThickness="2" />
                                 <Line x:Name="SteeringCursorLine" Stroke="#202020" StrokeDashArray="2,2" StrokeThickness="1" />
+                                <Canvas x:Name="SteeringEventMarkersCanvas" IsHitTestVisible="False" />
                             </Canvas>
                             <TextBlock x:Name="SteeringPanelValue" Margin="8,8,0,0" FontSize="18" FontWeight="SemiBold" Text="—" />
                         </Grid>
@@ -129,14 +153,47 @@
                                 <Polyline x:Name="ReferenceLineChartLine" Stroke="#718096" StrokeDashArray="4,3" StrokeThickness="2" />
                                 <Polyline x:Name="LineChartLine" Stroke="#DD6B20" StrokeThickness="2" />
                                 <Line x:Name="LineCursorLine" Stroke="#202020" StrokeDashArray="2,2" StrokeThickness="1" />
+                                <Canvas x:Name="LineEventMarkersCanvas" IsHitTestVisible="False" />
                             </Canvas>
                             <TextBlock x:Name="LinePanelValue" Margin="8,8,0,0" FontSize="18" FontWeight="SemiBold" Text="—" />
                         </Grid>
                     </Border>
                 </Expander>
 
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Analysis">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+
                 <Expander x:Name="CornerAnalysisExpander" Header="Corner analysis" IsExpanded="False" Margin="0,0,0,8">
-                    <TextBlock x:Name="CornerAnalysisTextBlock" Margin="8,8,8,14" Text="Load replay and reference laps to analyse corners." TextWrapping="Wrap" />
+                    <ScrollViewer Height="220" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="CornerAnalysisItemsControl" Margin="8,8,8,14">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0,0,0,6" Padding="8" BorderBrush="#D0D0D0" BorderThickness="1" Background="#FAFAFA" Cursor="Hand" MouseLeftButtonUp="CornerAnalysisRowClick">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="110" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <TextBlock FontWeight="SemiBold" Text="{Binding CornerLabel}" />
+                                                <TextBlock Margin="0,3,0,0" Foreground="#555555" Text="{Binding TimeLoss}" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock FontWeight="SemiBold" Text="{Binding Issue}" />
+                                                <TextBlock Margin="0,3,0,0" Text="{Binding Recommendation}" TextWrapping="Wrap" />
+                                                <TextBlock Margin="0,3,0,0" Foreground="Gray" Text="{Binding Steering}" TextWrapping="Wrap" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </Expander>
 
                 <Expander Header="Coach" IsExpanded="True" Margin="0,0,0,8">
@@ -171,8 +228,10 @@
                         <TextBlock Margin="0,6,0,0" Foreground="Gray" Text="Reference-lap comparison will appear here once the comparison engine is added." TextWrapping="Wrap" />
                     </StackPanel>
                 </Expander>
-            </StackPanel>
-        </ScrollViewer>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
 
         <StackPanel Grid.Row="5" Margin="0,12,0,0">
             <Grid Margin="0,0,0,8">

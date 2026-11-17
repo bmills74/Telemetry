@@ -10,4 +10,16 @@ public sealed record TelemetrySample(
     double Steering,
     int Gear,
     double? Latitude = null,
-    double? Longitude = null);
+    double? Longitude = null,
+    double? LapProgress = null,
+    double? Rpm = null,
+    double? Clutch = null,
+    bool? AbsActive = null,
+    bool? DrsActive = null,
+    bool? P2PActive = null,
+    double? LateralAcceleration = null,
+    double? LongitudinalAcceleration = null,
+    double? VerticalAcceleration = null,
+    double? Yaw = null,
+    double? YawRate = null,
+    int? PositionType = null);
