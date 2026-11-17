@@ -8,5 +8,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimCoach.App\SimCoach.App.csproj" />
+    <PackageReference Include="SVappsLAB.iRacingTelemetrySDK" Version="2.3.0" />
   </ItemGroup>
 </Project>

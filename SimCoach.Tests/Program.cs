@@ -78,6 +78,17 @@ if (args.Length > 2 && File.Exists(args[2]))
     var variables = IbtTelemetrySource.ReadVariables(args[2]);
     Assert(variables.Any(variable => variable.Name == "Speed" && variable.Unit == "m/s"), "Expected IBT variable metadata to include Speed units.");
     Console.WriteLine($"IBT checks passed: {ibt.Samples.Count:N0} samples, {ibt.Metadata.Channels.Channels.Count:N0} channels, {ibt.Metadata.LapNumbers.Count:N0} laps.");
+
+    var sdkSamples = 0;
+    await using (var sdkSource = new IracingLiveTelemetrySource(args[2], 1000))
+    {
+        sdkSource.SampleReceived += (_, _) => Interlocked.Increment(ref sdkSamples);
+        await sdkSource.StartAsync();
+        await Task.Delay(500);
+        await sdkSource.StopAsync();
+        Assert(sdkSamples > 0, $"Expected the SDK adapter to emit IBT samples, got {sdkSamples}.");
+    }
+    Console.WriteLine($"SDK adapter checks passed: {sdkSamples:N0} samples emitted from IBT playback.");
 }
 
 Console.WriteLine($"Parser checks passed: {samples.Count:N0} samples, {samples[^1].LapDistanceKm:0.000} km lap distance.");
