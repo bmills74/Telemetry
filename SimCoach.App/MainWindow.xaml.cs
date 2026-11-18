@@ -35,10 +35,12 @@ public partial class MainWindow : System.Windows.Window
     private readonly System.Windows.Threading.DispatcherTimer _liveTimer = new() { Interval = TimeSpan.FromMilliseconds(100) };
     private bool _wasLiveConnected;
     private readonly SimCoachSettingsStore _settingsStore = new();
+    private SimCoachSettings _settings = new();
     private readonly CoachResponseService _coachResponseService = new();
     private readonly CoachingSynthesisService _coachingSynthesisService = new();
     private readonly CoachingSessionMemory _coachingSessionMemory = new();
     private readonly ICoachingNarrator _coachingNarrator = new DeterministicCoachingNarrator();
+    private OpenAiCoachingNarrator? _openAiNarrator;
     private readonly VoiceCoachService _voiceCoachService = new();
     private string? _lastCoachResponse;
     private TelemetryComparison? _currentComparison;
@@ -55,6 +57,11 @@ public partial class MainWindow : System.Windows.Window
     public MainWindow()
     {
         InitializeComponent();
+        _settings = _settingsStore.Load();
+        _openAiNarrator = OpenAiCoachingNarrator.TryCreateFromEnvironment(
+            _settings.NaturalCoachingModel,
+            _settings.NaturalCoachingTimeoutMs);
+        NaturalCoachingCheckBox.IsChecked = _settings.NaturalCoachingEnabled && _openAiNarrator is not null;
         InitializeWheelBinding();
         _voiceCoachService.SpeechFailed += (_, message) => Dispatcher.BeginInvoke(new Action(() =>
             StatusTextBlock.Text = $"Speech unavailable — {message}"));
@@ -1172,16 +1179,32 @@ public partial class MainWindow : System.Windows.Window
         _coachingSessionMemory.Reset();
     }
 
-    private void AskCoachClick(object sender, System.Windows.RoutedEventArgs e)
+    private void NaturalCoachingChanged(object sender, System.Windows.RoutedEventArgs e)
     {
-        AskCoach(speak: false);
+        _settings.NaturalCoachingEnabled = NaturalCoachingCheckBox.IsChecked == true;
+        _settingsStore.Save(_settings);
+        if (_settings.NaturalCoachingEnabled && _openAiNarrator is null)
+        {
+            StatusTextBlock.Text = "Natural coaching needs OPENAI_API_KEY; using measured coaching for now.";
+        }
+        else
+        {
+            StatusTextBlock.Text = _settings.NaturalCoachingEnabled
+                ? "Natural coaching enabled"
+                : "Natural coaching disabled";
+        }
     }
 
-    private void CoachInputKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    private async void AskCoachClick(object sender, System.Windows.RoutedEventArgs e)
+    {
+        await AskCoachAsync(speak: false);
+    }
+
+    private async void CoachInputKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == System.Windows.Input.Key.Enter)
         {
-            AskCoach(speak: false);
+            await AskCoachAsync(speak: false);
             e.Handled = true;
         }
     }
@@ -1288,7 +1311,7 @@ public partial class MainWindow : System.Windows.Window
             }
 
             CoachInputTextBox.Text = transcript;
-            AskCoach(speak: true);
+            await AskCoachAsync(speak: true);
         }
         catch (Exception exception)
         {
@@ -1325,7 +1348,7 @@ public partial class MainWindow : System.Windows.Window
         }
     }
 
-    private void AskCoach(bool speak)
+    private async Task AskCoachAsync(bool speak)
     {
         var command = _coachResponseService.Parse(CoachInputTextBox.Text);
         if (_liveMode)
@@ -1334,6 +1357,24 @@ public partial class MainWindow : System.Windows.Window
             var structuredResponse = command.Type == CoachCommandType.Repeat
                 ? null
                 : _liveCoach?.RespondStructured(CoachInputTextBox.Text, out understood);
+            if (structuredResponse is not null &&
+                _settings.NaturalCoachingEnabled &&
+                _openAiNarrator is not null &&
+                command.Type != CoachCommandType.Quiet)
+            {
+                try
+                {
+                    StatusTextBlock.Text = "Making the coaching wording more natural...";
+                    structuredResponse = await _openAiNarrator.NarrateAnswerAsync(
+                        structuredResponse,
+                        CoachInputTextBox.Text);
+                }
+                catch (Exception exception)
+                {
+                    System.Diagnostics.Trace.TraceWarning("Natural coaching fell back to measured wording: {0}", exception.Message);
+                    StatusTextBlock.Text = "Natural coaching unavailable; using measured coaching.";
+                }
+            }
             var liveResponse = command.Type == CoachCommandType.Repeat
                 ? _lastCoachResponse ?? "No coaching message yet."
                 : structuredResponse?.SpokenText ?? "Load a reference lap to enable live coaching.";
@@ -1358,6 +1399,28 @@ public partial class MainWindow : System.Windows.Window
 
         var context = new CoachContext(_cornerFindings, _currentCorner, _currentComparison, _conversationCornerNumber);
         var response = _coachResponseService.Respond(command, context, _lastCoachResponse);
+        if (_settings.NaturalCoachingEnabled &&
+            _openAiNarrator is not null &&
+            command.Type is CoachCommandType.Focus or CoachCommandType.Corner or CoachCommandType.Braking or CoachCommandType.Line or CoachCommandType.Steering)
+        {
+            try
+            {
+                StatusTextBlock.Text = "Making the coaching wording more natural...";
+                var replayAnswer = new CoachingAnswer(
+                    response,
+                    null,
+                    response,
+                    null,
+                    null,
+                    CoachingConfidence.Medium);
+                response = (await _openAiNarrator.NarrateAnswerAsync(replayAnswer, CoachInputTextBox.Text)).SpokenText;
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Trace.TraceWarning("Natural replay coaching fell back to measured wording: {0}", exception.Message);
+                StatusTextBlock.Text = "Natural coaching unavailable; using measured coaching.";
+            }
+        }
         _lastCoachResponse = response;
         CoachResponseTextBlock.Text = response;
         if (speak && command.Type != CoachCommandType.Quiet)

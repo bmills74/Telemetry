@@ -14,6 +14,7 @@ if (args.Length >= 4 && args[0] == "--csv-coach-review")
 IbtLapChecks.Run();
 LiveCoachChecks.Run();
 await CoachingMemoryChecks.RunAsync();
+await OpenAiNarratorChecks.RunAsync();
 await LiveTelemetryChecks.RunAsync();
 if (args.Length == 0) return 0;
 if (args[0] == "--kokoro-smoke")

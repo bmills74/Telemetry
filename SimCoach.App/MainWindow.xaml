@@ -38,6 +38,7 @@
             <Button Click="StopClick" Content="Stop" />
             <CheckBox x:Name="LoopCheckBox" Margin="4,0,12,0" VerticalAlignment="Center" Content="Loop" />
             <CheckBox x:Name="AutoCoachCheckBox" Margin="4,0,12,0" VerticalAlignment="Center" Content="Auto coach" />
+            <CheckBox x:Name="NaturalCoachingCheckBox" Margin="4,0,12,0" VerticalAlignment="Center" Content="Natural coaching" ToolTip="Use OpenAI to make the measured coaching advice sound more conversational" Checked="NaturalCoachingChanged" Unchecked="NaturalCoachingChanged" />
             <TextBlock Text="Playback speed:" />
             <ComboBox x:Name="PlaybackSpeedComboBox" Width="90" Margin="8,0,0,0" SelectedIndex="1">
                 <ComboBoxItem Content="0.5×" Tag="0.5" />
