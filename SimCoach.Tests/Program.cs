@@ -3,9 +3,17 @@ using SimCoach.Coaching;
 
 if (args.Length >= 3 && args[0] == "--voice-drive")
     return await VoiceDriveChecks.RunAsync(args[1], args[2], args.Skip(3).ToArray());
+if (args.Length >= 3 && args[0] == "--coach-review")
+    return CoachReviewChecks.Run(args[1], args[2]);
+if (args.Length >= 4 && args[0] == "--csv-coach-review")
+{
+    var loops = args.Length >= 5 && int.TryParse(args[4], out var requestedLoops) ? requestedLoops : 3;
+    return CsvCoachReviewChecks.Run(args[1], args[2], args[3], loops);
+}
 
 IbtLapChecks.Run();
 LiveCoachChecks.Run();
+await CoachingMemoryChecks.RunAsync();
 await LiveTelemetryChecks.RunAsync();
 if (args.Length == 0) return 0;
 if (args[0] == "--kokoro-smoke")
@@ -78,6 +86,18 @@ if (args.Length > 1 && File.Exists(args[1]))
     Assert(cornerTwoCommand.CornerNumber == 2, "Expected corner number parsing to ignore question punctuation.");
     var cornerTwoLineResponse = coach.Respond(cornerTwoCommand, new CoachContext(cornerFindings, cornerFindings.FirstOrDefault(), comparison));
     Assert(cornerTwoLineResponse.StartsWith("Corner 2:", StringComparison.Ordinal) && cornerTwoLineResponse.Contains("hand corner", StringComparison.Ordinal), "Expected line response to use the requested corner and direction.");
+    var lineDiagnosis = LineDiagnosisService.Diagnose(CornerTurnDirection.Right, -0.5, -3.0, -2.0);
+    Assert(lineDiagnosis.Issue == LineIssueType.TightEntryAndApex && lineDiagnosis.Suggestion.Contains("turn in later", StringComparison.OrdinalIgnoreCase), "Expected signed line offsets to produce actionable tight-line advice.");
+    var memory = new CoachingSessionMemory();
+    var diagnosisForMemory = new CoachingDiagnosisService().Diagnose(cornerFindings.First());
+    var eventOne = CoachingEventFactory.FromFinding(cornerFindings.First() with { SegmentTimeDeltaSeconds = 0.20 }, diagnosisForMemory, 1);
+    var eventTwo = CoachingEventFactory.FromFinding(cornerFindings.First() with { SegmentTimeDeltaSeconds = 0.14 }, diagnosisForMemory, 2);
+    var firstMemory = memory.Record(eventOne);
+    var secondMemory = memory.Record(eventTwo);
+    Assert(firstMemory.Trend == CoachingTrend.FirstObservation && secondMemory.Trend == CoachingTrend.Improving, "Expected coaching memory to detect improvement.");
+    Assert(secondMemory.ConsecutiveIssueCount == 2, "Expected repeated diagnosis count to be tracked.");
+    var narrated = await new DeterministicCoachingNarrator().NarrateAsync(new CoachingNarrationRequest(eventTwo, secondMemory));
+    Assert(narrated.Message.Contains("better", StringComparison.OrdinalIgnoreCase), "Expected deterministic narrator to acknowledge improvement.");
     Console.WriteLine($"Corner checks passed: {cornerFindings.Count} detected corners.");
     Console.WriteLine($"Comparison checks passed: final delta {comparison.TimeDeltaSeconds:+0.000;-0.000;0.000} s.");
 }

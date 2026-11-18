@@ -1,0 +1,1720 @@
+{
+  "generatedAtUtc": "2026-11-18T14:19:16.3764049+00:00",
+  "replay": "Garage 61 - Brent Mills - FIA F4 - Long Beach Street Circuit - 01.21.953 - 01M7NC2Y8N8NKJSJKFJ40R97AE.csv",
+  "reference": "Garage 61 - Charlie Walter - FIA F4 - Long Beach Street Circuit - 01.19.869 - 01M7ND8AEPZT6W2PNEVR0333M4.csv",
+  "loops": 3,
+  "corners": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "answers": [
+    {
+      "Lap": 1,
+      "Corner": 1,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 1,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 1. Your biggest loss was on mid-corner, about 0.4 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 1,
+      "Question": "How was my braking?",
+      "Answer": "Corner 1. you braked about 11 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 1,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 1. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 1,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 1. you began steering at about 220 km/h versus 223 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 1,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 1. Peak steering was 55 degrees, compared with 58 on the reference. Steering build rate was 0.38 versus 0.72 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 1,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 1. You didn\u2019t reach full throttle in the measured exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 1,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 1,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "I need at least two completed laps through that corner before I can compare the trend.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 2,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 2,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 2. Your biggest loss was on exit, about 0.4 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 2,
+      "Question": "How was my braking?",
+      "Answer": "Corner 2. you braked about 12 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 2,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 2. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 2,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 2. you began steering at about 115 km/h versus 120 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 2,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 2. Peak steering was 97 degrees, compared with 131 on the reference. Steering build rate could not be measured reliably in this comparison.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 2,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 2. You reached full throttle about 10.8 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 2,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 2,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "I need at least two completed laps through that corner before I can compare the trend.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 3,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 3,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 3. Your biggest loss was on mid-corner, about 0.4 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 3,
+      "Question": "How was my braking?",
+      "Answer": "Corner 3. you braked about 14 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 3,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 3. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 3,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 3. you began steering at about 87 km/h versus 86 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 3,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 3. Peak steering was 57 degrees, compared with 51 on the reference. Steering build rate was 1.72 versus 0.29 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 3,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 3. You reached full throttle at about the same point as the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 3,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 3,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "I need at least two completed laps through that corner before I can compare the trend.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 4,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 4,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 4. Your biggest loss was on mid-corner, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 4,
+      "Question": "How was my braking?",
+      "Answer": "Corner 4. you braked about 5 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 4,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 4. You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 4,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 4. you began steering at about 96 km/h versus 109 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 4,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 4. Peak steering was 50 degrees, compared with 51 on the reference. Steering build rate was 0.73 versus 1.03 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 4,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 4. You reached full throttle about 3.2 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 4,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 4,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "I need at least two completed laps through that corner before I can compare the trend.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 5,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 5,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 5. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 5,
+      "Question": "How was my braking?",
+      "Answer": "Corner 5. Your braking point was close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 5,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 5. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 5,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 5. you began steering at about 170 km/h versus 170 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 5,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 5. Peak steering was 61 degrees, compared with 63 on the reference. Steering build rate was 0.16 versus 0.40 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 5,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 5. You reached full throttle about 0.5 metres earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 5,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 5,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "I need at least two completed laps through that corner before I can compare the trend.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 6,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 6,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 6. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 6,
+      "Question": "How was my braking?",
+      "Answer": "Corner 6. Your braking point was close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 6,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 6. You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 6,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 6. you began steering at about 147 km/h versus 152 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 6,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 6. Peak steering was 62 degrees, compared with 60 on the reference. Steering build rate was 1.12 versus 2.17 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 6,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 6. You reached full throttle about 9.0 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 6,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 6,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "I need at least two completed laps through that corner before I can compare the trend.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 7,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 7,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 7. Your biggest loss was on mid-corner, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 7,
+      "Question": "How was my braking?",
+      "Answer": "Corner 7. Your braking point was close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 7,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 7. You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 7,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 7. you began steering at about 204 km/h versus 201 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 7,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 7. Peak steering was 64 degrees, compared with 62 on the reference. Steering build rate was 0.48 versus 1.56 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 7,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 7. You reached full throttle about 43.8 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 7,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 7,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "I need at least two completed laps through that corner before I can compare the trend.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 8,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 8,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 8. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 8,
+      "Question": "How was my braking?",
+      "Answer": "Corner 8. you braked about 23 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 8,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 8. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 8,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 8. you began steering at about 118 km/h versus 111 on the reference. You are turning in earlier; carry the car a little deeper before committing to the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 8,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 8. Peak steering was 180 degrees, compared with 206 on the reference. Steering build rate was 1.97 versus 2.05 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 8,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 8. You reached full throttle about 2.9 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 8,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 8,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "I need at least two completed laps through that corner before I can compare the trend.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 9,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 9,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 9. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 9,
+      "Question": "How was my braking?",
+      "Answer": "Corner 9. you braked about 5 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 9,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 9. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 9,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 9. you began steering at about 119 km/h versus 116 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 9,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 9. Peak steering was 180 degrees, compared with 206 on the reference. Steering build rate was 2.12 versus 1.39 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 9,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 9. You reached full throttle about 2.9 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 9,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 1,
+      "Corner": 9,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "I need at least two completed laps through that corner before I can compare the trend.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 1,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 1,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 1. Your biggest loss was on mid-corner, about 0.4 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 1,
+      "Question": "How was my braking?",
+      "Answer": "Corner 1. you braked about 11 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 1,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 1. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 1,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 1. you began steering at about 220 km/h versus 223 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 1,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 1. Peak steering was 55 degrees, compared with 58 on the reference. Steering build rate was 0.38 versus 0.72 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 1,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 1. You didn\u2019t reach full throttle in the measured exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 1,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 1,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 1 is broadly unchanged: the time loss moved from 0.36 to 0.36 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 2,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 2,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 2. Your biggest loss was on exit, about 0.4 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 2,
+      "Question": "How was my braking?",
+      "Answer": "Corner 2. you braked about 12 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 2,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 2. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 2,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 2. you began steering at about 115 km/h versus 120 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 2,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 2. Peak steering was 97 degrees, compared with 131 on the reference. Steering build rate could not be measured reliably in this comparison.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 2,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 2. You reached full throttle about 10.8 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 2,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 2,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 2 is broadly unchanged: the time loss moved from 0.72 to 0.72 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 3,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 3,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 3. Your biggest loss was on mid-corner, about 0.4 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 3,
+      "Question": "How was my braking?",
+      "Answer": "Corner 3. you braked about 14 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 3,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 3. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 3,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 3. you began steering at about 87 km/h versus 86 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 3,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 3. Peak steering was 57 degrees, compared with 51 on the reference. Steering build rate was 1.72 versus 0.29 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 3,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 3. You reached full throttle at about the same point as the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 3,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 3,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 3 is broadly unchanged: the time loss moved from 0.54 to 0.54 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 4,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 4,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 4. Your biggest loss was on mid-corner, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 4,
+      "Question": "How was my braking?",
+      "Answer": "Corner 4. you braked about 5 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 4,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 4. You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 4,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 4. you began steering at about 96 km/h versus 109 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 4,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 4. Peak steering was 50 degrees, compared with 51 on the reference. Steering build rate was 0.73 versus 1.03 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 4,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 4. You reached full throttle about 3.2 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 4,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 4,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 4 is broadly unchanged: the time loss moved from 0.32 to 0.32 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 5,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 5,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 5. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 5,
+      "Question": "How was my braking?",
+      "Answer": "Corner 5. Your braking point was close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 5,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 5. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 5,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 5. you began steering at about 170 km/h versus 170 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 5,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 5. Peak steering was 61 degrees, compared with 63 on the reference. Steering build rate was 0.16 versus 0.40 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 5,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 5. You reached full throttle about 0.5 metres earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 5,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 5,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 5 is broadly unchanged: the time loss moved from 0.17 to 0.17 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 6,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 6,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 6. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 6,
+      "Question": "How was my braking?",
+      "Answer": "Corner 6. Your braking point was close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 6,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 6. You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 6,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 6. you began steering at about 147 km/h versus 152 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 6,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 6. Peak steering was 62 degrees, compared with 60 on the reference. Steering build rate was 1.12 versus 2.17 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 6,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 6. You reached full throttle about 9.0 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 6,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 6,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 6 is broadly unchanged: the time loss moved from 0.24 to 0.24 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 7,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 7,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 7. Your biggest loss was on mid-corner, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 7,
+      "Question": "How was my braking?",
+      "Answer": "Corner 7. Your braking point was close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 7,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 7. You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 7,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 7. you began steering at about 204 km/h versus 201 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 7,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 7. Peak steering was 64 degrees, compared with 62 on the reference. Steering build rate was 0.48 versus 1.56 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 7,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 7. You reached full throttle about 43.8 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 7,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 7,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 7 is broadly unchanged: the time loss moved from 0.14 to 0.14 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 8,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 8,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 8. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 8,
+      "Question": "How was my braking?",
+      "Answer": "Corner 8. you braked about 23 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 8,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 8. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 8,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 8. you began steering at about 118 km/h versus 111 on the reference. You are turning in earlier; carry the car a little deeper before committing to the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 8,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 8. Peak steering was 180 degrees, compared with 206 on the reference. Steering build rate was 1.97 versus 2.05 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 8,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 8. You reached full throttle about 2.9 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 8,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 8,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 8 is broadly unchanged: the time loss moved from 0.39 to 0.39 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 9,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 9,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 9. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 9,
+      "Question": "How was my braking?",
+      "Answer": "Corner 9. you braked about 5 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 9,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 9. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 9,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 9. you began steering at about 119 km/h versus 116 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 9,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 9. Peak steering was 180 degrees, compared with 206 on the reference. Steering build rate was 2.12 versus 1.39 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 9,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 9. You reached full throttle about 2.9 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 9,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 2,
+      "Corner": 9,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 9 is broadly unchanged: the time loss moved from 0.32 to 0.32 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 1. Your biggest loss was on mid-corner, about 0.4 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "How was my braking?",
+      "Answer": "Corner 1. you braked about 11 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 1. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 1. you began steering at about 220 km/h versus 223 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 1. Peak steering was 55 degrees, compared with 58 on the reference. Steering build rate was 0.38 versus 0.72 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 1. You didn\u2019t reach full throttle in the measured exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 1 is broadly unchanged: the time loss moved from 0.36 to 0.36 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 2. Your biggest loss was on exit, about 0.4 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "How was my braking?",
+      "Answer": "Corner 2. you braked about 12 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 2. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 2. you began steering at about 115 km/h versus 120 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 2. Peak steering was 97 degrees, compared with 131 on the reference. Steering build rate could not be measured reliably in this comparison.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 2. You reached full throttle about 10.8 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 2 is broadly unchanged: the time loss moved from 0.72 to 0.72 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 3. Your biggest loss was on mid-corner, about 0.4 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "How was my braking?",
+      "Answer": "Corner 3. you braked about 14 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 3. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 3. you began steering at about 87 km/h versus 86 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 3. Peak steering was 57 degrees, compared with 51 on the reference. Steering build rate was 1.72 versus 0.29 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 3. You reached full throttle at about the same point as the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 3 is broadly unchanged: the time loss moved from 0.54 to 0.54 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 4. Your biggest loss was on mid-corner, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "How was my braking?",
+      "Answer": "Corner 4. you braked about 5 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 4. You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 4. you began steering at about 96 km/h versus 109 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 4. Peak steering was 50 degrees, compared with 51 on the reference. Steering build rate was 0.73 versus 1.03 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 4. You reached full throttle about 3.2 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 4 is broadly unchanged: the time loss moved from 0.32 to 0.32 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 5. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "How was my braking?",
+      "Answer": "Corner 5. Your braking point was close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 5. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 5. you began steering at about 170 km/h versus 170 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 5. Peak steering was 61 degrees, compared with 63 on the reference. Steering build rate was 0.16 versus 0.40 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 5. You reached full throttle about 0.5 metres earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 5 is broadly unchanged: the time loss moved from 0.17 to 0.17 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 6. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "How was my braking?",
+      "Answer": "Corner 6. Your braking point was close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 6. You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 6. you began steering at about 147 km/h versus 152 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 6. Peak steering was 62 degrees, compared with 60 on the reference. Steering build rate was 1.12 versus 2.17 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 6. You reached full throttle about 9.0 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 6 is broadly unchanged: the time loss moved from 0.24 to 0.24 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 7. Your biggest loss was on mid-corner, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "How was my braking?",
+      "Answer": "Corner 7. Your braking point was close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 7. You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 7. you began steering at about 204 km/h versus 201 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 7. Peak steering was 64 degrees, compared with 62 on the reference. Steering build rate was 0.48 versus 1.56 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 7. You reached full throttle about 43.8 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 7 is broadly unchanged: the time loss moved from 0.14 to 0.14 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 8. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "How was my braking?",
+      "Answer": "Corner 8. you braked about 23 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 8. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 8. you began steering at about 118 km/h versus 111 on the reference. You are turning in earlier; carry the car a little deeper before committing to the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 8. Peak steering was 180 degrees, compared with 206 on the reference. Steering build rate was 1.97 versus 2.05 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 8. You reached full throttle about 2.9 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 8 is broadly unchanged: the time loss moved from 0.39 to 0.39 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 9. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "How was my braking?",
+      "Answer": "Corner 9. you braked about 5 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 9. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 9. you began steering at about 119 km/h versus 116 on the reference. That is broadly matched to the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 9. Peak steering was 180 degrees, compared with 206 on the reference. Steering build rate was 2.12 versus 1.39 radians per second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 9. You reached full throttle about 2.9 metres later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "What should I try differently next lap?",
+      "Answer": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 9 is broadly unchanged: the time loss moved from 0.32 to 0.32 seconds.",
+      "Understood": true
+    }
+  ]
+}

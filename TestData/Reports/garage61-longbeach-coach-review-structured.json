@@ -1,0 +1,3421 @@
+{
+  "generatedAtUtc": "2026-11-18T15:11:03.2291153+00:00",
+  "replay": "Garage 61 - Brent Mills - FIA F4 - Long Beach Street Circuit - 01.21.953 - 01M7NC2Y8N8NKJSJKFJ40R97AE.csv",
+  "reference": "Garage 61 - Charlie Walter - FIA F4 - Long Beach Street Circuit - 01.19.869 - 01M7ND8AEPZT6W2PNEVR0333M4.csv",
+  "loops": 3,
+  "corners": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "answers": [
+    {
+      "lap": 1,
+      "corner": 1,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 1. Your biggest loss was on mid-corner, about 0.4 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 1. you braked about 11 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 1. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 0.3 metres off, apex 1.3 metres off, exit 1.3 metres off, maximum 2.6 metres at entry.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 1. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 1. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 1. You didn\u2019t reach full throttle in the measured exit.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "I need at least two completed laps through that corner before I can compare the trend.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 2. Your biggest loss was on exit, about 0.4 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 2. you braked about 12 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 2. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "symptom": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "suggestion": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "evidence": "Entry 0.1 metres off, apex 0.6 metres off, exit 0.3 metres off, maximum 3.1 metres at the apex.",
+        "suggestionId": "delay_turn_in",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 2. Symptom: steering build could not be measured reliably in this comparison. Suggestion: focus on a smooth, progressive turn-in and use the replay trace to compare the input shape.",
+        "symptom": "Steering build could not be measured reliably.",
+        "suggestion": "Focus on a smooth, progressive turn-in and compare the input shape on the replay trace.",
+        "evidence": null,
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 2. Symptom: steering build could not be measured reliably in this comparison. Suggestion: focus on a smooth, progressive turn-in and use the replay trace to compare the input shape.",
+        "symptom": "Steering build could not be measured reliably.",
+        "suggestion": "Focus on a smooth, progressive turn-in and compare the input shape on the replay trace.",
+        "evidence": null,
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 2. You reached full throttle about 10.8 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "I need at least two completed laps through that corner before I can compare the trend.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 3. Your biggest loss was on mid-corner, about 0.4 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 3. you braked about 14 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 3. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "symptom": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "suggestion": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "evidence": "Entry 0.2 metres off, apex 0.2 metres off, exit 0.7 metres off, maximum 3.1 metres at the apex.",
+        "suggestionId": "delay_turn_in",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 3. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 3. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 3. You reached full throttle at about the same point as the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "I need at least two completed laps through that corner before I can compare the trend.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 4. Your biggest loss was on mid-corner, about 0.1 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 4. you braked about 5 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 4. You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+        "symptom": "You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+        "suggestion": "You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+        "evidence": "Entry 0.5 metres off, apex 1.4 metres off, exit 3.2 metres off, maximum 8.6 metres at exit.",
+        "suggestionId": "rotate_before_throttle",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 4. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 4. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 4. You reached full throttle about 3.2 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "I need at least two completed laps through that corner before I can compare the trend.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 5,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 5,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 5. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 5,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 5. Your braking point was close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 5,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 5. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 0.4 metres off, apex 0.7 metres off, exit 1.6 metres off, maximum 4.7 metres at exit.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 5,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 5. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 5,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 5. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 5,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 5. You reached full throttle about 0.5 metres earlier than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 5,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 5,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "I need at least two completed laps through that corner before I can compare the trend.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 6,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 6,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 6. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 6,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 6. Your braking point was close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 6,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 6. You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "symptom": "You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "suggestion": "You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "evidence": "Entry 4.0 metres off, apex 1.6 metres off, exit 1.7 metres off, maximum 4.0 metres at entry.",
+        "suggestionId": "aim_for_apex",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 6,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 6. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 6,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 6. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 6,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 6. You reached full throttle about 9.0 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 6,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 6,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "I need at least two completed laps through that corner before I can compare the trend.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 7,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 7,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 7. Your biggest loss was on mid-corner, about 0.1 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 7,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 7. Your braking point was close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 7,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 7. You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "symptom": "You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "suggestion": "You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "evidence": "Entry 2.4 metres off, apex 2.0 metres off, exit 2.1 metres off, maximum 2.7 metres at the apex.",
+        "suggestionId": "aim_for_apex",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 7,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 7. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 7,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 7. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 7,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 7. You reached full throttle about 43.8 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 7,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 7,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "I need at least two completed laps through that corner before I can compare the trend.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 8,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 8,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 8. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 8,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 8. you braked about 23 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 8,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 8. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 1.5 metres off, apex 0.8 metres off, exit 0.5 metres off, maximum 2.7 metres at entry.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 8,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 8. Symptom: Your steering build is broadly matched to the reference. Suggestion: Keep the same steering rhythm and focus on carrying the line cleanly to the exit. Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "symptom": "Your steering build is broadly matched to the reference.",
+        "suggestion": "Keep the same steering rhythm and focus on carrying the line cleanly to the exit.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "suggestionId": "keep_current_steering",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 8,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 8. Symptom: Your steering build is broadly matched to the reference. Suggestion: Keep the same steering rhythm and focus on carrying the line cleanly to the exit. Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "symptom": "Your steering build is broadly matched to the reference.",
+        "suggestion": "Keep the same steering rhythm and focus on carrying the line cleanly to the exit.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "suggestionId": "keep_current_steering",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 8,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 8. You reached full throttle about 2.9 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 8,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 8,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "I need at least two completed laps through that corner before I can compare the trend.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 9,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 9,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 9. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 9,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 9. you braked about 5 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 9,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 9. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 0.5 metres off, apex 0.8 metres off, exit 0.7 metres off, maximum 2.1 metres at entry.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 9,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 9. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 9,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 9. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 9,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 9. You reached full throttle about 2.9 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 9,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 1,
+      "corner": 9,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "I need at least two completed laps through that corner before I can compare the trend.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 1. Your biggest loss was on mid-corner, about 0.4 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 1. you braked about 11 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 1. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 0.3 metres off, apex 1.3 metres off, exit 1.3 metres off, maximum 2.6 metres at entry.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 1. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 1. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 1. You didn\u2019t reach full throttle in the measured exit.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 1 is broadly unchanged: the time loss moved from 0.36 to 0.36 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 2. Your biggest loss was on exit, about 0.4 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 2. you braked about 12 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 2. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "symptom": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "suggestion": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "evidence": "Entry 0.1 metres off, apex 0.6 metres off, exit 0.3 metres off, maximum 3.1 metres at the apex.",
+        "suggestionId": "delay_turn_in",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 2. Symptom: steering build could not be measured reliably in this comparison. Suggestion: focus on a smooth, progressive turn-in and use the replay trace to compare the input shape.",
+        "symptom": "Steering build could not be measured reliably.",
+        "suggestion": "Focus on a smooth, progressive turn-in and compare the input shape on the replay trace.",
+        "evidence": null,
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 2. Symptom: steering build could not be measured reliably in this comparison. Suggestion: focus on a smooth, progressive turn-in and use the replay trace to compare the input shape.",
+        "symptom": "Steering build could not be measured reliably.",
+        "suggestion": "Focus on a smooth, progressive turn-in and compare the input shape on the replay trace.",
+        "evidence": null,
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 2. You reached full throttle about 10.8 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 2 is broadly unchanged: the time loss moved from 0.72 to 0.72 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 3. Your biggest loss was on mid-corner, about 0.4 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 3. you braked about 14 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 3. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "symptom": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "suggestion": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "evidence": "Entry 0.2 metres off, apex 0.2 metres off, exit 0.7 metres off, maximum 3.1 metres at the apex.",
+        "suggestionId": "delay_turn_in",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 3. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 3. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 3. You reached full throttle at about the same point as the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 3 is broadly unchanged: the time loss moved from 0.54 to 0.54 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 4. Your biggest loss was on mid-corner, about 0.1 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 4. you braked about 5 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 4. You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+        "symptom": "You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+        "suggestion": "You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+        "evidence": "Entry 0.5 metres off, apex 1.4 metres off, exit 3.2 metres off, maximum 8.6 metres at exit.",
+        "suggestionId": "rotate_before_throttle",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 4. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 4. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 4. You reached full throttle about 3.2 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 4 is broadly unchanged: the time loss moved from 0.32 to 0.32 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 5,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 5,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 5. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 5,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 5. Your braking point was close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 5,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 5. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 0.4 metres off, apex 0.7 metres off, exit 1.6 metres off, maximum 4.7 metres at exit.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 5,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 5. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 5,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 5. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 5,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 5. You reached full throttle about 0.5 metres earlier than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 5,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 5,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 5 is broadly unchanged: the time loss moved from 0.17 to 0.17 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 6,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 6,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 6. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 6,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 6. Your braking point was close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 6,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 6. You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "symptom": "You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "suggestion": "You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "evidence": "Entry 4.0 metres off, apex 1.6 metres off, exit 1.7 metres off, maximum 4.0 metres at entry.",
+        "suggestionId": "aim_for_apex",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 6,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 6. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 6,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 6. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 6,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 6. You reached full throttle about 9.0 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 6,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 6,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 6 is broadly unchanged: the time loss moved from 0.24 to 0.24 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 7,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 7,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 7. Your biggest loss was on mid-corner, about 0.1 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 7,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 7. Your braking point was close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 7,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 7. You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "symptom": "You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "suggestion": "You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "evidence": "Entry 2.4 metres off, apex 2.0 metres off, exit 2.1 metres off, maximum 2.7 metres at the apex.",
+        "suggestionId": "aim_for_apex",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 7,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 7. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 7,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 7. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 7,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 7. You reached full throttle about 43.8 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 7,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 7,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 7 is broadly unchanged: the time loss moved from 0.14 to 0.14 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 8,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 8,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 8. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 8,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 8. you braked about 23 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 8,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 8. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 1.5 metres off, apex 0.8 metres off, exit 0.5 metres off, maximum 2.7 metres at entry.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 8,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 8. Symptom: Your steering build is broadly matched to the reference. Suggestion: Keep the same steering rhythm and focus on carrying the line cleanly to the exit. Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "symptom": "Your steering build is broadly matched to the reference.",
+        "suggestion": "Keep the same steering rhythm and focus on carrying the line cleanly to the exit.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "suggestionId": "keep_current_steering",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 8,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 8. Symptom: Your steering build is broadly matched to the reference. Suggestion: Keep the same steering rhythm and focus on carrying the line cleanly to the exit. Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "symptom": "Your steering build is broadly matched to the reference.",
+        "suggestion": "Keep the same steering rhythm and focus on carrying the line cleanly to the exit.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "suggestionId": "keep_current_steering",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 8,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 8. You reached full throttle about 2.9 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 8,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 8,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 8 is broadly unchanged: the time loss moved from 0.39 to 0.39 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 9,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 9,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 9. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 9,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 9. you braked about 5 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 9,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 9. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 0.5 metres off, apex 0.8 metres off, exit 0.7 metres off, maximum 2.1 metres at entry.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 9,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 9. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 9,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 9. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 9,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 9. You reached full throttle about 2.9 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 9,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 2,
+      "corner": 9,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 9 is broadly unchanged: the time loss moved from 0.32 to 0.32 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 1. Your biggest loss was on mid-corner, about 0.4 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 1. you braked about 11 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 1. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 0.3 metres off, apex 1.3 metres off, exit 1.3 metres off, maximum 2.6 metres at entry.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 1. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 1. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 55 degrees versus 58 degrees; build rate 22 degrees per second versus 41 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 1. You didn\u2019t reach full throttle in the measured exit.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 1, brake about 11 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 1 is broadly unchanged: the time loss moved from 0.36 to 0.36 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 2. Your biggest loss was on exit, about 0.4 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 2. you braked about 12 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 2. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "symptom": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "suggestion": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "evidence": "Entry 0.1 metres off, apex 0.6 metres off, exit 0.3 metres off, maximum 3.1 metres at the apex.",
+        "suggestionId": "delay_turn_in",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 2. Symptom: steering build could not be measured reliably in this comparison. Suggestion: focus on a smooth, progressive turn-in and use the replay trace to compare the input shape.",
+        "symptom": "Steering build could not be measured reliably.",
+        "suggestion": "Focus on a smooth, progressive turn-in and compare the input shape on the replay trace.",
+        "evidence": null,
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 2. Symptom: steering build could not be measured reliably in this comparison. Suggestion: focus on a smooth, progressive turn-in and use the replay trace to compare the input shape.",
+        "symptom": "Steering build could not be measured reliably.",
+        "suggestion": "Focus on a smooth, progressive turn-in and compare the input shape on the replay trace.",
+        "evidence": null,
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 2. You reached full throttle about 10.8 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 2, you can brake about 12 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 2 is broadly unchanged: the time loss moved from 0.72 to 0.72 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 3. Your biggest loss was on mid-corner, about 0.4 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 3. you braked about 14 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 3. You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "symptom": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "suggestion": "You are getting too tight as you reach the apex. Delay the turn-in slightly and aim for a later apex so you can open the steering earlier.",
+        "evidence": "Entry 0.2 metres off, apex 0.2 metres off, exit 0.7 metres off, maximum 3.1 metres at the apex.",
+        "suggestionId": "delay_turn_in",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 3. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 3. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 57 degrees versus 51 degrees; build rate 98 degrees per second versus 16 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 3. You reached full throttle at about the same point as the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 3, you can brake about 14 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 3 is broadly unchanged: the time loss moved from 0.54 to 0.54 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 4. Your biggest loss was on mid-corner, about 0.1 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 4. you braked about 5 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 4. You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+        "symptom": "You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+        "suggestion": "You are running wide on exit. Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+        "evidence": "Entry 0.5 metres off, apex 1.4 metres off, exit 3.2 metres off, maximum 8.6 metres at exit.",
+        "suggestionId": "rotate_before_throttle",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 4. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 4. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 50 degrees versus 51 degrees; build rate 42 degrees per second versus 59 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 4. You reached full throttle about 3.2 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 4, brake about 5 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 4 is broadly unchanged: the time loss moved from 0.32 to 0.32 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 5,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 5,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 5. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 5,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 5. Your braking point was close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 5,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 5. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 0.4 metres off, apex 0.7 metres off, exit 1.6 metres off, maximum 4.7 metres at exit.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 5,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 5. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 5,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 5. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 61 degrees versus 63 degrees; build rate 9 degrees per second versus 23 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 5,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 5. You reached full throttle about 0.5 metres earlier than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 5,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 5, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 5,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 5 is broadly unchanged: the time loss moved from 0.17 to 0.17 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 6,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 6,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 6. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 6,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 6. Your braking point was close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 6,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 6. You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "symptom": "You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "suggestion": "You are missing the apex on the outside. Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "evidence": "Entry 4.0 metres off, apex 1.6 metres off, exit 1.7 metres off, maximum 4.0 metres at entry.",
+        "suggestionId": "aim_for_apex",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 6,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 6. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 6,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 6. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 62 degrees versus 60 degrees; build rate 64 degrees per second versus 124 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 6,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 6. You reached full throttle about 9.0 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 6,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 6, carry about 4 km/h more through the slowest point, then prioritise getting back to throttle.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 6,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 6 is broadly unchanged: the time loss moved from 0.24 to 0.24 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 7,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 7,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 7. Your biggest loss was on mid-corner, about 0.1 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 7,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 7. Your braking point was close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 7,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 7. You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "symptom": "You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "suggestion": "You are missing the apex. Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+        "evidence": "Entry 2.4 metres off, apex 2.0 metres off, exit 2.1 metres off, maximum 2.7 metres at the apex.",
+        "suggestionId": "aim_for_apex",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 7,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 7. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 7,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 7. Symptom: You are building steering more slowly than the reference through turn-in. Suggestion: Try introducing the steering a little earlier and building the input more decisively while keeping the car settled. Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "symptom": "You are building steering more slowly than the reference through turn-in.",
+        "suggestion": "Try introducing the steering a little earlier and building the input more decisively while keeping the car settled.",
+        "evidence": "Evidence: peak steering 64 degrees versus 62 degrees; build rate 27 degrees per second versus 90 degrees per second.",
+        "suggestionId": "build_steering_progressively",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 7,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 7. You reached full throttle about 43.8 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 7,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 7, focus on a smooth turn-in and an earlier, cleaner exit. Your current approach is close to the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 7,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 7 is broadly unchanged: the time loss moved from 0.14 to 0.14 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 8,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 8,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 8. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 8,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 8. you braked about 23 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 8,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 8. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 1.5 metres off, apex 0.8 metres off, exit 0.5 metres off, maximum 2.7 metres at entry.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 8,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 8. Symptom: Your steering build is broadly matched to the reference. Suggestion: Keep the same steering rhythm and focus on carrying the line cleanly to the exit. Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "symptom": "Your steering build is broadly matched to the reference.",
+        "suggestion": "Keep the same steering rhythm and focus on carrying the line cleanly to the exit.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "suggestionId": "keep_current_steering",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 8,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 8. Symptom: Your steering build is broadly matched to the reference. Suggestion: Keep the same steering rhythm and focus on carrying the line cleanly to the exit. Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "symptom": "Your steering build is broadly matched to the reference.",
+        "suggestion": "Keep the same steering rhythm and focus on carrying the line cleanly to the exit.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 113 degrees per second versus 118 degrees per second.",
+        "suggestionId": "keep_current_steering",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 8,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 8. You reached full throttle about 2.9 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 8,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 8, brake about 23 metres earlier so the car is settled before turn-in.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 8,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 8 is broadly unchanged: the time loss moved from 0.39 to 0.39 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 9,
+      "question": "What should I focus on in this corner?",
+      "answer": {
+        "spokenText": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 9,
+      "question": "Where am I losing the most time here?",
+      "answer": {
+        "spokenText": "Corner 9. Your biggest loss was on mid-corner, about 0.2 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 9,
+      "question": "How was my braking?",
+      "answer": {
+        "spokenText": "Corner 9. you braked about 5 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 9,
+      "question": "How was my line on entry, at the apex and on exit?",
+      "answer": {
+        "spokenText": "Corner 9. Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "symptom": null,
+        "suggestion": "Your line is close to the reference. Keep the same shape and focus on a clean, early exit.",
+        "evidence": "Entry 0.5 metres off, apex 0.8 metres off, exit 0.7 metres off, maximum 2.1 metres at entry.",
+        "suggestionId": "keep_current_line",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 9,
+      "question": "Was I too early or too late on turn-in?",
+      "answer": {
+        "spokenText": "Corner 9. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 9,
+      "question": "How was my steering input?",
+      "answer": {
+        "spokenText": "Corner 9. Symptom: You are adding steering more abruptly than the reference through turn-in. Suggestion: Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input. Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "symptom": "You are adding steering more abruptly than the reference through turn-in.",
+        "suggestion": "Try starting the steering slightly earlier and feeding it in more smoothly instead of making one sharp input.",
+        "evidence": "Evidence: peak steering 180 degrees versus 206 degrees; build rate 122 degrees per second versus 80 degrees per second.",
+        "suggestionId": "reduce_steering_rate",
+        "confidence": "Medium"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 9,
+      "question": "Did I get back on throttle early enough?",
+      "answer": {
+        "spokenText": "Corner 9. You reached full throttle about 2.9 metres later than the reference.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 9,
+      "question": "What should I try differently next lap?",
+      "answer": {
+        "spokenText": "For Corner 9, you can brake about 5 metres later while keeping the car moving toward the apex.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    },
+    {
+      "lap": 3,
+      "corner": 9,
+      "question": "Is this corner getting better or worse?",
+      "answer": {
+        "spokenText": "Corner 9 is broadly unchanged: the time loss moved from 0.32 to 0.32 seconds.",
+        "symptom": null,
+        "suggestion": null,
+        "evidence": null,
+        "suggestionId": null,
+        "confidence": "Low"
+      },
+      "understood": true
+    }
+  ]
+}

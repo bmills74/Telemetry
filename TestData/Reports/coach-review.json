@@ -1,0 +1,1724 @@
+{
+  "generatedAtUtc": "2026-11-18T12:18:53.6577925+00:00",
+  "recording": "mx5 cup_okayama_full_2011-05-13.ibt",
+  "referenceLap": 5,
+  "testedLaps": [
+    3,
+    6,
+    7
+  ],
+  "corners": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "answers": [
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 1. You lost 0.3 seconds. Your minimum speed was 4 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 1. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "How was my braking?",
+      "Answer": "Corner 1: brake at 3.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 1. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 1. Peak steering was 71 degrees, compared with 85 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 1. Peak steering was 71 degrees, compared with 85 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 1. You reached 90 percent throttle at about the same point as the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 1. You lost 0.3 seconds. Your minimum speed was 4 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 1,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 1. You lost 0.3 seconds. Your minimum speed was 4 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 2. You gained 0.1 seconds. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 2. No phase lost a tenth of a second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "How was my braking?",
+      "Answer": "Corner 2: brake at 11.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 2. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 2. Peak steering was 63 degrees, compared with 62 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 2. Peak steering was 63 degrees, compared with 62 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 2. You reached 90 percent throttle 0.2 percent of a lap later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 2. You gained 0.1 seconds. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 2,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 2. You gained 0.1 seconds. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 3. You matched the reference time. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 3. No phase lost a tenth of a second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "How was my braking?",
+      "Answer": "Corner 3: brake at 27.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 3. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 3. Peak steering was 100 degrees, compared with 105 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 3. Peak steering was 100 degrees, compared with 105 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 3. You reached 90 percent throttle 0.3 percent of a lap later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 3. You matched the reference time. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 3,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 3. You matched the reference time. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 4. You lost 0.4 seconds. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 4. Your biggest loss was on mid-corner, about 0.5 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "How was my braking?",
+      "Answer": "Corner 4: brake at 51.5% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 4. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 4. Peak steering was 129 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 4. Peak steering was 129 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 4. You reached 90 percent throttle 0.1 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 4. You lost 0.4 seconds. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 4,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 4. You lost 0.4 seconds. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 5. You matched the reference time. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 5. No phase lost a tenth of a second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "How was my braking?",
+      "Answer": "Corner 5: brake at 58.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 5. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 5. Peak steering was 129 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 5. Peak steering was 129 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 5. You reached 90 percent throttle 0.1 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 5. You matched the reference time. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 5,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 5. You matched the reference time. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 6. You lost 0.4 seconds. You carried 5 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 6. Your biggest loss was on exit, about 0.7 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "How was my braking?",
+      "Answer": "Corner 6: brake at 62.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 6. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 6. Peak steering was 114 degrees, compared with 84 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 6. Peak steering was 114 degrees, compared with 84 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 6. You reached 90 percent throttle 0.6 percent of a lap later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 6. You lost 0.4 seconds. You carried 5 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 6,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 6. You lost 0.4 seconds. You carried 5 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 7. You lost 0.2 seconds. You carried 6 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 7. Your biggest loss was on entry, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "How was my braking?",
+      "Answer": "Corner 7: brake at 70.7% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 7. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 7. Peak steering was 125 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 7. Peak steering was 125 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 7. You reached 90 percent throttle at about the same point as the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 7. You lost 0.2 seconds. You carried 6 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 7,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 7. You lost 0.2 seconds. You carried 6 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 8. You matched the reference time. You carried 6 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 8. No phase lost a tenth of a second.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "How was my braking?",
+      "Answer": "Corner 8: brake at 72.8% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 8. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 8. Peak steering was 125 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 8. Peak steering was 125 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 8. You reached 90 percent throttle at about the same point as the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 8. You matched the reference time. You carried 6 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 8,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 8. You matched the reference time. You carried 6 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 9. You lost 0.3 seconds. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 9. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "How was my braking?",
+      "Answer": "Corner 9: brake at 85.9% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 9. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 9. Peak steering was 76 degrees, compared with 72 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 9. Peak steering was 76 degrees, compared with 72 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 9. You reached 90 percent throttle 0.4 percent of a lap later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 9. You lost 0.3 seconds. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 3,
+      "Corner": 9,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 9. You lost 0.3 seconds. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 1,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 1. You matched the reference time. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 1,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 1. Your biggest loss was on exit, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 1,
+      "Question": "How was my braking?",
+      "Answer": "Corner 1: brake at 3.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 1,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 1. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 1,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 1. Peak steering was 103 degrees, compared with 85 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 1,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 1. Peak steering was 103 degrees, compared with 85 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 1,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 1. You reached 90 percent throttle 0.7 percent of a lap later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 1,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 1. You matched the reference time. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 1,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 1. You matched the reference time. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 2,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 2. You matched the reference time. Your minimum speed was 8 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 2,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 2. Your biggest loss was on entry, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 2,
+      "Question": "How was my braking?",
+      "Answer": "Corner 2: brake at 11.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 2,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 2. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 2,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 2. Peak steering was 87 degrees, compared with 62 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 2,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 2. Peak steering was 87 degrees, compared with 62 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 2,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 2. You reached 90 percent throttle 1.1 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 2,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 2. You matched the reference time. Your minimum speed was 8 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 2,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 2. You matched the reference time. Your minimum speed was 8 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 3,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 3. You gained 0.2 seconds. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 3,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 3. No phase lost a tenth of a second.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 3,
+      "Question": "How was my braking?",
+      "Answer": "Corner 3: brake at 27.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 3,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 3. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 3,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 3. Peak steering was 108 degrees, compared with 105 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 3,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 3. Peak steering was 108 degrees, compared with 105 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 3,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 3. You reached 90 percent throttle 0.5 percent of a lap later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 3,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 3. You gained 0.2 seconds. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 3,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 3. You gained 0.2 seconds. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 4,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 4. You lost 0.2 seconds. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 4,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 4. Your biggest loss was on exit, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 4,
+      "Question": "How was my braking?",
+      "Answer": "Corner 4: brake at 51.5% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 4,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 4. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 4,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 4. Peak steering was 133 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 4,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 4. Peak steering was 133 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 4,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 4. You reached 90 percent throttle at about the same point as the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 4,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 4. You lost 0.2 seconds. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 4,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 4. You lost 0.2 seconds. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 5,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 5. You matched the reference time. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 5,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 5. Your biggest loss was on exit, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 5,
+      "Question": "How was my braking?",
+      "Answer": "Corner 5: brake at 58.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 5,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 5. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 5,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 5. Peak steering was 133 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 5,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 5. Peak steering was 133 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 5,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 5. You reached 90 percent throttle at about the same point as the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 5,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 5. You matched the reference time. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 5,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 5. You matched the reference time. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 6,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 6. You lost 0.2 seconds. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 6,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 6. Your biggest loss was on mid-corner, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 6,
+      "Question": "How was my braking?",
+      "Answer": "Corner 6: brake at 62.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 6,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 6. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 6,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 6. Peak steering was 73 degrees, compared with 84 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 6,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 6. Peak steering was 73 degrees, compared with 84 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 6,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 6. You reached 90 percent throttle 0.1 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 6,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 6. You lost 0.2 seconds. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 6,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 6. You lost 0.2 seconds. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 7,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 7. You matched the reference time. You carried 8 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 7,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 7. Your biggest loss was on exit, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 7,
+      "Question": "How was my braking?",
+      "Answer": "Corner 7: brake at 70.7% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 7,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 7. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 7,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 7. Peak steering was 111 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 7,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 7. Peak steering was 111 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 7,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 7. You reached 90 percent throttle 0.1 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 7,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 7. You matched the reference time. You carried 8 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 7,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 7. You matched the reference time. You carried 8 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 8,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 8. You gained 0.1 seconds. You carried 8 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 8,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 8. No phase lost a tenth of a second.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 8,
+      "Question": "How was my braking?",
+      "Answer": "Corner 8: brake at 72.8% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 8,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 8. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 8,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 8. Peak steering was 111 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 8,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 8. Peak steering was 111 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 8,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 8. You reached 90 percent throttle 0.1 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 8,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 8. You gained 0.1 seconds. You carried 8 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 8,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 8. You gained 0.1 seconds. You carried 8 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 9,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 9. You lost 0.2 seconds. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 9,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 9. Your biggest loss was on mid-corner, about 0.2 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 9,
+      "Question": "How was my braking?",
+      "Answer": "Corner 9: brake at 85.9% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 9,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 9. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 9,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 9. Peak steering was 94 degrees, compared with 72 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 9,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 9. Peak steering was 94 degrees, compared with 72 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 9,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 9. You reached 90 percent throttle 0.1 percent of a lap later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 9,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 9. You lost 0.2 seconds. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 6,
+      "Corner": 9,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 9. You lost 0.2 seconds. Your minimum speed was within 1 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 1,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 1. You matched the reference time. Your minimum speed was 7 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 1,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 1. No phase lost a tenth of a second.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 1,
+      "Question": "How was my braking?",
+      "Answer": "Corner 1: brake at 3.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 1,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 1. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 1,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 1. Peak steering was 98 degrees, compared with 85 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 1,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 1. Peak steering was 98 degrees, compared with 85 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 1,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 1. You reached 90 percent throttle 1.1 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 1,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 1. You matched the reference time. Your minimum speed was 7 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 1,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 1. You matched the reference time. Your minimum speed was 7 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 2,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 2. You matched the reference time. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 2,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 2. Your biggest loss was on mid-corner, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 2,
+      "Question": "How was my braking?",
+      "Answer": "Corner 2: brake at 11.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 2,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 2. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 2,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 2. Peak steering was 59 degrees, compared with 62 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 2,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 2. Peak steering was 59 degrees, compared with 62 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 2,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 2. You reached 90 percent throttle 0.1 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 2,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 2. You matched the reference time. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 2,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 2. You matched the reference time. Your minimum speed was within 2 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 3,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 3. You gained 0.2 seconds. You carried 6 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 3,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 3. No phase lost a tenth of a second.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 3,
+      "Question": "How was my braking?",
+      "Answer": "Corner 3: brake at 27.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 3,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 3. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 3,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 3. Peak steering was 98 degrees, compared with 105 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 3,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 3. Peak steering was 98 degrees, compared with 105 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 3,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 3. You reached 90 percent throttle 0.3 percent of a lap later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 3,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 3. You gained 0.2 seconds. You carried 6 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 3,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 3. You gained 0.2 seconds. You carried 6 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 4,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 4. You matched the reference time. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 4,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 4. Your biggest loss was on exit, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 4,
+      "Question": "How was my braking?",
+      "Answer": "Corner 4: brake at 51.5% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 4,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 4. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 4,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 4. Peak steering was 125 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 4,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 4. Peak steering was 125 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 4,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 4. You reached 90 percent throttle 0.1 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 4,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 4. You matched the reference time. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 4,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 4. You matched the reference time. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 5,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 5. You lost 0.2 seconds. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 5,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 5. Your biggest loss was on exit, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 5,
+      "Question": "How was my braking?",
+      "Answer": "Corner 5: brake at 58.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 5,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 5. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 5,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 5. Peak steering was 113 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 5,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 5. Peak steering was 113 degrees, compared with 130 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 5,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 5. You reached 90 percent throttle 0.1 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 5,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 5. You lost 0.2 seconds. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 5,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 5. You lost 0.2 seconds. Your minimum speed was within 3 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 6,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 6. You lost 0.2 seconds. Your minimum speed was 5 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 6,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 6. Your biggest loss was on mid-corner, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 6,
+      "Question": "How was my braking?",
+      "Answer": "Corner 6: brake at 62.3% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 6,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 6. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 6,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 6. Peak steering was 84 degrees, compared with 84 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 6,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 6. Peak steering was 84 degrees, compared with 84 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 6,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 6. You reached 90 percent throttle 0.4 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 6,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 6. You lost 0.2 seconds. Your minimum speed was 5 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 6,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 6. You lost 0.2 seconds. Your minimum speed was 5 kilometres per hour lower.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 7,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 7. You gained 0.2 seconds. You carried 7 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 7,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 7. No phase lost a tenth of a second.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 7,
+      "Question": "How was my braking?",
+      "Answer": "Corner 7: brake at 70.7% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 7,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 7. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 7,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 7. Peak steering was 122 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 7,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 7. Peak steering was 122 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 7,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 7. You reached 90 percent throttle 0.2 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 7,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 7. You gained 0.2 seconds. You carried 7 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 7,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 7. You gained 0.2 seconds. You carried 7 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 8,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 8. You gained 0.2 seconds. You carried 7 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 8,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 8. No phase lost a tenth of a second.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 8,
+      "Question": "How was my braking?",
+      "Answer": "Corner 8: brake at 72.8% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 8,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 8. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 8,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 8. Peak steering was 122 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 8,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 8. Peak steering was 122 degrees, compared with 107 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 8,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 8. You reached 90 percent throttle 0.2 percent of a lap earlier than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 8,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 8. You gained 0.2 seconds. You carried 7 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 8,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 8. You gained 0.2 seconds. You carried 7 kilometres per hour more minimum speed.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 9,
+      "Question": "What should I focus on in this corner?",
+      "Answer": "Corner 9. You lost 0.2 seconds. Your minimum speed was within 0 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 9,
+      "Question": "Where am I losing the most time here?",
+      "Answer": "Corner 9. Your biggest loss was on mid-corner, about 0.1 seconds.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 9,
+      "Question": "How was my braking?",
+      "Answer": "Corner 9: brake at 85.9% of the lap.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 9,
+      "Question": "How was my line on entry, at the apex and on exit?",
+      "Answer": "Corner 9. I need position data from both laps to compare your racing line.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 9,
+      "Question": "Was I too early or too late on turn-in?",
+      "Answer": "Corner 9. Peak steering was 87 degrees, compared with 72 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 9,
+      "Question": "How was my steering input?",
+      "Answer": "Corner 9. Peak steering was 87 degrees, compared with 72 on the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 9,
+      "Question": "Did I get back on throttle early enough?",
+      "Answer": "Corner 9. You reached 90 percent throttle 0.3 percent of a lap later than the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 9,
+      "Question": "What should I try differently next lap?",
+      "Answer": "Corner 9. You lost 0.2 seconds. Your minimum speed was within 0 kilometres per hour of the reference.",
+      "Understood": true
+    },
+    {
+      "Lap": 7,
+      "Corner": 9,
+      "Question": "Is this corner getting better or worse?",
+      "Answer": "Corner 9. You lost 0.2 seconds. Your minimum speed was within 0 kilometres per hour of the reference.",
+      "Understood": true
+    }
+  ]
+}

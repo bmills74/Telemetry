@@ -37,6 +37,8 @@ public partial class MainWindow : System.Windows.Window
     private readonly SimCoachSettingsStore _settingsStore = new();
     private readonly CoachResponseService _coachResponseService = new();
     private readonly CoachingSynthesisService _coachingSynthesisService = new();
+    private readonly CoachingSessionMemory _coachingSessionMemory = new();
+    private readonly ICoachingNarrator _coachingNarrator = new DeterministicCoachingNarrator();
     private readonly VoiceCoachService _voiceCoachService = new();
     private string? _lastCoachResponse;
     private TelemetryComparison? _currentComparison;
@@ -1143,7 +1145,15 @@ public partial class MainWindow : System.Windows.Window
             (activeCorner is null || activeCorner.Number != _previousAutomaticCorner.Number) &&
             _automaticCoachedCorners.Add(_previousAutomaticCorner.Number))
         {
-            var advice = _coachingSynthesisService.Summarize(_previousAutomaticCorner);
+            var diagnosis = _coachingSynthesisService.Diagnose(_previousAutomaticCorner);
+            var coachingEvent = CoachingEventFactory.FromFinding(_previousAutomaticCorner, diagnosis, sample.LapNumber);
+            var memory = _coachingSessionMemory.Record(coachingEvent);
+            var narration = _coachingNarrator
+                .NarrateAsync(new CoachingNarrationRequest(coachingEvent, memory))
+                .GetAwaiter()
+                .GetResult();
+            _coachingSessionMemory.RecordNarration(coachingEvent.CornerNumber, narration);
+            var advice = narration.Message;
             CoachResponseTextBlock.Text = $"Corner {_previousAutomaticCorner.Number}: {advice}";
             _lastCoachResponse = advice;
             _voiceCoachService.Speak(advice);
@@ -1159,6 +1169,7 @@ public partial class MainWindow : System.Windows.Window
         _lastSourceSampleIndex = -1;
         _previousAutomaticCorner = null;
         _automaticCoachedCorners.Clear();
+        _coachingSessionMemory.Reset();
     }
 
     private void AskCoachClick(object sender, System.Windows.RoutedEventArgs e)
@@ -1320,9 +1331,12 @@ public partial class MainWindow : System.Windows.Window
         if (_liveMode)
         {
             var understood = true;
+            var structuredResponse = command.Type == CoachCommandType.Repeat
+                ? null
+                : _liveCoach?.RespondStructured(CoachInputTextBox.Text, out understood);
             var liveResponse = command.Type == CoachCommandType.Repeat
                 ? _lastCoachResponse ?? "No coaching message yet."
-                : _liveCoach?.Respond(CoachInputTextBox.Text, out understood) ?? "Load a reference lap to enable live coaching.";
+                : structuredResponse?.SpokenText ?? "Load a reference lap to enable live coaching.";
             if (speak && !understood) LogVoiceReview(CoachInputTextBox.Text, "unknown_command");
             if (command.Type == CoachCommandType.Quiet) _voiceCoachService.StopSpeaking();
             else if (speak) _voiceCoachService.Speak(liveResponse);
