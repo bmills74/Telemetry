@@ -31,7 +31,15 @@ public sealed class OpenAiCoachingNarrator : ICoachingNarrator
         string? model = null,
         int timeoutMs = 2500)
     {
-        var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
+        // A key set with `setx` is written to the User environment but is not
+        // visible to an already-open PowerShell process. Read the persisted
+        // User/Machine scopes as a fallback so the app can still start safely.
+        var apiKey = new[]
+        {
+            Environment.GetEnvironmentVariable("OPENAI_API_KEY"),
+            Environment.GetEnvironmentVariable("OPENAI_API_KEY", EnvironmentVariableTarget.User),
+            Environment.GetEnvironmentVariable("OPENAI_API_KEY", EnvironmentVariableTarget.Machine)
+        }.FirstOrDefault(value => !string.IsNullOrWhiteSpace(value));
         return string.IsNullOrWhiteSpace(apiKey)
             ? null
             : new OpenAiCoachingNarrator(new OpenAiNarratorOptions(
@@ -101,9 +109,7 @@ public sealed class OpenAiCoachingNarrator : ICoachingNarrator
             }
 
             using var document = JsonDocument.Parse(responseBody);
-            var outputText = document.RootElement.TryGetProperty("output_text", out var output)
-                ? output.GetString()
-                : null;
+            var outputText = ExtractOutputText(document.RootElement);
             if (string.IsNullOrWhiteSpace(outputText))
             {
                 LogNaturalNarration(false, started.ElapsedMilliseconds, answer.SuggestionId, "empty output");
@@ -131,6 +137,24 @@ public sealed class OpenAiCoachingNarrator : ICoachingNarrator
     public async Task<CoachingNarrationResult> NarrateAsync(
         CoachingNarrationRequest request,
         CancellationToken cancellationToken = default)
+    {
+        var started = System.Diagnostics.Stopwatch.StartNew();
+        try
+        {
+            var result = await NarrateCoreAsync(request, cancellationToken).ConfigureAwait(false);
+            LogNaturalNarration(true, started.ElapsedMilliseconds, result.SuggestionId, null);
+            return result;
+        }
+        catch (Exception exception) when (exception is HttpRequestException or TaskCanceledException or JsonException or InvalidOperationException)
+        {
+            LogNaturalNarration(false, started.ElapsedMilliseconds, null, exception is TaskCanceledException ? nameof(TaskCanceledException) : exception.GetType().Name);
+            throw;
+        }
+    }
+
+    private async Task<CoachingNarrationResult> NarrateCoreAsync(
+        CoachingNarrationRequest request,
+        CancellationToken cancellationToken)
     {
         var payload = new
         {
@@ -172,9 +196,7 @@ public sealed class OpenAiCoachingNarrator : ICoachingNarrator
             throw new InvalidOperationException($"OpenAI narration failed ({(int)response.StatusCode}): {ExtractError(responseBody)}");
 
         using var document = JsonDocument.Parse(responseBody);
-        var outputText = document.RootElement.TryGetProperty("output_text", out var output)
-            ? output.GetString()
-            : null;
+        var outputText = ExtractOutputText(document.RootElement);
         if (string.IsNullOrWhiteSpace(outputText))
             throw new InvalidOperationException("OpenAI returned no narration text.");
 
@@ -203,6 +225,37 @@ public sealed class OpenAiCoachingNarrator : ICoachingNarrator
         {
             return "unknown error";
         }
+    }
+
+    private static string? ExtractOutputText(JsonElement root)
+    {
+        if (root.TryGetProperty("output_text", out var direct) &&
+            direct.ValueKind == JsonValueKind.String &&
+            !string.IsNullOrWhiteSpace(direct.GetString()))
+        {
+            return direct.GetString();
+        }
+
+        if (!root.TryGetProperty("output", out var output) || output.ValueKind != JsonValueKind.Array)
+            return null;
+
+        var parts = new List<string>();
+        foreach (var item in output.EnumerateArray())
+        {
+            if (!item.TryGetProperty("content", out var content) || content.ValueKind != JsonValueKind.Array)
+                continue;
+            foreach (var contentItem in content.EnumerateArray())
+            {
+                if (contentItem.TryGetProperty("text", out var text) &&
+                    text.ValueKind == JsonValueKind.String &&
+                    !string.IsNullOrWhiteSpace(text.GetString()))
+                {
+                    parts.Add(text.GetString()!);
+                }
+            }
+        }
+
+        return parts.Count == 0 ? null : string.Join("", parts);
     }
 
     private void LogNaturalNarration(bool success, long durationMs, string? suggestionId, string? failure)

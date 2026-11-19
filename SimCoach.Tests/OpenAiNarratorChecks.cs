@@ -29,6 +29,18 @@ internal static class OpenAiNarratorChecks
         Assert(narrated.Suggestion == answer.Suggestion, "Expected the measured suggestion to remain unchanged.");
         Assert(narrated.Evidence == answer.Evidence, "Expected measured evidence to remain unchanged.");
         Assert(handler.LastRequestBody?.Contains("natural_coaching_answer", StringComparison.Ordinal) == true, "Expected the strict narration schema in the request.");
+
+        var nestedHandler = new StubHandler("""
+            {
+              "output": [{ "type": "message", "content": [{ "type": "output_text", "text": "{\"spokenText\":\"Ease the car toward the apex, then let it run out on exit.\"}" }] }]
+            }
+            """);
+        using var nestedClient = new HttpClient(nestedHandler);
+        var nestedNarrator = new OpenAiCoachingNarrator(
+            new OpenAiNarratorOptions("test-key", Timeout: TimeSpan.FromSeconds(1)),
+            nestedClient);
+        var nested = await nestedNarrator.NarrateAnswerAsync(answer, "How was my line?");
+        Assert(nested.SpokenText.StartsWith("Ease the car", StringComparison.Ordinal), "Expected nested Responses API output to be parsed.");
         Console.WriteLine("OpenAI narrator checks passed: structured evidence preserved and spoken wording replaced.");
     }
 

@@ -7,12 +7,23 @@ using SimCoach.Voice;
 
 internal static class VoiceDriveChecks
 {
-    public static async Task<int> RunAsync(string ibt, string report, string[] recordedClips)
+    public static async Task<int> RunAsync(string ibt, string report, string[] recordedClips, string? referencePath = null)
     {
         var samples = IbtTelemetrySource.Load(ibt);
         var laps = IbtLap.Summarize(samples).Where(lap => lap.Duration.HasValue).ToArray();
-        var fastest = IbtLap.Fastest(laps) ?? throw new InvalidOperationException("No complete reference lap.");
-        var reference = samples.Where(sample => sample.LapNumber == fastest.Number).ToArray();
+        IbtLap? fastest = null;
+        TelemetrySample[] reference;
+        if (referencePath is not null)
+        {
+            reference = Path.GetExtension(referencePath).Equals(".csv", StringComparison.OrdinalIgnoreCase)
+                ? CsvTelemetrySource.Load(referencePath).ToArray()
+                : IbtTelemetrySource.Load(referencePath).ToArray();
+        }
+        else
+        {
+            fastest = IbtLap.Fastest(laps) ?? throw new InvalidOperationException("No complete reference lap.");
+            reference = samples.Where(sample => sample.LapNumber == fastest.Number).ToArray();
+        }
         var corners = CornerAnalyzer.Analyze(reference, reference);
         if (corners.Count == 0 || laps.Length < 2)
             throw new InvalidOperationException("Need detected corners and at least two complete laps.");
@@ -30,9 +41,9 @@ internal static class VoiceDriveChecks
         var detailQuestions = new Dictionary<string, string>
         {
             ["Where am I losing the most time in that corner?"] = "loss|phase",
-            ["How is my line in that corner?"] = "line offset|position data",
-            ["How was my turning on that corner?"] = "Peak steering",
-            ["How well am I getting on throttle on exit?"] = "90 percent throttle"
+            ["How is my line in that corner?"] = "Symptom:|position data|racing line",
+            ["How was my turning on that corner?"] = "Symptom:|steering|turning",
+            ["How well am I getting on throttle on exit?"] = "full throttle|throttle"
         };
         var transcripts = new Dictionary<string, string>();
         foreach (var prompt in prompts.Concat(detailQuestions.Keys))
@@ -51,9 +62,11 @@ internal static class VoiceDriveChecks
 
         var outcomes = new List<object>();
         var failures = 0;
-        foreach (var lap in laps.Where(lap => lap.Number != fastest.Number))
+        foreach (var lap in laps.Where(lap => fastest is null || lap.Number != fastest.Number))
         {
             var drive = samples.Where(sample => sample.LapNumber == lap.Number).ToArray();
+            if (drive.Length == 0 || drive[0].LapProgress is null || drive[^1].LapProgress is null)
+                continue;
             var coach = new LiveCoach(reference);
             var pending = new Queue<CornerFinding>(corners.Where(corner =>
                 drive[0].LapProgress < corner.StartProgress && drive[^1].LapProgress >= corner.EndProgress));
@@ -110,10 +123,11 @@ internal static class VoiceDriveChecks
         }
         File.WriteAllText(report, JsonSerializer.Serialize(new
         {
-            recording = Path.GetFileName(ibt), referenceLap = fastest.Number,
-            testedLaps = laps.Length - 1, checks = outcomes.Count - extra.Count * (laps.Length - 1), failures, outcomes
+            recording = Path.GetFileName(ibt), reference = referencePath is null ? $"IBT lap {fastest!.Number}" : Path.GetFileName(referencePath),
+            testedLaps = laps.Count(lap => fastest is null || lap.Number != fastest.Number), checks = outcomes.Count - extra.Count * laps.Length, failures, outcomes
         }, new JsonSerializerOptions { WriteIndented = true }));
-        Console.WriteLine($"Reference lap {fastest.Number}. Tested {laps.Length - 1} laps and logged {outcomes.Count} answers. {failures} failed checks.");
+        var referenceLabel = referencePath is null ? $"IBT lap {fastest!.Number}" : Path.GetFileName(referencePath);
+        Console.WriteLine($"Reference {referenceLabel}. Tested {laps.Count(lap => fastest is null || lap.Number != fastest.Number)} laps and logged {outcomes.Count} answers. {failures} failed checks.");
         return failures == 0 ? 0 : 1;
     }
 

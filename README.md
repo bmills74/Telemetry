@@ -37,6 +37,14 @@ To test live coaching with recorded telemetry, run the voice harness with a mult
 
 The harness uses the fastest complete lap as a reference, streams the other complete laps into the live coach, and compares answers at corner exits against recorded crossing times. It sends typed prompts and Kokoro clips transcribed by Whisper. Add WAV paths after the report path to include your own recordings for review. The JSON report contains the question, transcript, answer and expected timing. Prepare the Kokoro bundle before running it.
 
+For a repeatable conversational matrix against a multi-lap session, use:
+
+```powershell
+.\.dotnet\dotnet.exe run --project SimCoach.Tests -c Release -- --coach-matrix "C:\path\session.ibt" "coach-matrix-report.json" "C:\path\reference.csv"
+```
+
+The matrix exercises persistent topic changes, braking, line, turn-in, throttle, verbosity controls, and repeated laps. It writes every prompt and answer to the JSON report and checks that the live coach understood each scenario.
+
 ```powershell
 .\.dotnet\dotnet.exe run --project .\SimCoach.Tests
 ```
@@ -53,9 +61,11 @@ The Line channel is derived from GPS position and shows replay lateral offset fr
 
 Corner analysis detects braking zones in the reference lap and reports corners in track order. Each corner's time delta starts at the earlier braking point and ends halfway to the next corner, incorporating exit speed and the following straight. The two largest absolute segment opportunities are marked as focus corners.
 
-The Coach panel currently provides a deterministic text command harness. It understands focus, corner-specific, braking, line, time, repeat, quiet, and help questions, using only the measured comparison findings.
+The Coach panel keeps telemetry analysis deterministic, but live natural-language requests are routed through a validated intent layer first. Compound requests such as “Tell me about corners 1 and 3, only braking, and don’t mention time” become supported corner, topic, and output settings before the measured comparison runs. The LLM can resolve conversational follow-ups using the current session state; deterministic parsing remains the fast fallback, and ambiguous or unsupported requests ask for clarification. Response wording remains a separate step, so the narrator cannot invent telemetry operations.
 
 The Coach panel uses a hold-to-talk local Whisper transcription flow. The first recording downloads the `ggml-base.bin` model into `%LocalAppData%\SimCoach\Models`; later recordings are processed locally. The transcript is placed in the command box and passed through the same deterministic parser. Use `Speak` to replay the latest response.
+
+Every non-blank typed or spoken coach interaction is recorded in `%LocalAppData%\SimCoach\coach-interactions.jsonl`, including the question, response, route, parser result, and whether OpenAI narration was used. Blank audio is ignored. Unknown voice commands remain in `voice-command-review.jsonl` for later review.
 
 Speech defaults to bundled Kokoro, with selectable US/British voices and an adjustable speech rate. Windows voices are used only when explicitly selected. Kokoro errors are shown in the status bar instead of silently switching voices. `Stop speaking` interrupts playback and discards queued speech.
 

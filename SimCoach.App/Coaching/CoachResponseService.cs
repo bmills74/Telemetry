@@ -11,6 +11,7 @@ public enum CoachCommandType
     Braking,
     Line,
     Steering,
+    Throttle,
     Time,
     Repeat,
     Quiet,
@@ -72,6 +73,16 @@ public sealed class CoachResponseService
             return new CoachCommand(CoachCommandType.Steering, cornerNumber);
         }
 
+        if (text.Contains("turning") || text.Contains("turn-in") || text.Contains("turn in"))
+        {
+            return new CoachCommand(CoachCommandType.Steering, cornerNumber);
+        }
+
+        if (text.Contains("throttle") || text.Contains("on power") || text.Contains("getting on power") || text.Contains("getting back on"))
+        {
+            return new CoachCommand(CoachCommandType.Throttle, cornerNumber);
+        }
+
         if (text.Contains("line") || text.Contains("racing line") || text.Contains("wide") || text.Contains("tight") || text.Contains("apex") || text.Contains("deviation") || text.Contains("how far") || text.Contains("maximum"))
         {
             return new CoachCommand(CoachCommandType.Line, cornerNumber);
@@ -80,6 +91,12 @@ public sealed class CoachResponseService
         if (cornerNumber.HasValue)
         {
             return new CoachCommand(CoachCommandType.Corner, cornerNumber);
+        }
+
+        if (text.Contains("how was that corner") || text.Contains("how was this corner") ||
+            text.Contains("tell me about") || text.Contains("how do i do"))
+        {
+            return new CoachCommand(CoachCommandType.Corner);
         }
 
         if (text.Contains("time") || text.Contains("delta") || text.Contains("lost"))
@@ -99,11 +116,12 @@ public sealed class CoachResponseService
             CoachCommandType.Braking => BrakingResponse(command.CornerNumber, context),
             CoachCommandType.Line => LineResponse(command.CornerNumber, context),
             CoachCommandType.Steering => SteeringResponse(command.CornerNumber, context),
+            CoachCommandType.Throttle => ThrottleResponse(command.CornerNumber, context),
             CoachCommandType.Time => TimeResponse(context),
             CoachCommandType.Repeat => previousResponse ?? "I don’t have a previous coaching message yet.",
             CoachCommandType.Quiet => "Coach muted. Ask me when you want another response.",
             CoachCommandType.Help => "Try asking which corner to focus on, or ask about braking, line, or time.",
-            _ => "I can answer questions about focus corners, braking, line, and time difference."
+            _ => "Sorry, I don’t understand that."
         };
     }
 
@@ -181,6 +199,22 @@ public sealed class CoachResponseService
 
         var diagnosis = new CoachingDiagnosisService().Diagnose(finding);
         return $"Corner {finding.Number}: {diagnosis.Instruction} Turn-in speed was {steering.ReplayTurnInSpeedKph:0} km/h versus {steering.ReferenceTurnInSpeedKph:0} in the reference. At the reference turn-in speed, steering input was {steering.ReplaySteeringAtReferenceSpeed:0.00} versus {steering.ReferenceSteeringAtReferenceSpeed:0.00}; steering build rate was {steering.ReplaySteeringRate:0.00} versus {steering.ReferenceSteeringRate:0.00} per second.";
+    }
+
+    private static string ThrottleResponse(int? cornerNumber, CoachContext context)
+    {
+        var finding = FindRequestedFinding(cornerNumber, context);
+        var events = finding?.Events;
+        if (finding is null || events is null)
+            return "I don’t have an exit-throttle comparison for that corner yet.";
+
+        var difference = events.ReplayThrottleProgress - events.ReferenceThrottleProgress;
+        if (Math.Abs(difference) < 0.005)
+            return $"Corner {finding.Number}: Your move back to full throttle was close to the reference.";
+
+        return difference > 0
+            ? $"Corner {finding.Number}: You got back to full throttle later than the reference. Prioritise rotating the car, then unwind the steering and commit to power earlier on exit."
+            : $"Corner {finding.Number}: You got back to full throttle earlier than the reference. Keep the car settled and make sure the extra throttle is not pushing you wide on exit.";
     }
 
     private static string BuildLineAdvice(CornerFinding finding)
@@ -272,9 +306,14 @@ public sealed class CoachResponseService
 
     private static int? TryReadCornerNumber(string text)
     {
-        var match = Regex.Match(text, @"(?:corner|turn)\s*([0-9]+)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
-        return match.Success && int.TryParse(match.Groups[1].Value, out var number)
-            ? number
-            : null;
+        var match = Regex.Match(text, @"(?:corner|turn)\s*([0-9]+|one|two|three|four|five|six|seven|eight|nine|ten)\b", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
+        if (!match.Success) return null;
+        if (int.TryParse(match.Groups[1].Value, out var number)) return number;
+        return match.Groups[1].Value.ToLowerInvariant() switch
+        {
+            "one" => 1, "two" => 2, "three" => 3, "four" => 4, "five" => 5,
+            "six" => 6, "seven" => 7, "eight" => 8, "nine" => 9, "ten" => 10,
+            _ => null
+        };
     }
 }

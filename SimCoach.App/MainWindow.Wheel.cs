@@ -74,6 +74,7 @@ public partial class MainWindow
 
         if (held == _wheelHeld) return;
         _wheelHeld = held;
+        _voiceCoachService.LogDiagnostic($"Wheel PTT edge received: {(held ? "pressed" : "released")}.");
         if (!held)
         {
             if (_wheelRecording && !_startingVoice)
@@ -88,6 +89,8 @@ public partial class MainWindow
             return;
 
         _wheelRecording = true;
+        // Interrupt current coaching immediately; do not wait for Whisper setup.
+        _voiceCoachService.StopSpeaking();
         await StartVoiceRecordingAsync(fromWheel: true);
         if (!_voiceCoachService.IsRecording) _wheelRecording = false;
         else if (!_wheelHeld && _wheelRecording)

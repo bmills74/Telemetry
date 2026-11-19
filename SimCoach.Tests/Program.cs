@@ -2,7 +2,12 @@ using SimCoach.Telemetry;
 using SimCoach.Coaching;
 
 if (args.Length >= 3 && args[0] == "--voice-drive")
-    return await VoiceDriveChecks.RunAsync(args[1], args[2], args.Skip(3).ToArray());
+{
+    var extra = args.Skip(3).ToArray();
+    var reference = extra.Length >= 2 && extra[0] == "--reference" ? extra[1] : null;
+    var clips = reference is null ? extra : extra.Skip(2).ToArray();
+    return await VoiceDriveChecks.RunAsync(args[1], args[2], clips, reference);
+}
 if (args.Length >= 3 && args[0] == "--coach-review")
     return CoachReviewChecks.Run(args[1], args[2]);
 if (args.Length >= 4 && args[0] == "--csv-coach-review")
@@ -10,11 +15,17 @@ if (args.Length >= 4 && args[0] == "--csv-coach-review")
     var loops = args.Length >= 5 && int.TryParse(args[4], out var requestedLoops) ? requestedLoops : 3;
     return CsvCoachReviewChecks.Run(args[1], args[2], args[3], loops);
 }
+if (args.Length >= 3 && args[0] == "--coach-matrix")
+{
+    var reference = args.Length >= 4 ? args[3] : null;
+    return CoachMatrixChecks.Run(args[1], args[2], reference);
+}
 
 IbtLapChecks.Run();
 LiveCoachChecks.Run();
 await CoachingMemoryChecks.RunAsync();
 await OpenAiNarratorChecks.RunAsync();
+await IntentRouterChecks.RunAsync();
 await LiveTelemetryChecks.RunAsync();
 if (args.Length == 0) return 0;
 if (args[0] == "--kokoro-smoke")

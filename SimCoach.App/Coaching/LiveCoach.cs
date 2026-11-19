@@ -45,6 +45,11 @@ internal sealed class LiveCoach
 
     private bool _muted;
     private int? _lastCompletedCorner;
+    private string _topic = "all";
+    private HashSet<string> _topics = [];
+    private bool _includeTime = true;
+    private bool _includeLapTrend = true;
+    private bool _includeCornerName = true;
 
     public LiveCoach(IReadOnlyList<TelemetrySample> reference)
     {
@@ -53,6 +58,8 @@ internal sealed class LiveCoach
         _reference = new(reference);
         _corners = CornerAnalyzer.Analyze(reference, reference);
     }
+
+    public IReadOnlyList<int> AvailableCorners => _corners.Select(corner => corner.Number).ToArray();
 
     public void Reset()
     {
@@ -64,6 +71,39 @@ internal sealed class LiveCoach
         _lossHistory.Clear();
         _details.Clear();
         _lastCompletedCorner = null;
+    }
+
+    public string ApplyIntentPlan(CoachingIntentPlan plan)
+    {
+        foreach (var action in plan.Actions)
+        {
+            switch (action.Type)
+            {
+                case CoachingIntentActionType.SetCornerScope:
+                    _only = action.Corners.Count == 0 ? null : action.Corners.ToHashSet();
+                    _ignored.Clear();
+                    break;
+                case CoachingIntentActionType.SetTopics:
+                    _topics = action.Topics.Select(TopicName).Where(topic => topic != "all").ToHashSet();
+                    _topic = _topics.Count == 0 ? "all" : _topics.First();
+                    break;
+                case CoachingIntentActionType.SetOutput:
+                    if (action.IncludeTimeDifference is bool includeTime) _includeTime = includeTime;
+                    if (action.IncludeCornerNames is bool includeNames) _includeCornerName = includeNames;
+                    if (action.IncludeLapTrend is bool includeTrend) _includeLapTrend = includeTrend;
+                    break;
+                case CoachingIntentActionType.Mute:
+                    _muted = true;
+                    break;
+                case CoachingIntentActionType.Resume:
+                    _muted = false;
+                    break;
+            }
+        }
+
+        return plan.Actions.Count == 0
+            ? "I did not change the coaching settings."
+            : "Coaching settings updated.";
     }
 
     public string? Observe(TelemetrySample sample)
@@ -265,13 +305,21 @@ internal sealed class LiveCoach
 
     private string StoreReport(CornerFinding corner, double loss, double speed)
     {
+        var previousLoss = _lossHistory.TryGetValue(corner.Number, out var previousHistory) && previousHistory.Count > 0
+            ? previousHistory[^1]
+            : (double?)null;
         var advice = speed < -4
             ? $"Your minimum speed was {-speed:0} kilometres per hour lower."
             : $"Your minimum speed was within {Math.Abs(speed):0} kilometres per hour of the reference.";
         if (speed > 4) advice = $"You carried {speed:0} kilometres per hour more minimum speed.";
         var timing = Math.Abs(loss) < 0.1 ? "You matched the reference time." :
             $"You {(loss > 0 ? "lost" : "gained")} {Math.Abs(loss):0.0} seconds.";
-        var report = $"Corner {corner.Number}. {timing} {advice}";
+        var trend = previousLoss is null || Math.Abs(loss - previousLoss.Value) < 0.03
+            ? string.Empty
+            : loss < previousLoss.Value
+                ? $" Improving: you reduced the loss from {Math.Abs(previousLoss.Value):0.0} to {Math.Abs(loss):0.0} seconds."
+                : $" Getting worse: the loss increased from {Math.Abs(previousLoss.Value):0.0} to {Math.Abs(loss):0.0} seconds.";
+        var report = BuildTopicReport(corner, loss, speed, timing, advice, trend);
         _reports[corner.Number] = report;
         _losses[corner.Number] = loss;
         _speedDifferences[corner.Number] = speed;
@@ -283,6 +331,53 @@ internal sealed class LiveCoach
         history.Add(loss);
         _lastCompletedCorner = corner.Number;
         return report;
+    }
+
+    private string BuildTopicReport(CornerFinding corner, double loss, double speed, string timing, string advice, string trend)
+    {
+        if (_topics.Count <= 1)
+            return BuildSingleTopicReport(corner, loss, speed, timing, advice, trend);
+
+        var saved = _topic;
+        try
+        {
+            return string.Join(" ", _topics.Select(topic =>
+            {
+                _topic = topic;
+                return BuildSingleTopicReport(corner, loss, speed, timing, string.Empty, string.Empty);
+            }));
+        }
+        finally { _topic = saved; }
+    }
+
+    private string BuildSingleTopicReport(CornerFinding corner, double loss, double speed, string timing, string advice, string trend)
+    {
+        var prefix = _includeCornerName ? $"Corner {corner.Number}. " : string.Empty;
+        var timeTrend = _includeTime && _includeLapTrend ? trend : string.Empty;
+        if (_topic == "braking" && _details.TryGetValue(corner.Number, out var braking))
+        {
+            var brake = !double.IsFinite(braking.BrakeDeltaMeters)
+                ? "I could not identify a comparable brake application."
+                : Math.Abs(braking.BrakeDeltaMeters) <= 2
+                    ? "Your braking point was close to the reference."
+                    : braking.BrakeDeltaMeters > 0
+                        ? $"You braked about {braking.BrakeDeltaMeters:0} metres later than the reference."
+                        : $"You braked about {Math.Abs(braking.BrakeDeltaMeters):0} metres earlier than the reference.";
+            return $"{prefix}{brake}{timeTrend}";
+        }
+
+        if (_topic == "line" && _details.TryGetValue(corner.Number, out var line) && line.LineOffset is not null)
+            return $"{prefix}Your line was {Math.Abs(line.LineOffset.Value):0.0} metres from the reference at its widest point.{timeTrend}";
+
+        if (_topic == "throttle" && _details.TryGetValue(corner.Number, out var throttle))
+        {
+            if (throttle.Throttle is not double driver || throttle.ReferenceThrottle is not double reference)
+                return $"{prefix}I could not compare your exit throttle yet.{timeTrend}";
+            var difference = (driver - reference) * _referenceDistanceKm * 1000;
+            return $"{prefix}You reached full throttle {Math.Abs(difference):0.0} metres {(difference > 0 ? "later" : "earlier")} than the reference.{timeTrend}";
+        }
+
+        return $"{prefix}{(_includeTime ? timing + " " : string.Empty)}{advice}{timeTrend}";
     }
 
     private bool Allowed(int number) => (_only is null || _only.Contains(number)) && !_ignored.Contains(number);
@@ -334,7 +429,7 @@ internal sealed class LiveCoach
             _only = null;
             _ignored.Clear();
         }
-        else if (command.Contains("only") || command.Contains("ignore"))
+        else if ((command.Contains("only") && numbers.Count > 0) || command.Contains("ignore"))
         {
             if (numbers.Count == 0 || numbers.Any(number => !_corners.Any(corner => corner.Number == number)))
                 return $"Choose from the {_corners.Count} corners detected in the reference lap.";
@@ -344,6 +439,7 @@ internal sealed class LiveCoach
                 _only = numbers;
                 _ignored.Clear();
             }
+            SetTopicFromCommand(command);
         }
         else if (command.Contains("quiet") || command.Contains("mute") || command.Contains("stop talking"))
         {
@@ -356,7 +452,32 @@ internal sealed class LiveCoach
             return "Automatic coaching resumed. Turn on Auto coach to hear it.";
         }
         else if (command.Contains("help") || command.Contains("what can"))
-            return "Try: Only talk about corners 1, 3 and 5. Ignore the last corner. Only talk about the last corner. All corners. Which corners are enabled? How was corner 3? Where am I losing time in that corner? How is my line, steering or throttle on exit? Where did I lose the most time? Repeat. Quiet. Resume coaching.";
+            return "Try: Only discuss braking. Stop talking about time. Stop saying corner names. Discuss time again. Say corner names again. Discuss everything. Quiet. Resume coaching.";
+        else if (command.Contains("stop talking about time") || command.Contains("don't talk about time") || command.Contains("do not talk about time") || command.Contains("no time commentary"))
+        {
+            _includeTime = false;
+            return "I’ll stop mentioning time and lap-to-lap changes.";
+        }
+        else if (command.Contains("talk about time") || command.Contains("include time") || command.Contains("time commentary"))
+        {
+            _includeTime = true;
+            return "I’ll include time and lap-to-lap changes again.";
+        }
+        else if (command.Contains("stop saying corner") || command.Contains("don't say corner") || command.Contains("do not say corner") || command.Contains("omit corner names"))
+        {
+            _includeCornerName = false;
+            return "I’ll stop repeating corner names.";
+        }
+        else if (command.Contains("say corner") || command.Contains("include corner names"))
+        {
+            _includeCornerName = true;
+            return "I’ll include corner names again.";
+        }
+        else if (command.Contains("only discuss") || command.Contains("only talk about") || command.Contains("focus on") || command.Contains("move on to") || command.Contains("discuss everything"))
+        {
+            SetTopicFromCommand(command);
+            return $"I’ll focus on {_topic}.";
+        }
         else if ((command.Contains("most time") || command.Contains("most of the time")) &&
             (command.Contains("that corner") || command.Contains("this corner") || numbers.Count == 1))
             return DetailResponse(numbers.Count == 1 ? numbers.Single() : _lastCompletedCorner, "phase");
@@ -412,12 +533,40 @@ internal sealed class LiveCoach
         else if (!command.Contains("enabled") && !command.Contains("which corners"))
         {
             understood = false;
-            return "Say help for live coaching commands.";
+            return "Sorry, I don’t understand that.";
         }
 
         var enabled = _corners.Select(corner => corner.Number).Where(Allowed).ToArray();
         return enabled.Length > 0 ? $"Coaching corners {string.Join(", ", enabled)}." : "No corners enabled.";
     }
+
+    private void SetTopicFromCommand(string command)
+    {
+        if (command.Contains("discuss everything") || command.Contains("all topics") || command.Contains("everything"))
+        {
+            _topics.Clear();
+            _topic = "all";
+            return;
+        }
+
+        _topics = [];
+        if (command.Contains("brak") || command.Contains("breakpoint")) _topics.Add("braking");
+        if (command.Contains("line") || command.Contains("apex")) _topics.Add("line");
+        if (command.Contains("throttle") || command.Contains("on power")) _topics.Add("throttle");
+        if (command.Contains("turn-in") || command.Contains("turn in")) _topics.Add("turnin");
+        if (command.Contains("steer") || command.Contains("steering") || command.Contains("turning")) _topics.Add("steering");
+        _topic = _topics.Count == 0 ? "all" : _topics.First();
+    }
+
+    private static string TopicName(CoachingTopic topic) => topic switch
+    {
+        CoachingTopic.Braking => "braking",
+        CoachingTopic.Line => "line",
+        CoachingTopic.TurnIn => "turnin",
+        CoachingTopic.Steering => "steering",
+        CoachingTopic.Throttle => "throttle",
+        _ => "all"
+    };
 
     private string ActionResponse(int? number)
     {

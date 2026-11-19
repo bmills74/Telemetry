@@ -9,6 +9,7 @@
     <RootNamespace>SimCoach</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Assets\beep-08b.mp3" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <Content Include="..\Tools\KokoroTts\runtime\KokoroWorker\**\*" Link="Kokoro\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <InternalsVisibleTo Include="SimCoach.Tests" />
     <PackageReference Include="NAudio" Version="2.3.0" />

@@ -39,8 +39,11 @@ public partial class MainWindow : System.Windows.Window
     private readonly CoachResponseService _coachResponseService = new();
     private readonly CoachingSynthesisService _coachingSynthesisService = new();
     private readonly CoachingSessionMemory _coachingSessionMemory = new();
-    private readonly ICoachingNarrator _coachingNarrator = new DeterministicCoachingNarrator();
+    private readonly DeterministicCoachingNarrator _deterministicNarrator = new();
+    private ICoachingNarrator _coachingNarrator;
     private OpenAiCoachingNarrator? _openAiNarrator;
+    private CoachingIntentRouter _intentRouter = new();
+    private CoachingSessionState _intentState = new();
     private readonly VoiceCoachService _voiceCoachService = new();
     private string? _lastCoachResponse;
     private TelemetryComparison? _currentComparison;
@@ -58,9 +61,22 @@ public partial class MainWindow : System.Windows.Window
     {
         InitializeComponent();
         _settings = _settingsStore.Load();
+        // Older settings files used a 2.5 second timeout, which is too short for
+        // a normal API round trip. Keep existing installs usable after upgrading.
+        if (_settings.NaturalCoachingTimeoutMs < 5000)
+        {
+            _settings.NaturalCoachingTimeoutMs = 7000;
+            _settingsStore.Save(_settings);
+        }
         _openAiNarrator = OpenAiCoachingNarrator.TryCreateFromEnvironment(
             _settings.NaturalCoachingModel,
             _settings.NaturalCoachingTimeoutMs);
+        _intentRouter = new(OpenAiCoachingIntentInterpreter.TryCreateFromEnvironment(
+            _settings.NaturalCoachingModel,
+            Math.Min(_settings.NaturalCoachingTimeoutMs, 4000)));
+        _coachingNarrator = _settings.NaturalCoachingEnabled && _openAiNarrator is not null
+            ? _openAiNarrator
+            : _deterministicNarrator;
         NaturalCoachingCheckBox.IsChecked = _settings.NaturalCoachingEnabled && _openAiNarrator is not null;
         InitializeWheelBinding();
         _voiceCoachService.SpeechFailed += (_, message) => Dispatcher.BeginInvoke(new Action(() =>
@@ -981,6 +997,7 @@ public partial class MainWindow : System.Windows.Window
 
     private void UpdateComparisonTrack()
     {
+        _intentState = new();
         _liveCoach = _liveMode && _referenceSamples is { Count: >= 10 } reference
             ? new LiveCoach(reference)
             : null;
@@ -1155,16 +1172,30 @@ public partial class MainWindow : System.Windows.Window
             var diagnosis = _coachingSynthesisService.Diagnose(_previousAutomaticCorner);
             var coachingEvent = CoachingEventFactory.FromFinding(_previousAutomaticCorner, diagnosis, sample.LapNumber);
             var memory = _coachingSessionMemory.Record(coachingEvent);
-            var narration = _coachingNarrator
-                .NarrateAsync(new CoachingNarrationRequest(coachingEvent, memory))
-                .GetAwaiter()
-                .GetResult();
+            CoachingNarrationResult narration;
+            try
+            {
+                narration = _coachingNarrator
+                    .NarrateAsync(new CoachingNarrationRequest(coachingEvent, memory))
+                    .GetAwaiter()
+                    .GetResult();
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Trace.TraceWarning("Natural automatic coaching fell back to measured wording: {0}", exception.Message);
+                narration = _deterministicNarrator
+                    .NarrateAsync(new CoachingNarrationRequest(coachingEvent, memory))
+                    .GetAwaiter()
+                    .GetResult();
+            }
             _coachingSessionMemory.RecordNarration(coachingEvent.CornerNumber, narration);
             var advice = narration.Message;
             CoachResponseTextBlock.Text = $"Corner {_previousAutomaticCorner.Number}: {advice}";
             _lastCoachResponse = advice;
             _voiceCoachService.Speak(advice);
-            StatusTextBlock.Text = $"Auto coach: Corner {_previousAutomaticCorner.Number}";
+            StatusTextBlock.Text = narration.UsedFallback
+                ? $"Auto coach: Corner {_previousAutomaticCorner.Number} (measured)"
+                : $"Auto coach: Corner {_previousAutomaticCorner.Number} (AI)";
         }
 
         _previousAutomaticCorner = activeCorner;
@@ -1183,6 +1214,9 @@ public partial class MainWindow : System.Windows.Window
     {
         _settings.NaturalCoachingEnabled = NaturalCoachingCheckBox.IsChecked == true;
         _settingsStore.Save(_settings);
+        _coachingNarrator = _settings.NaturalCoachingEnabled && _openAiNarrator is not null
+            ? _openAiNarrator
+            : _deterministicNarrator;
         if (_settings.NaturalCoachingEnabled && _openAiNarrator is null)
         {
             StatusTextBlock.Text = "Natural coaching needs OPENAI_API_KEY; using measured coaching for now.";
@@ -1211,6 +1245,10 @@ public partial class MainWindow : System.Windows.Window
 
     private async void ListenButtonClick(object sender, System.Windows.RoutedEventArgs e)
     {
+        _voiceCoachService.LogDiagnostic("UI listen button click received.");
+        // A press is also an immediate speech-interrupt gesture. Do this before
+        // any microphone/model work so it is responsive even during startup.
+        _voiceCoachService.StopSpeaking();
         if (_startingVoice || _wheelRecording || _voiceStopTask is { IsCompleted: false }) return;
         if (_voiceCoachService.IsRecording) await StopVoiceRecordingAsync();
         else await StartVoiceRecordingAsync(fromWheel: false);
@@ -1222,10 +1260,11 @@ public partial class MainWindow : System.Windows.Window
         try
         {
             _voiceCoachService.StopSpeaking();
-            ListenButton.Content = "Preparing microphone...";
-            StatusTextBlock.Text = "Preparing local speech model...";
-            await _voiceCoachService.StartRecordingAsync();
+            _voiceCoachService.PlayPttTick();
             ListenButton.Content = fromWheel ? "Recording… release wheel button" : "Recording… click to stop";
+            StatusTextBlock.Text = "Preparing local speech model...";
+            await Dispatcher.InvokeAsync(() => { }, System.Windows.Threading.DispatcherPriority.Render);
+            await _voiceCoachService.StartRecordingAsync();
             StatusTextBlock.Text = "Recording voice command...";
         }
         catch (Exception exception)
@@ -1348,19 +1387,83 @@ public partial class MainWindow : System.Windows.Window
         }
     }
 
+    private void LogCoachInteraction(string question, string response, CoachCommandType commandType, bool understood, bool usedAi, bool spoken)
+    {
+        if (string.IsNullOrWhiteSpace(question)) return;
+        var directory = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SimCoach");
+        try
+        {
+            Directory.CreateDirectory(directory);
+            var entry = System.Text.Json.JsonSerializer.Serialize(new
+            {
+                timestamp = DateTimeOffset.Now,
+                mode = _liveMode ? "live" : "replay",
+                route = spoken ? "voice" : "typed",
+                command = commandType.ToString(),
+                understood,
+                usedAi,
+                question = question.Trim(),
+                response
+            });
+            File.AppendAllText(System.IO.Path.Combine(directory, "coach-interactions.jsonl"), entry + Environment.NewLine);
+        }
+        catch (IOException exception)
+        {
+            System.Diagnostics.Trace.TraceWarning("Could not write coach interaction log: {0}", exception.Message);
+        }
+        catch (UnauthorizedAccessException exception)
+        {
+            System.Diagnostics.Trace.TraceWarning("Could not write coach interaction log: {0}", exception.Message);
+        }
+    }
+
     private async Task AskCoachAsync(bool speak)
     {
         var command = _coachResponseService.Parse(CoachInputTextBox.Text);
         if (_liveMode)
         {
             var understood = true;
-            var structuredResponse = command.Type == CoachCommandType.Repeat
-                ? null
-                : _liveCoach?.RespondStructured(CoachInputTextBox.Text, out understood);
+            var usedAi = false;
+            var intentConfigurationOnly = false;
+            CoachingAnswer? structuredResponse = null;
+            if (_liveCoach is not null && command.Type is not CoachCommandType.Repeat and not CoachCommandType.Quiet &&
+                (_intentRouter.HasInterpreter || ShouldInterpretIntent(CoachInputTextBox.Text, command)))
+            {
+                var route = await _intentRouter.RouteAsync(
+                    CoachInputTextBox.Text,
+                    _liveCoach.AvailableCorners,
+                    _intentState);
+                usedAi = route.UsedLlm;
+                if (route.Plan.NeedsClarification)
+                {
+                    understood = false;
+                    structuredResponse = new CoachingAnswer(
+                        route.Plan.Clarification ?? "Could you clarify which topic or corner you want?",
+                        null, null, null, null, CoachingConfidence.Low);
+                }
+                else
+                {
+                    _intentState = ApplyIntentState(_intentState, route.Plan);
+                    var acknowledgement = _liveCoach.ApplyIntentPlan(route.Plan);
+                    var query = route.Plan.QueryText;
+                    if (!string.IsNullOrWhiteSpace(query))
+                        structuredResponse = _liveCoach.RespondStructured(query, out understood);
+                    else
+                    {
+                        intentConfigurationOnly = true;
+                        structuredResponse = new CoachingAnswer(acknowledgement, null, null, null, null, CoachingConfidence.High);
+                    }
+                }
+            }
+            else if (command.Type != CoachCommandType.Repeat)
+            {
+                structuredResponse = _liveCoach?.RespondStructured(CoachInputTextBox.Text, out understood);
+            }
             if (structuredResponse is not null &&
                 _settings.NaturalCoachingEnabled &&
                 _openAiNarrator is not null &&
-                command.Type != CoachCommandType.Quiet)
+                command.Type != CoachCommandType.Quiet &&
+                !intentConfigurationOnly)
             {
                 try
                 {
@@ -1368,6 +1471,7 @@ public partial class MainWindow : System.Windows.Window
                     structuredResponse = await _openAiNarrator.NarrateAnswerAsync(
                         structuredResponse,
                         CoachInputTextBox.Text);
+                    usedAi = true;
                 }
                 catch (Exception exception)
                 {
@@ -1383,6 +1487,9 @@ public partial class MainWindow : System.Windows.Window
             else if (speak) _voiceCoachService.Speak(liveResponse);
             _lastCoachResponse = liveResponse;
             CoachResponseTextBlock.Text = liveResponse;
+            if (command.Type != CoachCommandType.Quiet)
+                StatusTextBlock.Text = usedAi ? "AI coaching response" : "Measured coaching response";
+            LogCoachInteraction(CoachInputTextBox.Text, liveResponse, command.Type, understood, usedAi, speak);
             CoachInputTextBox.SelectAll();
             return;
         }
@@ -1399,9 +1506,10 @@ public partial class MainWindow : System.Windows.Window
 
         var context = new CoachContext(_cornerFindings, _currentCorner, _currentComparison, _conversationCornerNumber);
         var response = _coachResponseService.Respond(command, context, _lastCoachResponse);
+        var replayUsedAi = false;
         if (_settings.NaturalCoachingEnabled &&
             _openAiNarrator is not null &&
-            command.Type is CoachCommandType.Focus or CoachCommandType.Corner or CoachCommandType.Braking or CoachCommandType.Line or CoachCommandType.Steering)
+            command.Type is CoachCommandType.Focus or CoachCommandType.Corner or CoachCommandType.Braking or CoachCommandType.Line or CoachCommandType.Steering or CoachCommandType.Throttle)
         {
             try
             {
@@ -1414,6 +1522,7 @@ public partial class MainWindow : System.Windows.Window
                     null,
                     CoachingConfidence.Medium);
                 response = (await _openAiNarrator.NarrateAnswerAsync(replayAnswer, CoachInputTextBox.Text)).SpokenText;
+                replayUsedAi = true;
             }
             catch (Exception exception)
             {
@@ -1423,11 +1532,46 @@ public partial class MainWindow : System.Windows.Window
         }
         _lastCoachResponse = response;
         CoachResponseTextBlock.Text = response;
+        if (command.Type != CoachCommandType.Quiet)
+            StatusTextBlock.Text = replayUsedAi ? "AI coaching response" : "Measured coaching response";
+        LogCoachInteraction(CoachInputTextBox.Text, response, command.Type, command.Type != CoachCommandType.Unknown, replayUsedAi, speak);
         if (speak && command.Type != CoachCommandType.Quiet)
         {
             _voiceCoachService.Speak(response);
         }
         CoachInputTextBox.SelectAll();
         CoachInputTextBox.Focus();
+    }
+
+    private static bool ShouldInterpretIntent(string transcript, CoachCommand command)
+    {
+        var text = transcript.ToLowerInvariant();
+        return command.Type == CoachCommandType.Unknown ||
+            text.Contains("only") || text.Contains("and") || text.Contains("don't") ||
+            text.Contains("do not") || text.Contains("stop") || text.Contains("then") ||
+            text.Contains("just") || text.Contains("versus") || text.Contains("compare");
+    }
+
+    private static CoachingSessionState ApplyIntentState(CoachingSessionState state, CoachingIntentPlan plan)
+    {
+        var cornerScope = state.CornerScope;
+        var topics = state.Topics;
+        var includeTime = state.IncludeTimeDifference;
+        var includeNames = state.IncludeCornerNames;
+        var includeTrend = state.IncludeLapTrend;
+        foreach (var action in plan.Actions)
+        {
+            if (action.Type == CoachingIntentActionType.SetCornerScope)
+                cornerScope = action.Corners.Count == 0 ? null : action.Corners.ToHashSet();
+            if (action.Type == CoachingIntentActionType.SetTopics)
+                topics = action.Topics.ToHashSet();
+            if (action.Type == CoachingIntentActionType.SetOutput)
+            {
+                if (action.IncludeTimeDifference is bool time) includeTime = time;
+                if (action.IncludeCornerNames is bool names) includeNames = names;
+                if (action.IncludeLapTrend is bool trend) includeTrend = trend;
+            }
+        }
+        return new(cornerScope, topics, includeTime, includeNames, includeTrend);
     }
 }

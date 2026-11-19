@@ -57,9 +57,31 @@ public sealed class VoiceCoachService : IDisposable
     private StreamReader? _kokoroOutput;
     private WaveOutEvent? _kokoroPlayback;
     private readonly SemaphoreSlim _speechLock = new(1, 1);
+    private WaveOutEvent? _pttTickPlayback;
+    private AudioFileReader? _pttTickReader;
     private int _speechVersion;
     private bool _disposed;
     public event EventHandler<string>? SpeechFailed;
+
+    public void LogDiagnostic(string message) => Log(message);
+
+    public void PlayPttTick()
+    {
+        try
+        {
+            _pttTickPlayback?.Stop();
+            _pttTickPlayback?.Dispose();
+            _pttTickReader?.Dispose();
+            _pttTickReader = new AudioFileReader(Path.Combine(AppContext.BaseDirectory, "Assets", "beep-08b.mp3"));
+            _pttTickPlayback = new WaveOutEvent();
+            _pttTickPlayback.Init(_pttTickReader);
+            _pttTickPlayback.Play();
+        }
+        catch (Exception exception)
+        {
+            Log($"PTT tick failed: {exception.Message}");
+        }
+    }
 
     public VoiceCoachService()
     {
@@ -102,12 +124,17 @@ public sealed class VoiceCoachService : IDisposable
 
     public async Task StartRecordingAsync(CancellationToken cancellationToken = default)
     {
+        var started = Stopwatch.StartNew();
+        Log("PTT start requested.");
         if (IsRecording)
         {
+            Log("PTT start ignored: already recording.");
             return;
         }
 
+        Log("Preparing Whisper microphone pipeline.");
         await EnsureWhisperReadyAsync(cancellationToken).ConfigureAwait(false);
+        Log($"Whisper pipeline ready after {started.ElapsedMilliseconds} ms.");
         if (WaveIn.DeviceCount == 0)
         {
             throw new InvalidOperationException("Windows reports no microphone input device.");
@@ -124,10 +151,13 @@ public sealed class VoiceCoachService : IDisposable
         _waveIn.DataAvailable += WaveInDataAvailable;
         _waveIn.StartRecording();
         IsRecording = true;
+        Log($"Microphone recording started after {started.ElapsedMilliseconds} ms.");
     }
 
     public async Task<string> StopRecordingAsync(CancellationToken cancellationToken = default)
     {
+        var started = Stopwatch.StartNew();
+        Log("PTT stop requested.");
         if (!IsRecording || _waveIn is null || _waveWriter is null || _audioStream is null)
         {
             return string.Empty;
@@ -144,15 +174,19 @@ public sealed class VoiceCoachService : IDisposable
         IsRecording = false;
         LastRecordedBytes = audioBytes.Length;
 
-        if (LastRecordedBytes <= 44)
+        if (LastRecordedBytes <= 44 || IsSilentAudio(audioBytes))
         {
             _audioStream = null;
+            Log($"Recording stopped with blank audio after {started.ElapsedMilliseconds} ms.");
             return string.Empty;
         }
 
         _audioStream = null;
+        Log($"Recording captured {LastRecordedBytes} bytes; starting transcription after {started.ElapsedMilliseconds} ms.");
         await using var transcriptionStream = new MemoryStream(audioBytes, writable: false);
-        return await TranscribeAsync(transcriptionStream, cancellationToken).ConfigureAwait(false);
+        var transcript = await TranscribeAsync(transcriptionStream, cancellationToken).ConfigureAwait(false);
+        Log($"Transcription finished after {started.ElapsedMilliseconds} ms ({transcript.Length} characters).");
+        return transcript;
     }
 
     internal async Task<string> TranscribeAsync(Stream transcriptionStream, CancellationToken cancellationToken = default)
@@ -174,6 +208,7 @@ public sealed class VoiceCoachService : IDisposable
 
     public void StopSpeaking()
     {
+        Log("Speech cancellation requested.");
         Interlocked.Increment(ref _speechVersion);
         _synthesizer.SpeakAsyncCancelAll();
         _kokoroPlayback?.Stop();
@@ -216,6 +251,9 @@ public sealed class VoiceCoachService : IDisposable
         }
         _kokoroProcess?.Dispose();
         _kokoroPlayback?.Dispose();
+        _pttTickPlayback?.Stop();
+        _pttTickPlayback?.Dispose();
+        _pttTickReader?.Dispose();
         // Active speech may still be releasing this managed semaphore after cancellation.
         _synthesizer.Dispose();
     }
@@ -440,13 +478,52 @@ public sealed class VoiceCoachService : IDisposable
         }
     }
 
+    private static bool IsSilentAudio(byte[] wav)
+    {
+        if (wav.Length <= 44) return true;
+        long sumSquares = 0;
+        var samples = 0;
+        for (var offset = 44; offset + 1 < wav.Length; offset += 2)
+        {
+            var sample = BitConverter.ToInt16(wav, offset);
+            sumSquares += (long)sample * sample;
+            samples++;
+        }
+        var rms = samples == 0 ? 0 : Math.Sqrt(sumSquares / (double)samples);
+        return rms < 180;
+    }
+
+    private static byte[] CreatePttTickWave()
+    {
+        const int sampleRate = 8000;
+        const int samples = 80; // 10 ms
+        const short amplitude = 1800;
+        var bytes = new byte[44 + samples * 2];
+        void WriteAscii(int offset, string value) => System.Text.Encoding.ASCII.GetBytes(value).CopyTo(bytes, offset);
+        void WriteInt(int offset, int value) => BitConverter.GetBytes(value).CopyTo(bytes, offset);
+        void WriteShort(int offset, short value) => BitConverter.GetBytes(value).CopyTo(bytes, offset);
+        WriteAscii(0, "RIFF"); WriteInt(4, bytes.Length - 8); WriteAscii(8, "WAVE");
+        WriteAscii(12, "fmt "); WriteInt(16, 16); WriteShort(20, 1); WriteShort(22, 1);
+        WriteInt(24, sampleRate); WriteInt(28, sampleRate * 2); WriteShort(32, 2); WriteShort(34, 16);
+        WriteAscii(36, "data"); WriteInt(40, samples * 2);
+        for (var i = 0; i < samples; i++)
+        {
+            var envelope = Math.Min(i, samples - 1 - i) / 8.0;
+            var sample = (short)(Math.Sin(2 * Math.PI * 900 * i / sampleRate) * amplitude * Math.Min(1, envelope));
+            WriteShort(44 + i * 2, sample);
+        }
+        return bytes;
+    }
+
     private async Task EnsureWhisperReadyAsync(CancellationToken cancellationToken)
     {
         if (_whisperProcessor is not null)
         {
+            Log("Whisper processor already initialized.");
             return;
         }
 
+        var started = Stopwatch.StartNew();
         var directory = Path.GetDirectoryName(_modelPath)!;
         Directory.CreateDirectory(directory);
         if (!File.Exists(_modelPath))
@@ -462,6 +539,7 @@ public sealed class VoiceCoachService : IDisposable
         _whisperProcessor = _whisperFactory.CreateBuilder()
             .WithLanguage("en")
             .Build();
+        Log($"Whisper model and processor initialized after {started.ElapsedMilliseconds} ms.");
     }
 
     private void WaveInDataAvailable(object? sender, WaveInEventArgs e)

@@ -1,0 +1,1570 @@
+{
+  "recording": "formulair04_brandshatch indy 2026-11-17 21-19-26.ibt",
+  "reference": "Garage 61 - Henry Mercier - FIA F4 - Brands Hatch Circuit (Indy) - 00.43.536 - 01KQS7VGSSPACVX132P5KP79A7.csv",
+  "lapsTested": [
+    1,
+    2,
+    3,
+    5,
+    6
+  ],
+  "promptCount": 9,
+  "failures": 0,
+  "outcomes": [
+    {
+      "category": "intent",
+      "prompt": "Tell me about corners 1 and 3, only braking, and stop talking about time.",
+      "plan": {
+        "NeedsClarification": false,
+        "Clarification": null,
+        "Actions": [
+          {
+            "Type": 0,
+            "Corners": [
+              1,
+              3
+            ],
+            "Topics": [],
+            "IncludeTimeDifference": null,
+            "IncludeCornerNames": null,
+            "IncludeLapTrend": null
+          },
+          {
+            "Type": 2,
+            "Corners": [],
+            "Topics": [],
+            "IncludeTimeDifference": false,
+            "IncludeCornerNames": null,
+            "IncludeLapTrend": null
+          },
+          {
+            "Type": 1,
+            "Corners": [
+              1,
+              3
+            ],
+            "Topics": [
+              0
+            ],
+            "IncludeTimeDifference": null,
+            "IncludeCornerNames": null,
+            "IncludeLapTrend": null
+          }
+        ],
+        "QueryText": null
+      },
+      "passed": true
+    },
+    {
+      "category": "intent",
+      "prompt": "Only discuss line.",
+      "plan": {
+        "NeedsClarification": false,
+        "Clarification": null,
+        "Actions": [
+          {
+            "Type": 1,
+            "Corners": [],
+            "Topics": [
+              1
+            ],
+            "IncludeTimeDifference": null,
+            "IncludeCornerNames": null,
+            "IncludeLapTrend": null
+          }
+        ],
+        "QueryText": null
+      },
+      "passed": true
+    },
+    {
+      "category": "intent",
+      "prompt": "Stop saying corner names.",
+      "plan": {
+        "NeedsClarification": false,
+        "Clarification": null,
+        "Actions": [
+          {
+            "Type": 2,
+            "Corners": [],
+            "Topics": [],
+            "IncludeTimeDifference": null,
+            "IncludeCornerNames": false,
+            "IncludeLapTrend": null
+          }
+        ],
+        "QueryText": null
+      },
+      "passed": true
+    },
+    {
+      "category": "intent",
+      "prompt": "Discuss everything.",
+      "plan": {
+        "NeedsClarification": false,
+        "Clarification": null,
+        "Actions": [
+          {
+            "Type": 1,
+            "Corners": [],
+            "Topics": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "IncludeTimeDifference": null,
+            "IncludeCornerNames": null,
+            "IncludeLapTrend": null
+          }
+        ],
+        "QueryText": null
+      },
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "prompt": "How was my braking?",
+      "answer": "Corner 1. you braked about 37 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "prompt": "How was my line?",
+      "answer": "Corner 1. Symptom: running wide on exit. Suggestion: Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 1. you began steering at about 30 km/h versus 209 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 1. You didn\u2019t reach full throttle in the measured exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 1,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "prompt": "How was my braking?",
+      "answer": "Corner 2. you braked about 47 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "prompt": "How was my line?",
+      "answer": "Corner 2. Symptom: missing the apex on the outside. Suggestion: Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 2. you began steering at about 88 km/h versus 187 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 2. You reached full throttle about 62.7 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 2,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "prompt": "How was my braking?",
+      "answer": "Corner 3. you braked about 41 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "prompt": "How was my line?",
+      "answer": "Corner 3. Symptom: too tight on entry and through the apex. Suggestion: Hold the car wider, turn in later and aim for a later apex so you can straighten the wheel sooner on exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 3. you began steering at about 145 km/h versus 149 on the reference. That is broadly matched to the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 3. You didn\u2019t reach full throttle in the measured exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 3,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "prompt": "How was my braking?",
+      "answer": "Corner 4. you braked about 2 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "prompt": "How was my line?",
+      "answer": "Corner 4. Symptom: running wide on exit. Suggestion: Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 4. you began steering at about 133 km/h versus 185 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 4. You reached full throttle about 43.7 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 1,
+      "corner": 4,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "prompt": "How was my braking?",
+      "answer": "Corner 1. you braked about 48 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "prompt": "How was my line?",
+      "answer": "Corner 1. Symptom: missing the apex on the outside. Suggestion: Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 1. you began steering at about 181 km/h versus 209 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 1. You reached full throttle about 53.0 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 1,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "prompt": "How was my braking?",
+      "answer": "Corner 2. you braked about 38 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "prompt": "How was my line?",
+      "answer": "Corner 2. Symptom: missing the apex on the outside. Suggestion: Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 2. you began steering at about 172 km/h versus 187 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 2. You reached full throttle about 39.3 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 2,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "prompt": "How was my braking?",
+      "answer": "Corner 3. you braked about 18 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "prompt": "How was my line?",
+      "answer": "Corner 3. Symptom: too tight on entry and through the apex. Suggestion: Hold the car wider, turn in later and aim for a later apex so you can straighten the wheel sooner on exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 3. you began steering at about 142 km/h versus 149 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 3. You reached full throttle about 21.0 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 3,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "prompt": "How was my braking?",
+      "answer": "Corner 4. you braked about 31 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "prompt": "How was my line?",
+      "answer": "Corner 4. Symptom: missing the apex. Suggestion: Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 4. you began steering at about 146 km/h versus 185 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 4. You reached full throttle about 56.7 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 2,
+      "corner": 4,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "prompt": "How was my braking?",
+      "answer": "Corner 1. you braked about 44 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "prompt": "How was my line?",
+      "answer": "Corner 1. Symptom: missing the apex on the outside. Suggestion: Turn the car toward the apex a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 1. you began steering at about 206 km/h versus 209 on the reference. That is broadly matched to the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 1. You reached full throttle about 41.4 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 1,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "prompt": "How was my braking?",
+      "answer": "Corner 2. you braked about 32 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "prompt": "How was my line?",
+      "answer": "Corner 2. Symptom: running wide on exit. Suggestion: Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 2. you began steering at about 173 km/h versus 187 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 2. You reached full throttle about 33.8 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 2,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "prompt": "How was my braking?",
+      "answer": "Corner 3. you braked about 20 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "prompt": "How was my line?",
+      "answer": "Corner 3. Symptom: line close to the reference. Suggestion: Keep the same shape and focus on a clean, early exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 3. you began steering at about 146 km/h versus 149 on the reference. That is broadly matched to the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 3. You reached full throttle about 25.2 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 3,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "prompt": "How was my braking?",
+      "answer": "Corner 4. you braked about 5 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "prompt": "How was my line?",
+      "answer": "Corner 4. Symptom: line close to the reference. Suggestion: Keep the same shape and focus on a clean, early exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 4. you began steering at about 162 km/h versus 185 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 4. You reached full throttle about 45.7 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 3,
+      "corner": 4,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 1,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 1,
+      "prompt": "How was my braking?",
+      "answer": "Corner 1. you braked about 47 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 1,
+      "prompt": "How was my line?",
+      "answer": "Corner 1. Symptom: running wide on exit. Suggestion: Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 1,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 1. you began steering at about 187 km/h versus 209 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 1,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 1. You didn\u2019t reach full throttle in the measured exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 1,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 1,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 1,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 1,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 2,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 2,
+      "prompt": "How was my braking?",
+      "answer": "Corner 2. you braked about 23 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 2,
+      "prompt": "How was my line?",
+      "answer": "Corner 2. Symptom: wide on entry. Suggestion: Ease the car toward the apex a little sooner, then let it run out naturally on exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 2,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 2. you began steering at about 169 km/h versus 187 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 2,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 2. You reached full throttle about 27.5 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 2,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 2,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 2,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 2,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 3,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 3,
+      "prompt": "How was my braking?",
+      "answer": "Corner 3. you braked about 25 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 3,
+      "prompt": "How was my line?",
+      "answer": "Corner 3. Symptom: line close to the reference. Suggestion: Keep the same shape and focus on a clean, early exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 3,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 3. you began steering at about 146 km/h versus 149 on the reference. That is broadly matched to the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 3,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 3. You reached full throttle about 21.7 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 3,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 3,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 3,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 3,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 4,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 4,
+      "prompt": "How was my braking?",
+      "answer": "Corner 4. you braked about 11 metres later than the reference. Brake earlier so the car is settled before turn-in.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 4,
+      "prompt": "How was my line?",
+      "answer": "Corner 4. Symptom: missing the apex. Suggestion: Turn the car toward it a little more decisively, then unwind the steering as soon as the car is rotated.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 4,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 4. you began steering at about 154 km/h versus 185 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 4,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 4. You reached full throttle about 39.4 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 4,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 4,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 4,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 5,
+      "corner": 4,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 1,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 1,
+      "prompt": "How was my braking?",
+      "answer": "Corner 1. you braked about 33 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 1,
+      "prompt": "How was my line?",
+      "answer": "Corner 1. Symptom: running wide on exit. Suggestion: Get the car rotated before adding more throttle, then unwind the steering smoothly toward the outside.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 1,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 1. you began steering at about 206 km/h versus 209 on the reference. That is broadly matched to the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 1,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 1. You reached full throttle about 48.4 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 1,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 1,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 1,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 1,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 2,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 2,
+      "prompt": "How was my braking?",
+      "answer": "Corner 2. you braked about 12 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 2,
+      "prompt": "How was my line?",
+      "answer": "Corner 2. Symptom: wide on entry. Suggestion: Ease the car toward the apex a little sooner, then let it run out naturally on exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 2,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 2. you began steering at about 176 km/h versus 187 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 2,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 2. You reached full throttle about 23.8 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 2,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 2,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 2,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 2,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 3,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 3,
+      "prompt": "How was my braking?",
+      "answer": "Corner 3. you braked about 12 metres earlier than the reference. Try releasing the brake a little later while keeping the car moving toward the apex.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 3,
+      "prompt": "How was my line?",
+      "answer": "Corner 3. Symptom: line close to the reference. Suggestion: Keep the same shape and focus on a clean, early exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 3,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 3. you began steering at about 148 km/h versus 149 on the reference. That is broadly matched to the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 3,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 3. You reached full throttle about 29.9 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 3,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 3,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 3,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 3,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 4,
+      "prompt": "Only discuss braking.",
+      "answer": "I\u2019ll focus on braking.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 4,
+      "prompt": "How was my braking?",
+      "answer": "Corner 4. Your braking point was close to the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 4,
+      "prompt": "How was my line?",
+      "answer": "Corner 4. Symptom: line close to the reference. Suggestion: Keep the same shape and focus on a clean, early exit.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 4,
+      "prompt": "How was my turn-in?",
+      "answer": "Corner 4. you began steering at about 171 km/h versus 185 on the reference. You are waiting too long; start turning in earlier and build the steering progressively.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 4,
+      "prompt": "How was my throttle on exit?",
+      "answer": "Corner 4. You reached full throttle about 37.6 metres later than the reference.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 4,
+      "prompt": "Stop talking about time.",
+      "answer": "Automatic coaching muted.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 4,
+      "prompt": "Stop saying corner names.",
+      "answer": "I\u2019ll stop repeating corner names.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 4,
+      "prompt": "Only discuss line.",
+      "answer": "I\u2019ll focus on line.",
+      "understood": true,
+      "passed": true
+    },
+    {
+      "lap": 6,
+      "corner": 4,
+      "prompt": "Discuss everything.",
+      "answer": "I\u2019ll focus on all.",
+      "understood": true,
+      "passed": true
+    }
+  ]
+}

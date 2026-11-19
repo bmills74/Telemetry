@@ -27,7 +27,7 @@ public sealed class SimCoachSettings
 
     public string? NaturalCoachingModel { get; set; }
 
-    public int NaturalCoachingTimeoutMs { get; set; } = 2500;
+    public int NaturalCoachingTimeoutMs { get; set; } = 7000;
 }
 
 public sealed class SimCoachSettingsStore
